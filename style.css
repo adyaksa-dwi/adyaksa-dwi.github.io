@@ -1,0 +1,103 @@
+:root {
+  /* Light Mode Colors */
+  --secondary-container: #00d2e0;
+  --on-background: #1c1b1b;
+  --surface-container-low: #f2f2f2;
+  --surface: #fafafa;
+  --background: #fafafa;
+  --primary-container: #0054d6;
+  --on-primary-container: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --outline-variant: #c2c6d8;
+  --outline: #75798a;
+  --on-surface: #1c1b1b;
+  --primary: #0066ff;
+  --on-surface-variant: #424656;
+  --inverse-primary: #b3c5ff;
+}
+
+.dark {
+  /* Dark Mode Colors (Default) */
+  --secondary-container: #00eefc;
+  --on-background: #e5e2e1;
+  --surface-container-low: #1c1b1b;
+  --surface: #131313;
+  --background: #131313;
+  --primary-container: #0066ff;
+  --on-primary-container: #f8f7ff;
+  --surface-container-lowest: #0e0e0e;
+  --outline-variant: #424656;
+  --outline: #8c90a1;
+  --on-surface: #e5e2e1;
+  --primary: #b3c5ff;
+  --on-surface-variant: #c2c6d8;
+  --inverse-primary: #0054d6;
+}
+
+body { scroll-behavior: smooth; }
+        .glass-panel {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.3);
+            transform: scale(1.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-image-wrapper { overflow: hidden; border-radius: 0.25rem; }
+        .card-image-wrapper img { transition: transform 0.5s ease; }
+        .card-image-wrapper:hover img { transform: scale(1.05); }
+        .scroll-pulse { animation: pulse-y 2s infinite ease-in-out; }
+        @keyframes pulse-y {
+            0% { transform: scaleY(0.5); opacity: 0.5; transform-origin: top; }
+            50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+            51% { transform-origin: bottom; }
+            100% { transform: scaleY(0.5); opacity: 0.5; transform-origin: bottom; }
+        }
+        .hidden-item { display: none !important; }
+
+        /* Terminal Cursor Blink (No Fade) */
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-blink {
+            animation: blink-cursor 1s step-end infinite;
+        }
+
+        /* Disable all CSS transitions during View Transitions to prevent stuttering */
+        .theme-transitioning * {
+            transition: none !important;
+        }
+
+        /* Exempt toggle switch knob to allow View Transitions to animate it smoothly */
+        #theme-toggle-knob {
+            view-transition-name: theme-knob;
+        }
+
+        /* View Transitions for Theme Switcher */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation: none;
+            mix-blend-mode: normal;
+        }
+        
+        ::view-transition-old(root) {
+            z-index: 1;
+        }
+        
+        ::view-transition-new(root) {
+            z-index: 9999;
+            animation: reveal-diagonal 0.5s ease-out;
+        }
+
+        @keyframes reveal-diagonal {
+            from {
+                clip-path: circle(0px at var(--click-x, 100%) var(--click-y, 0%));
+            }
+            to {
+                clip-path: circle(var(--click-r, 150vmax) at var(--click-x, 100%) var(--click-y, 0%));
+            }
+        }
