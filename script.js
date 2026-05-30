@@ -81,101 +81,112 @@
         });
 
         // Google Sheets Dynamic Integration
-        async function loadMotionPortfolio() {
+        async function loadDynamicPortfolio() {
             const sheetId = '1anhPdL6etR7KwwtEUUj1ZYpO49EwIY6JYO76V4DX-p4';
-            // Gunakan format CSV karena endpoint ini memberikan izin akses langsung (CORS) untuk dibaca dari mana saja
-            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
-            try {
-                const response = await fetch(url);
-                const text = await response.text();
-                
-                // Parsing CSV dasar
-                const rows = text.split('\n').map(row => {
-                    const regex = /(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|([^,]*))(?:,|$)/g;
-                    let arr = [];
-                    let match;
-                    while (match = regex.exec(row)) {
-                        arr.push(match[1] ? match[1].replace(/\"\"/g, '\"') : match[2]);
-                        if (match.index === regex.lastIndex) regex.lastIndex++;
-                    }
-                    return arr;
-                }).filter(row => row.length > 1 && row[0].trim() !== '');
-                
-                const container = document.getElementById('motion-portfolio-container');
-                container.innerHTML = '';
-                
-                // Mulai dari index 1 karena baris 0 adalah header tabel
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i];
-                    
-                    const title = row[0] ? row[0].trim() : 'Untitled';
-                    
-                    let videoUrl = row[2] ? row[2].trim() : '';
-                    if(!videoUrl) continue;
-                    
-                    // Deteksi ID Platform Video
-                    let driveId = '';
-                    let ytId = '';
-                    
-                    const gDriveMatch = videoUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                    if(gDriveMatch && gDriveMatch[1]) driveId = gDriveMatch[1];
-                    
-                    const ytMatch = videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-                    if(ytMatch && ytMatch[1]) ytId = ytMatch[1];
+            const sheets = [
+                { gid: '0', category: 'motion', label: 'MOTION GRAPHICS' },
+                { gid: '284798931', category: '3d', label: '3D MODELLING' },
+                { gid: '1127387480', category: 'graphic', label: 'GRAPHIC DESIGN' }
+            ];
+            
+            const container = document.getElementById('dynamic-portfolio-container');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            let allHtml = '';
+            let displayIndex = 0;
 
-                    // Logika Thumbnail Cerdas:
-                    let thumbnail = (row[1] && row[1].trim() !== '') ? row[1].trim() : '';
-                    if (thumbnail) {
-                        // Gunakan Google User Content API (LH3) untuk bypass pemblokiran keamanan browser
+            for (const sheet of sheets) {
+                const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${sheet.gid}`;
+                try {
+                    const response = await fetch(url);
+                    const text = await response.text();
+                    
+                    const rows = text.split('\n').map(row => {
+                        const regex = /(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|([^,]*))(?:,|$)/g;
+                        let arr = [];
+                        let match;
+                        while (match = regex.exec(row)) {
+                            arr.push(match[1] ? match[1].replace(/\"\"/g, '\"') : match[2]);
+                            if (match.index === regex.lastIndex) regex.lastIndex++;
+                        }
+                        return arr;
+                    }).filter(row => row.length > 1 && row[0].trim() !== '');
+                    
+                    for (let i = 1; i < rows.length; i++) {
+                        const row = rows[i];
+                        
+                        const title = row[0] ? row[0].trim() : 'Untitled';
+                        let thumbnail = (row[1] && row[1].trim() !== '') ? row[1].trim() : '';
+                        let videoUrl = row[2] ? row[2].trim() : '';
+                        
                         const thumbMatch = thumbnail.match(/\/d\/([a-zA-Z0-9_-]+)/);
                         if(thumbMatch && thumbMatch[1]) {
                             thumbnail = `https://lh3.googleusercontent.com/d/${thumbMatch[1]}=w800`;
                         }
-                    } else {
-                        // Jika dikosongkan, cek apakah ini YouTube atau Google Drive
-                        if (ytId) {
-                            // Ekstrak otomatis dari YouTube
-                            thumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
-                        } else if (driveId) {
-                            // Ekstrak otomatis gambar dari Video Google Drive
-                            thumbnail = `https://lh3.googleusercontent.com/d/${driveId}=w800`;
+
+                        let onClickAttr = '';
+                        let playIcon = '';
+                        let opacityClass = 'opacity-100'; 
+                        
+                        if (videoUrl) {
+                            opacityClass = 'opacity-60 group-hover:opacity-80 transition-opacity';
+                            onClickAttr = `onclick="openVideoModal('${encodeURIComponent(videoUrl)}')"`
+                            playIcon = `<span class="material-symbols-outlined text-[48px] text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">play_arrow</span>`;
+                            
+                            if (!thumbnail) {
+                                const ytMatch = videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+                                const gDriveMatch = videoUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                                if (ytMatch && ytMatch[1]) {
+                                    thumbnail = `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
+                                } else if (gDriveMatch && gDriveMatch[1]) {
+                                    thumbnail = `https://lh3.googleusercontent.com/d/${gDriveMatch[1]}=w800`;
+                                }
+                            }
                         } else {
-                            // Jika format lain tanpa thumbnail, gunakan gambar default
-                            thumbnail = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                            let highResImage = row[1] ? row[1].trim() : '';
+                            if(thumbMatch && thumbMatch[1]) highResImage = `https://lh3.googleusercontent.com/d/${thumbMatch[1]}=w1920`;
+                            onClickAttr = `onclick="openImageModal('${highResImage}', '${title.replace(/'/g, "\\'")}', '${sheet.label}')"`;
                         }
-                    }
-                    
-                    const displayIndex = i - 1; // Untuk perhitungan desain
-                    const colSpan = displayIndex === 0 ? 'md:col-span-7' : 'md:col-span-4';
-                    const heightClass = displayIndex === 0 ? 'h-64 md:h-96' : 'h-64 md:h-80';
-                    const iconSize = displayIndex === 0 ? 'text-[64px]' : 'text-[48px]';
-                    
-                    const html = `
-                    <div class="portfolio-item ${colSpan} bg-surface-container-low p-2 rounded-lg glow-hover cursor-pointer" data-category="motion" onclick="openVideoModal('${encodeURIComponent(videoUrl)}')">
-                        <div class="card-image-wrapper ${heightClass} relative flex items-center justify-center">
-                            <img alt="${title}" class="absolute inset-0 w-full h-full object-cover opacity-60" src="${thumbnail}">
-                            <span class="material-symbols-outlined ${iconSize} text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">play_arrow</span>
-                            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent z-10">
-                                <span class="text-label-caps font-label-caps text-secondary-container">MOTION GRAPHICS</span>
-                                <h3 class="text-headline-md font-headline-md text-on-surface text-lg">${title}</h3>
+                        
+                        if(!thumbnail) thumbnail = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                        
+                        const colSpan = displayIndex === 0 ? 'md:col-span-7' : (displayIndex % 3 === 0 ? 'md:col-span-8' : 'md:col-span-4');
+                        const heightClass = displayIndex === 0 ? 'h-64 md:h-96' : 'h-64 md:h-80';
+                        const iconSize = displayIndex === 0 ? 'text-[64px]' : 'text-[48px]';
+                        
+                        if (playIcon) {
+                             playIcon = `<span class="material-symbols-outlined ${iconSize} text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">play_arrow</span>`;
+                        }
+                        
+                        allHtml += `
+                        <div class="portfolio-item ${colSpan} bg-surface-container-low p-2 rounded-lg glow-hover cursor-pointer group" data-category="${sheet.category}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
+                            <div class="card-image-wrapper ${heightClass} relative flex items-center justify-center">
+                                <img alt="${title}" class="absolute inset-0 w-full h-full object-cover ${opacityClass}" src="${thumbnail}">
+                                ${playIcon}
+                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent z-10">
+                                    <span class="text-label-caps font-label-caps text-secondary-container">${sheet.label}</span>
+                                    <h3 class="text-headline-md font-headline-md text-on-surface text-lg">${title}</h3>
+                                </div>
                             </div>
-                        </div>
-                    </div>`;
-                    container.innerHTML += html;
+                        </div>`;
+                        
+                        displayIndex++;
+                    }
+                } catch (e) {
+                    console.error("Error loading sheet", sheet.label, e);
                 }
-                
-                // Trigger filter to apply to newly loaded items if a filter is active
-                const activeBtn = Array.from(filterBtns).find(btn => btn.classList.contains('text-primary'));
-                if(activeBtn) {
-                    activeBtn.click();
-                }
-                
-            } catch(e) {
-                console.error('Failed to load dynamic portfolio:', e);
+            }
+            
+            container.innerHTML = allHtml;
+            
+            const activeBtn = Array.from(filterBtns).find(btn => btn.classList.contains('text-primary'));
+            if(activeBtn) {
+                activeBtn.click();
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadMotionPortfolio);
+        document.addEventListener('DOMContentLoaded', loadDynamicPortfolio);
 
         // Contact Form Logic (DITAMBAHKAN)
         const contactForm = document.getElementById('contact-form');
@@ -185,7 +196,14 @@
             contactForm.reset();
         });
 
-        // Modal Logic
+        // Global Modal Logic
+        window.openImageModal = function(imgUrl, title, category) {
+            document.getElementById('modal-image-img').src = imgUrl;
+            document.getElementById('modal-image-title').textContent = title;
+            document.getElementById('modal-image-cat').textContent = category;
+            openModal('modal-image');
+        };
+
         function openVideoModal(encodedUrl) {
             const videoUrl = decodeURIComponent(encodedUrl);
             const iframe = document.getElementById('portfolio-video');

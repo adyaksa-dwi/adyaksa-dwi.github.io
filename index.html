@@ -174,29 +174,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="portfolio-grid">
-            <!-- Added data-category attribute to items -->
-            <div class="portfolio-item md:col-span-4 bg-surface-container-low p-2 rounded-lg glow-hover cursor-pointer" data-category="graphic" onclick="openModal('modal-image')">
-                <div class="card-image-wrapper h-64 md:h-80 relative">
-                    <img alt="Abstract Graphic" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUiWXRZ56nnqe3r58X6tG_qo89tNT9cXLNWiGfhaJbURx7UoShPFOk9dcPaCIxEirmxhlS1umH6ORwwj1qoptZtiV35paPkY_0SPFrLZT-fXBTEDQZfz90j5nZq9fy02lFCNUCGSUNYL-nO42eb__TzwmSuNvdTOP269kragm2blTyWQtD-kzEs4i0HPrEYnIqxzIZfBgTkZMvBDo1ooVedGa4Bjc2lQCBBCwUhjWw_nDVjx07ci_2fAXuDJkHHVy9g5BOMoa839A">
-                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent">
-                        <span class="text-label-caps font-label-caps text-secondary-container">GRAPHIC DESIGN</span>
-                        <h3 class="text-headline-md font-headline-md text-on-surface text-lg">Neon Geometries</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="portfolio-item md:col-span-8 bg-surface-container-low p-2 rounded-lg glow-hover cursor-pointer" data-category="3d" onclick="openModal('modal-image')">
-                <div class="card-image-wrapper h-64 md:h-80 relative">
-                    <img alt="3D Render" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdBAjxjVJ2lKh4LNFrbrcWDh4Fos8Lz5-SRmAJEzIbmu3Nute-9BYylvAKnG6tP9y0TW1-IxyeS_zYB4hQZRTjC5l9JB22TuPLKHDbRwHzgqVO5frugMblvIosG0PE4-V1Y_IaXGmg0Y3Qj_s8YVyz70sQyxtLqwIWSy5osmsYvHz3DQvNPwkytR4eWgDKKiwcIFea3b1I9E0niktkqT7TwiEJsa-bjLlEBlC0Aj9u5cyAX7665pJwMoRLVUDdKzZbpCoPq5JPTd0">
-                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent">
-                        <span class="text-label-caps font-label-caps text-secondary-container">3D MODELLING</span>
-                        <h3 class="text-headline-md font-headline-md text-on-surface text-lg">Obsidian Monolith</h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Motion Portfolios will be injected here dynamically -->
-
+            <!-- Game Portfolios is static for now -->
             <div class="portfolio-item md:col-span-5 bg-surface-container-low p-2 rounded-lg glow-hover cursor-pointer" data-category="game" onclick="openModal('modal-game')">
                 <div class="card-image-wrapper h-64 md:h-96 relative">
                     <img alt="Game Screenshot" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6BlhgO2Rc0hjZ10QzFtvQ5SFB4Vu6u3v32A_bdh6UXGN6js2VnlGqA6BMceuUuQ-Tqms1C5ZLyiDZN7-oVRQYOyVf0a4u0ErjRDGmIkjbtPy_QCZR4J8eI-nOuJ2oipliYhuReEFjRzoEn4tvhEV7mV_27EoWilAsEHntjxwbixwcWQ6V1SyYx4qHysLQdxvT6Xf7pyYk0aq8V-ktDz3Tvi-T479ErHedFZ-A64BKcyBif5ecozSsk4WIqwET9snlLbbFVw6X7hY">
@@ -208,7 +186,7 @@
             </div>
 
             <!-- Container for Dynamic Content -->
-            <div id="motion-portfolio-container" class="contents"></div>
+            <div id="dynamic-portfolio-container" class="contents"></div>
         </div>
     </section>
 
@@ -281,9 +259,9 @@
         <div class="absolute inset-0 bg-background/90 backdrop-blur-xl" onclick="closeModal('modal-image')"></div>
         <div class="glass-panel relative w-full max-w-5xl max-h-full overflow-y-auto rounded-xl flex flex-col shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 border-t border-white/10 modal-content">
             <button class="absolute top-4 right-4 text-on-surface bg-surface-container p-2 rounded-full hover:bg-primary-container transition-colors z-20" onclick="closeModal('modal-image')"><span class="material-symbols-outlined">close</span></button>
-            <div class="w-full h-[50vh] md:h-[60vh] bg-black"><img alt="Main View" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQRAm_Ip2Gdd_xq5DDGK49wqmBpt1t-h_JaBCoWBd6kXVrL1AhoU6HCDN3UXo0qZO9u1SCQGWJwpV00Na__yXMezfUgYqBDkvJgFMgqlXBsTupPwoJCxyLXV1kwXfiHcp209daMwfnZnzza2xKR3edMU04KCLAEHx0o1BP7JFJKFOeLrp8rDOlZGorX_SKc0bAJoXIyzs5-_LWnor8JzWqBkBpAmUzlkUst_BJ1VcpNCVQX03S56FEI_Bkb6Od2Jt8yZ9yltAA3cs"></div>
+            <div class="w-full h-[50vh] md:h-[60vh] bg-black"><img id="modal-image-img" alt="Main View" class="w-full h-full object-contain" src=""></div>
             <div class="p-6 md:p-10 bg-surface-container-low">
-                <div class="mb-8"><span class="px-3 py-1 bg-surface border border-primary/30 text-primary font-label-caps text-[10px] rounded-full mb-3 inline-block">3D MODELLING</span><h2 class="text-headline-md font-headline-md text-on-surface mb-2">Obsidian Monolith Concept</h2><p class="text-body-md font-body-md text-on-surface-variant max-w-3xl">Eksplorasi bentuk arsitektural brutalist dalam ruang hampa digital, berfokus pada pantulan material dan pencahayaan dramatis.</p></div>
+                <div class="mb-8"><span id="modal-image-cat" class="px-3 py-1 bg-surface border border-primary/30 text-primary font-label-caps text-[10px] rounded-full mb-3 inline-block"></span><h2 id="modal-image-title" class="text-headline-md font-headline-md text-on-surface mb-2"></h2></div>
             </div>
         </div>
     </div>
