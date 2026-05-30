@@ -59,15 +59,24 @@
 
                 const filter = btn.getAttribute('data-filter');
                 
-                // Tampilkan atau sembunyikan item (Re-query to include dynamic items)
-                const currentPortfolioItems = document.querySelectorAll('.portfolio-item');
-                currentPortfolioItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.classList.remove('hidden-item');
-                    } else {
-                        item.classList.add('hidden-item');
-                    }
-                });
+                // Fungsi logika untuk menyembunyikan/menampilkan item
+                const filterLogic = () => {
+                    const currentPortfolioItems = document.querySelectorAll('.portfolio-item');
+                    currentPortfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.classList.remove('hidden-item');
+                        } else {
+                            item.classList.add('hidden-item');
+                        }
+                    });
+                };
+
+                // Eksekusi dengan View Transitions API jika didukung untuk efek Fade-In mulus
+                if (document.startViewTransition) {
+                    document.startViewTransition(filterLogic);
+                } else {
+                    filterLogic();
+                }
             });
         });
 
