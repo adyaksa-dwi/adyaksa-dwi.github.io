@@ -645,8 +645,9 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        // Hentikan observasi setelah elemen terlihat agar tidak hilang lagi saat scroll ke atas
-                        observer.unobserve(entry.target); 
+                    } else {
+                        // Menghilangkan kelas agar kembali beranimasi saat discroll ulang
+                        entry.target.classList.remove('is-visible');
                     }
                 });
             }, {
