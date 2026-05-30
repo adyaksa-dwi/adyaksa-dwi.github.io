@@ -117,8 +117,9 @@
                         const row = rows[i];
                         
                         const title = row[0] ? row[0].trim() : 'Untitled';
-                        let thumbnail = (row[1] && row[1].trim() !== '') ? row[1].trim() : '';
-                        let videoUrl = row[2] ? row[2].trim() : '';
+                        const description = row[1] ? row[1].trim() : '';
+                        let thumbnail = (row[2] && row[2].trim() !== '') ? row[2].trim() : '';
+                        let videoUrl = row[3] ? row[3].trim() : '';
                         
                         const thumbMatch = thumbnail.match(/\/d\/([a-zA-Z0-9_-]+)/);
                         if(thumbMatch && thumbMatch[1]) {
@@ -144,9 +145,9 @@
                                 }
                             }
                         } else {
-                            let highResImage = row[1] ? row[1].trim() : '';
+                            let highResImage = row[2] ? row[2].trim() : '';
                             if(thumbMatch && thumbMatch[1]) highResImage = `https://lh3.googleusercontent.com/d/${thumbMatch[1]}=w1920`;
-                            onClickAttr = `onclick="openImageModal('${highResImage}', '${title.replace(/'/g, "\\'")}', '${sheet.label}')"`;
+                            onClickAttr = `onclick="openImageModal('${highResImage}', '${title.replace(/'/g, "\\'")}', '${sheet.label}', '${description.replace(/'/g, "\\'")}')"`;
                         }
                         
                         if(!thumbnail) thumbnail = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
@@ -197,10 +198,15 @@
         });
 
         // Global Modal Logic
-        window.openImageModal = function(imgUrl, title, category) {
+        window.openImageModal = function(imgUrl, title, category, description) {
             document.getElementById('modal-image-img').src = imgUrl;
             document.getElementById('modal-image-title').textContent = title;
             document.getElementById('modal-image-cat').textContent = category;
+            
+            const descEl = document.getElementById('modal-image-desc');
+            if (descEl) {
+                descEl.textContent = description || '';
+            }
             openModal('modal-image');
         };
 
