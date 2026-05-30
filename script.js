@@ -130,7 +130,14 @@
                         let playIcon = '';
                         let opacityClass = 'opacity-100'; 
                         
-                        if (videoUrl) {
+                        // Pastikan videoUrl valid (dimulai dengan http)
+                        if (videoUrl && videoUrl.toLowerCase().startsWith('http')) {
+                            
+                            // Auto replace /view with /preview for Google Drive iframe compatibility (CSP Fix)
+                            if (videoUrl.includes('drive.google.com') && videoUrl.includes('/view')) {
+                                videoUrl = videoUrl.replace('/view', '/preview');
+                            }
+                            
                             opacityClass = 'opacity-60 group-hover:opacity-80 transition-opacity';
                             onClickAttr = `onclick="openVideoModal('${encodeURIComponent(videoUrl)}')"`
                             playIcon = `<span class="material-symbols-outlined text-[48px] text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">play_arrow</span>`;
