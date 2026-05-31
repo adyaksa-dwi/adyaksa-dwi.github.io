@@ -561,7 +561,7 @@ async function loadDynamicPortfolio() {
         { gid: '1969393925', category: 'magazines', label: 'MAGAZINES' },
         { gid: '1662877084', category: 'mockup', label: 'MOCKUP DESIGNS' },
         { gid: '976825207', category: 'game', label: 'GAME DEVELOPMENT' },
-        { gid: 'YOUR_3D_ANIMATION_GID', category: '3danimation', label: '3D ANIMATION' }
+        { gid: '404770039', category: '3danimation', label: '3D ANIMATION' }
     ];
 
     const container = document.getElementById('dynamic-portfolio-container');
