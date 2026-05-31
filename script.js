@@ -1613,6 +1613,9 @@ class SpiralCarousel {
             let rad = angle * (Math.PI / 180);
             let facing = Math.cos(rad);
             
+            // Perbaikan CSS 3D Stacking: Atur Z-Index berdasarkan posisi Z agar browser merender urutan yang benar
+            card.style.zIndex = Math.round(facing * 1000) + 1000;
+            
             if (facing < 0 || opacity < 0.1) {
                 card.style.pointerEvents = 'none'; // Tidak bisa diklik kalau membelakangi layar
                 card.style.filter = `brightness(${0.3 + (facing + 1) * 0.35})`; // Lebih gelap saat di belakang
