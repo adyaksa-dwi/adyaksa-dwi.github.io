@@ -560,7 +560,8 @@ async function loadDynamicPortfolio() {
         { gid: '2069598161', category: 'videography', label: 'VIDEOGRAPHY' },
         { gid: '1969393925', category: 'magazines', label: 'MAGAZINES' },
         { gid: '1662877084', category: 'mockup', label: 'MOCKUP DESIGNS' },
-        { gid: '976825207', category: 'game', label: 'GAME DEVELOPMENT' }
+        { gid: '976825207', category: 'game', label: 'GAME DEVELOPMENT' },
+        { gid: 'YOUR_3D_ANIMATION_GID', category: '3danimation', label: '3D ANIMATION' }
     ];
 
     const container = document.getElementById('dynamic-portfolio-container');
@@ -602,7 +603,7 @@ async function loadDynamicPortfolio() {
                     description = row[1] ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : ''; // Kolom 3: Images (comma separated)
                     externalLink = row[3] ? row[3].trim() : ''; // Kolom 4: Link
-                } else if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup') {
+                } else if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup' || sheet.category === '3danimation') {
                     thumbnail = (row[1] && row[1].trim() !== '' && row[1].trim() !== '-') ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : '';
                 } else {
