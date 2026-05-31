@@ -1502,7 +1502,7 @@ class SpiralCarousel {
         // Settings
         this.rotations = 2; // Berapa kali melilit dalam satu putaran penuh
         this.totalHeight = window.innerWidth < 768 ? 750 : 900; // Dikurangi agar lebih padat
-        this.radius = window.innerWidth < 768 ? 160 : 320; // Dikurangi agar lebih rapat
+        this.radius = window.innerWidth < 768 ? 90 : 320; // Dikurangi drastis di mobile agar tidak terpotong (clipping)
 
         this.init();
     }
@@ -1510,8 +1510,34 @@ class SpiralCarousel {
     init() {
         this.container.addEventListener('mouseenter', () => this.targetSpeed = 0);
         this.container.addEventListener('mouseleave', () => this.targetSpeed = this.baseSpeed);
-        this.container.addEventListener('touchstart', () => this.targetSpeed = 0);
-        this.container.addEventListener('touchend', () => this.targetSpeed = this.baseSpeed);
+        let touchStartY = 0;
+        let touchStartX = 0;
+
+        this.container.addEventListener('touchstart', (e) => {
+            this.targetSpeed = 0;
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        this.container.addEventListener('touchmove', (e) => {
+            if (window.portfolioViewMode === 'grid') return;
+            const deltaY = touchStartY - e.touches[0].clientY;
+            const deltaX = touchStartX - e.touches[0].clientX;
+            
+            // Gunakan pergerakan terjauh (vertikal atau horizontal) untuk memutar
+            const delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
+            this.scrollOffset += delta * 0.0015; // Sensitivitas swipe
+            
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+            
+            // Cegah scroll halaman / pull-to-refresh jika swiping di dalam carousel
+            e.preventDefault();
+        }, { passive: false });
+
+        this.container.addEventListener('touchend', () => {
+            this.targetSpeed = this.baseSpeed;
+        });
 
         // Memungkinkan scroll untuk memutar untaian DNA saat cursor ada di areanya
         this.container.addEventListener('wheel', (e) => {
@@ -1521,7 +1547,7 @@ class SpiralCarousel {
 
         window.addEventListener('resize', () => {
             this.totalHeight = window.innerWidth < 768 ? 750 : 900; 
-            this.radius = window.innerWidth < 768 ? 160 : 320;
+            this.radius = window.innerWidth < 768 ? 90 : 320;
         });
 
         this.animate();
