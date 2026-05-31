@@ -234,7 +234,7 @@ window.openCategoryTab = function (event, title, categoryId) {
                 left: lastRect.left + 'px',
                 width: lastRect.width + 'px',
                 height: lastRect.height + 'px',
-                borderRadius: '0px'
+                borderRadius: '24px' // Sesuai dengan rounded-3xl container tujuan
             }
         ], {
             duration: 800, // 0.8 detik
