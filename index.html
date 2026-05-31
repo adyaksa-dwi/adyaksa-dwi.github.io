@@ -70,7 +70,7 @@
 </head>
 
 <body
-    class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative">
+    class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw]">
 
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300"
@@ -259,7 +259,7 @@
             <div id="spiral-stage" class="absolute top-1/2 left-1/2 w-0 h-0 transition-all duration-500" style="transform-style: preserve-3d;">
                 
                 <!-- 3D Modelling -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, '3D Modelling', '3d')">
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="3D Modelling">
@@ -271,7 +271,7 @@
                 </div>
 
                 <!-- Game Dev -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Game Development', 'game')">
                     <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Game Dev">
@@ -283,7 +283,7 @@
                 </div>
 
                 <!-- Motion -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Motion Graphics', 'motion')">
                     <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Motion Graphics">
@@ -295,7 +295,7 @@
                 </div>
 
                 <!-- Graphic Design -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Graphic Design', 'graphic')">
                     <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Graphic Design">
@@ -307,7 +307,7 @@
                 </div>
 
                 <!-- Photography -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Photography', 'photography')">
                     <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Photography">
@@ -319,7 +319,7 @@
                 </div>
 
                 <!-- Videography -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Videography', 'videography')">
                     <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Videography">
@@ -331,7 +331,7 @@
                 </div>
 
                 <!-- Magazines -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Magazines', 'magazines')">
                     <img src="https://images.unsplash.com/photo-1579298245158-33e8f568f7d3?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Magazines">
@@ -343,7 +343,7 @@
                 </div>
 
                 <!-- Mockup Designs -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, 'Mockup Designs', 'mockup')">
                     <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="Mockup Designs">
@@ -355,7 +355,7 @@
                 </div>
 
                 <!-- 3D Animation -->
-                <div class="spiral-card absolute w-80 h-56 md:w-96 md:h-64 -ml-40 -mt-28 md:-ml-48 md:-mt-32 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
+                <div class="spiral-card absolute w-[85vw] max-w-[280px] h-48 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] border border-transparent dark:border-white/10 hover:border-white/40 transition-[box-shadow,border-color,opacity,filter] duration-300"
                     onclick="openCategoryTab(event, '3D Animation', '3danimation')">
                     <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=800&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" alt="3D Animation">
@@ -530,7 +530,7 @@
         <div class="glass-panel relative w-full h-[90vh] max-w-[1400px] rounded-xl flex flex-col md:flex-row overflow-hidden shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 modal-content">
             
             <!-- Left Side: Image / Carousel -->
-            <div class="w-full md:w-[70%] h-[50vh] md:h-full bg-black overflow-y-auto hide-scrollbar relative flex items-center justify-center group/game-modal">
+            <div class="w-full h-[40vh] min-h-[40vh] md:h-full md:w-[70%] bg-black relative flex items-center justify-center group/game-modal">
                 <img id="modal-game-img" alt="Game Hero" class="w-full h-full object-cover transition-opacity duration-300" src="">
                 
                 <!-- Navigation Buttons (Hidden by default, shown if multiple images) -->
@@ -543,7 +543,7 @@
             </div>
             
             <!-- Right Side: Content -->
-            <div class="w-full md:w-[30%] h-full bg-surface/90 backdrop-blur-md p-8 md:p-10 border-l border-white/5 flex flex-col overflow-y-auto relative">
+            <div class="w-full flex-1 overflow-y-auto md:h-full md:w-[30%] bg-surface/90 backdrop-blur-md p-8 md:p-10 md:border-l border-white/5 flex flex-col relative">
                 <button class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors hidden md:block" onclick="closeModal('modal-game')">
                     <span class="material-symbols-outlined">close</span>
                 </button>

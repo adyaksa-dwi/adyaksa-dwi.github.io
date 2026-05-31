@@ -1573,7 +1573,7 @@ class SpiralCarousel {
             // Konversi ke Rotasi (Sudut)
             let angle = normalizedI * 360 * this.rotations;
             
-            card.style.transform = `translateY(${y}px) rotateY(${angle}deg) translateZ(${this.radius}px)`;
+            card.style.transform = `translate(-50%, -50%) translateY(${y}px) rotateY(${angle}deg) translateZ(${this.radius}px)`;
             
             // Perhitungan Opasitas untuk memudarkan kartu di ujung atas dan bawah
             let edgeDist = Math.abs(normalizedI - 0.5) * 2; // 0 di tengah, 1 di ujung
@@ -1695,7 +1695,7 @@ window.togglePortfolioView = function(mode) {
             if (overlay) overlay.classList.remove('opacity-0', 'hidden');
             
             document.querySelectorAll('.spiral-card').forEach(card => {
-                card.classList.add('absolute', 'w-80', 'h-56', 'md:w-96', 'md:h-64', '-ml-40', '-mt-28', 'md:-ml-48', 'md:-mt-32', 'rounded-[40px]', 'md:rounded-[60px]');
+                card.classList.add('absolute', 'w-[85vw]', 'max-w-[280px]', 'h-48', 'md:max-w-none', 'md:w-96', 'md:h-64', '-translate-x-1/2', '-translate-y-1/2', 'rounded-[40px]', 'md:rounded-[60px]');
                 card.classList.remove('relative', 'w-full', 'aspect-[4/3]', 'rounded-3xl');
                 card.querySelector('.bg-gradient-to-r').classList.remove('hidden'); 
                 // Teks tetap muncul saat dihover saja (default behavior)
@@ -1712,7 +1712,7 @@ window.togglePortfolioView = function(mode) {
             if (overlay) overlay.classList.add('opacity-0', 'hidden'); // Sembunyikan efek gradient atas bawah
             
             document.querySelectorAll('.spiral-card').forEach(card => {
-                card.classList.remove('absolute', 'w-80', 'h-56', 'md:w-96', 'md:h-64', '-ml-40', '-mt-28', 'md:-ml-48', 'md:-mt-32', 'rounded-[40px]', 'md:rounded-[60px]');
+                card.classList.remove('absolute', 'w-[85vw]', 'max-w-[280px]', 'h-48', 'md:max-w-none', 'md:w-96', 'md:h-64', '-translate-x-1/2', '-translate-y-1/2', 'rounded-[40px]', 'md:rounded-[60px]');
                 card.classList.add('relative', 'w-full', 'aspect-[4/3]', 'rounded-3xl'); // Buat kartu sedikit lebih tinggi
                 card.querySelector('.bg-gradient-to-r').classList.add('hidden'); // Hilangkan lengkungan shadow
                 // Teks otomatis tetap hanya muncul saat dihover karena kita tidak menghapus kelasnya
