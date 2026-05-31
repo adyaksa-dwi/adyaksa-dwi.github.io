@@ -174,47 +174,44 @@
     <!-- Section 2: About Me -->
     <section class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto scroll-reveal"
         id="about">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-            <div class="md:col-span-5 flex justify-center relative">
-                <div class="absolute inset-0 bg-primary-container/20 blur-[100px] rounded-full z-0 pointer-events-none">
-                </div>
-                <div
-                    class="w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-2 border-surface-variant relative z-10 p-2">
-                    <img alt="Profile"
-                        class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjJjUbpCplJgqszVYkBrvf_PU34ZuuSSpVewDeq1D9uRgRnRS3o8odhLW1SnJXO0_msv6bhtI514Cd3UTMZW5BeK3ixjBsWuRwITxnVYefz3beGP16T0DhH2mKe0a8UeKFaf9d7VHlEhVg1UohdxvCTxN8PwYDVxhK1weJlswOwwsDpfsAflezJ15bprljiFcyvsS3tnJgTS6HpruxN8VfgfUHrIpDJZ0DFXH-XTuPsjAyOGUq5r0ZcRZeoYB6fAhc4lip8Mg0FBg">
+        <div id="interactive-profile" class="relative max-w-xs md:max-w-md mx-auto transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer group bg-surface-container-low border border-white/5 rounded-[40px] md:rounded-[60px] p-2 md:p-4 flex flex-col md:flex-row items-center justify-center shadow-[0_0_40px_rgba(var(--glow-rgb),0.1)] hover:shadow-[0_0_60px_rgba(var(--glow-rgb),0.2)]" onclick="toggleProfile()">
+            
+            <!-- Profile Photo -->
+            <div id="profile-avatar" class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shrink-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10 border-2 border-surface-variant">
+                <img id="profile-img" class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjJjUbpCplJgqszVYkBrvf_PU34ZuuSSpVewDeq1D9uRgRnRS3o8odhLW1SnJXO0_msv6bhtI514Cd3UTMZW5BeK3ixjBsWuRwITxnVYefz3beGP16T0DhH2mKe0a8UeKFaf9d7VHlEhVg1UohdxvCTxN8PwYDVxhK1weJlswOwwsDpfsAflezJ15bprljiFcyvsS3tnJgTS6HpruxN8VfgfUHrIpDJZ0DFXH-XTuPsjAyOGUq5r0ZcRZeoYB6fAhc4lip8Mg0FBg" alt="Profile">
+                
+                <!-- Hover Hint -->
+                <div id="profile-hint" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                    <span class="text-white font-label-caps tracking-widest text-sm flex items-center gap-2 drop-shadow-md">
+                        <span class="material-symbols-outlined animate-pulse text-[32px]">fingerprint</span>
+                    </span>
+                    <span class="text-white font-label-caps tracking-widest text-xs mt-2 opacity-80">CLICK TO REVEAL</span>
                 </div>
             </div>
-            <div class="md:col-span-7 flex flex-col gap-stack-md mt-10 md:mt-0">
-                <div>
-                    <h2 class="text-headline-lg font-headline-lg text-on-surface mb-4" data-i18n="about_title">MENDALAMI<br>ESTETIKA DIGITAL</h2>
-                    <p class="text-body-md font-body-md text-on-surface-variant leading-relaxed" data-i18n="about_desc">
-                        Saya adalah seorang desainer dan teknolog kreatif yang berbasis di Indonesia. Dengan fokus pada
-                        interaksi digital dan pengalaman mendalam, saya menggabungkan desain grafis, pemodelan 3D, dan
-                        pengembangan interaktif untuk menciptakan karya yang tidak hanya dilihat, tetapi dirasakan.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-label-caps font-label-caps text-secondary-container mb-4">SOFTWARE ARSENAL</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
-                                class="material-symbols-outlined text-[16px]">polyline</span> BLENDER</span>
-                        <span
-                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
-                                class="material-symbols-outlined text-[16px]">brush</span> PHOTOSHOP</span>
-                        <span
-                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
-                                class="material-symbols-outlined text-[16px]">movie</span> PREMIERE</span>
-                        <span
-                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
-                                class="material-symbols-outlined text-[16px]">animation</span> AFTER EFFECTS</span>
-                        <span
-                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
-                                class="material-symbols-outlined text-[16px]">sports_esports</span> UNREAL ENGINE</span>
-                        <span
-                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
-                                class="material-symbols-outlined text-[16px]">code</span> UNITY</span>
+
+            <!-- Hidden Content Area -->
+            <div id="profile-content" class="w-0 opacity-0 overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-center">
+                <!-- Inner container with fixed minimum width to prevent text reflow during expansion -->
+                <div class="p-6 md:p-10 w-[300px] md:w-[600px] min-w-[300px] md:min-w-[600px]">
+                    <div id="profile-text-1" class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100">
+                        <h2 class="text-headline-md md:text-headline-lg font-headline-lg text-on-surface mb-4 leading-tight" data-i18n="about_title">MENDALAMI<br>ESTETIKA DIGITAL</h2>
+                        <p class="text-body-sm md:text-body-md font-body-md text-on-surface-variant leading-relaxed mb-6" data-i18n="about_desc">
+                            Saya adalah seorang desainer dan teknolog kreatif yang berbasis di Indonesia. Dengan fokus pada
+                            interaksi digital dan pengalaman mendalam, saya menggabungkan desain grafis, pemodelan 3D, dan
+                            pengembangan interaktif untuk menciptakan karya yang tidak hanya dilihat, tetapi dirasakan.
+                        </p>
+                    </div>
+                    
+                    <div id="profile-text-2" class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-200">
+                        <h3 class="text-label-caps font-label-caps text-secondary-container mb-4 tracking-widest">SOFTWARE ARSENAL</h3>
+                        <div class="flex flex-wrap gap-2 md:gap-3">
+                            <span class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2 text-xs md:text-sm"><span class="material-symbols-outlined text-[14px] md:text-[16px]">polyline</span> BLENDER</span>
+                            <span class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2 text-xs md:text-sm"><span class="material-symbols-outlined text-[14px] md:text-[16px]">brush</span> PHOTOSHOP</span>
+                            <span class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2 text-xs md:text-sm"><span class="material-symbols-outlined text-[14px] md:text-[16px]">movie</span> PREMIERE</span>
+                            <span class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2 text-xs md:text-sm"><span class="material-symbols-outlined text-[14px] md:text-[16px]">animation</span> AFTER EFFECTS</span>
+                            <span class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2 text-xs md:text-sm"><span class="material-symbols-outlined text-[14px] md:text-[16px]">sports_esports</span> UNREAL ENGINE</span>
+                            <span class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2 text-xs md:text-sm"><span class="material-symbols-outlined text-[14px] md:text-[16px]">code</span> UNITY</span>
+                        </div>
                     </div>
                 </div>
             </div>

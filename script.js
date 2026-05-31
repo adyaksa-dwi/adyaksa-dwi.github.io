@@ -1857,3 +1857,78 @@ window.nextGameImage = function() {
     currentGameIndex = (currentGameIndex + 1) % gameImages.length;
     updateGameDisplay();
 };
+
+// ----------------------------------------------------
+// INTERACTIVE PROFILE LOGIC
+// ----------------------------------------------------
+let isProfileExpanded = false;
+
+window.toggleProfile = function() {
+    const container = document.getElementById('interactive-profile');
+    const avatar = document.getElementById('profile-avatar');
+    const img = document.getElementById('profile-img');
+    const hint = document.getElementById('profile-hint');
+    const content = document.getElementById('profile-content');
+    const text1 = document.getElementById('profile-text-1');
+    const text2 = document.getElementById('profile-text-2');
+
+    isProfileExpanded = !isProfileExpanded;
+
+    if (isProfileExpanded) {
+        // Expand container
+        container.classList.remove('max-w-xs', 'md:max-w-md');
+        container.classList.add('max-w-5xl');
+        
+        // Avatar changes
+        avatar.classList.remove('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-full');
+        avatar.classList.add('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-3xl');
+        
+        // Image changes (Full color)
+        img.classList.remove('grayscale', 'group-hover:grayscale-[50%]');
+        img.classList.add('grayscale-0');
+        
+        // Hide hint
+        hint.classList.add('opacity-0');
+        setTimeout(() => hint.classList.add('hidden'), 300);
+
+        // Show content container
+        content.classList.remove('w-0', 'opacity-0');
+        content.classList.add('w-full', 'opacity-100');
+
+        // Staggered text reveal
+        setTimeout(() => {
+            text1.classList.remove('opacity-0', 'translate-y-8');
+        }, 300);
+        
+        setTimeout(() => {
+            text2.classList.remove('opacity-0', 'translate-y-8');
+        }, 500);
+
+    } else {
+        // Hide text immediately
+        text1.classList.add('opacity-0', 'translate-y-8');
+        text2.classList.add('opacity-0', 'translate-y-8');
+
+        // Hide content container
+        content.classList.remove('w-full', 'opacity-100');
+        content.classList.add('w-0', 'opacity-0');
+        
+        // Show hint
+        hint.classList.remove('hidden');
+        setTimeout(() => hint.classList.remove('opacity-0'), 50);
+
+        // Avatar changes
+        avatar.classList.remove('w-48', 'h-48', 'rounded-3xl');
+        avatar.classList.add('w-64', 'h-64', 'rounded-full');
+        
+        // Image changes (Grayscale)
+        img.classList.remove('grayscale-0');
+        img.classList.add('grayscale', 'group-hover:grayscale-[50%]');
+
+        // Collapse container
+        setTimeout(() => {
+            container.classList.remove('max-w-5xl');
+            container.classList.add('max-w-xs', 'md:max-w-md');
+        }, 300);
+    }
+};
