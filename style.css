@@ -1,48 +1,48 @@
 :root {
-  /* Light Mode Colors */
-  --secondary-container: #00d2e0;
-  --on-background: #1c1b1b;
-  --surface-container-low: #f2f2f2;
-  --surface: #fafafa;
-  --background: #fafafa;
-  --primary-container: #0054d6;
-  --on-primary-container: #ffffff;
+  /* Light Mode Colors (Warm & Earthy) */
+  --secondary-container: #a3b19b;
+  --on-background: #4a4341;
+  --surface-container-low: #f4eee6;
+  --surface: #f8f5f0;
+  --background: #fdfbf7;
+  --primary-container: #e6bca6;
+  --on-primary-container: #4a342b;
   --surface-container-lowest: #ffffff;
-  --outline-variant: #c2c6d8;
-  --outline: #75798a;
-  --on-surface: #1c1b1b;
-  --primary: #0066ff;
-  --on-surface-variant: #424656;
-  --inverse-primary: #b3c5ff;
+  --outline-variant: #d6cfc7;
+  --outline: #a09793;
+  --on-surface: #4a4341;
+  --primary: #d37c68;
+  --on-surface-variant: #766a66;
+  --inverse-primary: #e29785;
 }
 
 .dark {
-  /* Dark Mode Colors (Default) */
-  --secondary-container: #00eefc;
-  --on-background: #e5e2e1;
-  --surface-container-low: #1c1b1b;
-  --surface: #131313;
-  --background: #131313;
-  --primary-container: #0066ff;
-  --on-primary-container: #f8f7ff;
-  --surface-container-lowest: #0e0e0e;
-  --outline-variant: #424656;
-  --outline: #8c90a1;
-  --on-surface: #e5e2e1;
-  --primary: #b3c5ff;
-  --on-surface-variant: #c2c6d8;
-  --inverse-primary: #0054d6;
+  /* Dark Mode Colors (Deep Ocean) */
+  --secondary-container: #5eead4;
+  --on-background: #f8fafc;
+  --surface-container-low: #334155;
+  --surface: #1e293b;
+  --background: #0f172a;
+  --primary-container: #0369a1;
+  --on-primary-container: #f0f9ff;
+  --surface-container-lowest: #020617;
+  --outline-variant: #475569;
+  --outline: #64748b;
+  --on-surface: #f8fafc;
+  --primary: #7dd3fc;
+  --on-surface-variant: #cbd5e1;
+  --inverse-primary: #0284c7;
 }
 
 body { scroll-behavior: smooth; }
         .glass-panel {
-            background: rgba(17, 17, 17, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         .glow-hover:hover {
-            box-shadow: 0 0 30px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             transform: scale(1.02);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
