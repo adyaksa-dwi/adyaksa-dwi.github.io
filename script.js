@@ -139,6 +139,7 @@ mobileNavLinks.forEach(link => {
 });
 
 window.openCategoryTab = function (event, title, categoryId) {
+    window.activePortfolioCategory = categoryId; // Simpan status kategori yang sedang aktif
     const cardEl = event ? event.currentTarget : null;
     const imgEl = cardEl ? cardEl.querySelector('img') : null;
     
@@ -210,7 +211,11 @@ window.openCategoryTab = function (event, title, categoryId) {
         clone.style.margin = '0';
         clone.style.zIndex = '9999';
         clone.style.objectFit = 'cover';
-        clone.style.borderRadius = computedStyle.borderRadius;
+        
+        // Atasi bug radius hilang dengan menggunakan nilai radius spesifik viewport
+        const startRadius = window.innerWidth < 768 ? '40px' : '60px';
+        clone.style.borderRadius = startRadius;
+        
         // Tangkap posisi object-position jika ada
         clone.style.objectPosition = getComputedStyle(imgEl).objectPosition;
         document.body.appendChild(clone);
@@ -222,7 +227,7 @@ window.openCategoryTab = function (event, title, categoryId) {
                 left: firstRect.left + 'px',
                 width: firstRect.width + 'px',
                 height: firstRect.height + 'px',
-                borderRadius: computedStyle.borderRadius
+                borderRadius: startRadius
             },
             {
                 top: lastRect.top + 'px',
@@ -295,6 +300,7 @@ window.openCategoryTab = function (event, title, categoryId) {
 };
 
 window.closeCategoryTab = function () {
+    window.activePortfolioCategory = null; // Reset kategori aktif
     const titleEl = document.getElementById('active-category-title');
     titleEl.classList.add('opacity-0', 'translate-y-8'); // Sembunyikan teks
     
@@ -740,6 +746,18 @@ async function loadDynamicPortfolio() {
     }
 
     container.innerHTML = allHtml;
+
+    // Terapkan filter jika user sudah keburu klik salah satu kategori sebelum loading selesai
+    if (window.activePortfolioCategory) {
+        const items = container.querySelectorAll('.portfolio-item');
+        items.forEach(item => {
+            if (item.getAttribute('data-category') === window.activePortfolioCategory) {
+                item.classList.remove('hidden-item');
+            } else {
+                item.classList.add('hidden-item');
+            }
+        });
+    }
 }
 
 // 3D Tilt Effect on Hover
