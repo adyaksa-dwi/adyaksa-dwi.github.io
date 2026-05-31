@@ -178,7 +178,16 @@ window.openCategoryTab = function (event, title, categoryId) {
         document.getElementById('contact')?.classList.add('hidden');
         document.getElementById('main-footer')?.classList.add('hidden');
         
-        // Tampilkan content view
+        
+        // Toggle Masonry layout untuk Photography
+        const grid = document.getElementById('portfolio-grid');
+        if (categoryId === 'photography') {
+            grid.classList.add('masonry-active');
+        } else {
+            grid.classList.remove('masonry-active');
+        }
+        
+        // Tampilkan content view normal
         document.getElementById('category-content-view').classList.remove('hidden');
         
         // Reset scroll ke atas seketika agar posisi LAST akurat
@@ -370,6 +379,176 @@ window.closeCategoryTab = function () {
     });
 };
 
+
+
+
+
+
+
+
+
+function initPhotographyTunnel() {
+    const stage = document.getElementById('tunnel-stage');
+    if (!stage) return;
+    stage.innerHTML = '';
+    tunnelPhotos = [];
+    tunnelScrollTarget = 0;
+    tunnelScrollCurrent = 0;
+
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    // Build photo pool (~50 photos)
+    const pool = [];
+    while (pool.length < 50) {
+        for (const src of photographyImages) {
+            pool.push(src);
+            if (pool.length >= 50) break;
+        }
+    }
+    // Shuffle
+    for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    for (let i = 0; i < pool.length; i++) {
+        const img = document.createElement('img');
+        img.src = pool[i];
+        img.alt = 'Photography';
+        img.className = 'tunnel-photo';
+        img.draggable = false;
+
+        const baseW = 180 + Math.random() * 220;
+        const baseH = baseW * (0.6 + Math.random() * 0.6);
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 120 + Math.random() * 500;
+        const vx = Math.cos(angle) * radius;
+        const vy = Math.sin(angle) * radius;
+        const vz = -(200 + i * 240 + Math.random() * 200);
+        const rot = (Math.random() - 0.5) * 12;
+
+        stage.appendChild(img);
+        tunnelPhotos.push({ el: img, vx, vy, vz, baseW, baseH, rot, src: pool[i] });
+    }
+
+    // Start animation loop
+    window.addEventListener('scroll', onTunnelScroll, { passive: true });
+    if (tunnelRAF) cancelAnimationFrame(tunnelRAF);
+    tunnelRAF = requestAnimationFrame(tunnelRenderLoop);
+
+    setTimeout(() => {
+        document.getElementById('tunnel-close-btn')?.classList.remove('opacity-0', 'translate-y-[-20px]');
+    }, 800);
+}
+
+function onTunnelScroll() {
+    const tunnelView = document.getElementById('photography-tunnel-view');
+    if (!tunnelView || tunnelView.classList.contains('hidden')) return;
+    const maxScroll = tunnelView.scrollHeight - window.innerHeight;
+    const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+    tunnelScrollTarget = progress * TUNNEL_SPEED;
+}
+
+function tunnelRenderLoop() {
+    const tunnelView = document.getElementById('photography-tunnel-view');
+    if (!tunnelView || tunnelView.classList.contains('hidden')) {
+        tunnelRAF = null;
+        return;
+    }
+
+    // Smooth lerp
+    tunnelScrollCurrent += (tunnelScrollTarget - tunnelScrollCurrent) * LERP_FACTOR;
+
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+
+    for (const photo of tunnelPhotos) {
+        const dz = photo.vz + tunnelScrollCurrent;
+
+        // Behind camera or too far → hide
+        if (dz >= TUNNEL_PERSPECTIVE || dz < -TUNNEL_SPEED * 0.8) {
+            photo.el.style.display = 'none';
+            continue;
+        }
+
+        const distFromCam = -dz;
+        const scale = TUNNEL_PERSPECTIVE / (TUNNEL_PERSPECTIVE + distFromCam);
+
+        const sx = cx + photo.vx * scale;
+        const sy = cy + photo.vy * scale;
+        const sw = photo.baseW * scale;
+        const sh = photo.baseH * scale;
+
+        // Opacity: fade out near, fade in from far
+        let opacity = 1;
+        if (distFromCam < 100) {
+            opacity = Math.max(0, distFromCam / 100);
+        } else if (distFromCam > 3000) {
+            opacity = Math.max(0, 1 - (distFromCam - 3000) / 5000);
+        }
+
+        const zIndex = Math.round(scale * 1000);
+
+        photo.el.style.display = 'block';
+        photo.el.style.position = 'absolute';
+        photo.el.style.left = (sx - sw / 2) + 'px';
+        photo.el.style.top = (sy - sh / 2) + 'px';
+        photo.el.style.width = sw + 'px';
+        photo.el.style.height = sh + 'px';
+        photo.el.style.opacity = opacity.toFixed(3);
+        photo.el.style.zIndex = zIndex;
+        photo.el.style.transform = 'rotate(' + (photo.rot * scale).toFixed(2) + 'deg)';
+        photo.el.style.pointerEvents = opacity < 0.15 ? 'none' : 'auto';
+    }
+
+    // Fade out title
+    const title = document.getElementById('tunnel-title');
+    if (title) {
+        title.style.opacity = Math.max(0, 1 - tunnelScrollCurrent / 400).toFixed(3);
+    }
+
+    tunnelRAF = requestAnimationFrame(tunnelRenderLoop);
+}
+
+window.closePhotographyTunnel = function() {
+    const tunnelView = document.getElementById('photography-tunnel-view');
+    const closeBtn = document.getElementById('tunnel-close-btn');
+    
+    closeBtn.classList.add('opacity-0', 'translate-y-[-20px]');
+    tunnelView.style.transition = 'opacity 0.5s ease';
+    tunnelView.style.opacity = '0';
+    
+    window.removeEventListener('scroll', onTunnelScroll);
+    if (tunnelRAF) { cancelAnimationFrame(tunnelRAF); tunnelRAF = null; }
+    
+    setTimeout(() => {
+        tunnelView.classList.add('hidden');
+        tunnelView.style.opacity = '';
+        tunnelView.style.transition = '';
+        
+        const portfolioSection = document.getElementById('portfolio');
+        const selectionView = document.getElementById('category-selection-view');
+        const header = document.getElementById('portfolio-header');
+        
+        document.getElementById('home')?.classList.remove('hidden');
+        document.getElementById('about')?.classList.remove('hidden');
+        document.getElementById('lumina-flux')?.classList.remove('hidden');
+        document.getElementById('contact')?.classList.remove('hidden');
+        document.getElementById('main-footer')?.classList.remove('hidden');
+        
+        void portfolioSection.offsetHeight;
+        window.scrollTo({ top: portfolioSection.offsetTop, behavior: 'instant' });
+        
+        selectionView.classList.remove('hidden', 'opacity-0', 'scale-90', 'pointer-events-none');
+        selectionView.classList.add('scale-100');
+        header.classList.remove('hidden', 'opacity-0', '-translate-y-8', 'pointer-events-none');
+    }, 500);
+}
+
+
 // Google Sheets Dynamic Integration
 async function loadDynamicPortfolio() {
     const sheetId = '1anhPdL6etR7KwwtEUUj1ZYpO49EwIY6JYO76V4DX-p4';
@@ -380,7 +559,8 @@ async function loadDynamicPortfolio() {
         { gid: '1532829572', category: 'photography', label: 'PHOTOGRAPHY' },
         { gid: '2069598161', category: 'videography', label: 'VIDEOGRAPHY' },
         { gid: '1969393925', category: 'magazines', label: 'MAGAZINES' },
-        { gid: '1662877084', category: 'mockup', label: 'MOCKUP DESIGNS' }
+        { gid: '1662877084', category: 'mockup', label: 'MOCKUP DESIGNS' },
+        { gid: '976825207', category: 'game', label: 'GAME DEVELOPMENT' }
     ];
 
     const container = document.getElementById('dynamic-portfolio-container');
@@ -416,7 +596,13 @@ async function loadDynamicPortfolio() {
                 let videoUrl = '';
                 let imageCol = '';
 
-                if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup') {
+                let externalLink = '';
+
+                if (sheet.category === 'game') {
+                    description = row[1] ? row[1].trim() : '';
+                    videoUrl = row[2] ? row[2].trim() : ''; // Kolom 3: Images (comma separated)
+                    externalLink = row[3] ? row[3].trim() : ''; // Kolom 4: Link
+                } else if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup') {
                     thumbnail = (row[1] && row[1].trim() !== '' && row[1].trim() !== '-') ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : '';
                 } else {
@@ -434,8 +620,25 @@ async function loadDynamicPortfolio() {
                 let playIcon = '';
                 let opacityClass = 'opacity-100';
 
+                // Pisahkan logika khusus untuk Game Carousel
+                if (sheet.category === 'game' && videoUrl) {
+                    opacityClass = 'opacity-60 group-hover:opacity-80 transition-opacity';
+                    const encodedImages = encodeURIComponent(videoUrl);
+                    const encodedDesc = encodeURIComponent(description);
+                    const encodedLink = encodeURIComponent(externalLink);
+                    onClickAttr = `onclick="openGameModal('${title.replace(/'/g, "\\'")}', '${encodedImages}', '${encodedDesc}', '${encodedLink}')"`;
+                    playIcon = `<span class="material-symbols-outlined text-[48px] text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">sports_esports</span>`;
+                    
+                    if (!thumbnail) {
+                        const firstUrl = videoUrl.split(',')[0].trim();
+                        const gDriveMatch = firstUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                        if (gDriveMatch && gDriveMatch[1]) {
+                            thumbnail = `https://lh3.googleusercontent.com/d/${gDriveMatch[1]}=w800`;
+                        }
+                    }
+                }
                 // Pisahkan logika khusus untuk Mockup Carousel
-                if (sheet.category === 'mockup' && videoUrl) {
+                else if (sheet.category === 'mockup' && videoUrl) {
                     opacityClass = 'opacity-60 group-hover:opacity-80 transition-opacity';
                     // videoUrl di sini adalah kumpulan link yang dipisahkan koma
                     const encodedImages = encodeURIComponent(videoUrl);
@@ -499,6 +702,9 @@ async function loadDynamicPortfolio() {
                     colSpan = 'md:col-span-4'; // Majalah tetap 3 kolom (karena proporsi portrait A4 butuh ruang lebih)
                     heightClass = 'aspect-[1/1.414] h-auto md:h-auto'; // Proporsi kertas A4
                     objectFit = 'object-contain bg-[#1a1a1a]'; // Contain agar seluruh sampul terlihat tanpa terpotong
+                } else if (sheet.category === 'photography') {
+                    heightClass = 'h-auto'; // Masonry membutuhkan tinggi natural
+                    objectFit = 'object-cover';
                 }
                 
                 const iconSize = 'text-[48px]'; // Ukuran ikon seragam
@@ -535,13 +741,69 @@ async function loadDynamicPortfolio() {
     container.innerHTML = allHtml;
 }
 
-document.addEventListener('DOMContentLoaded', loadDynamicPortfolio);
+// 3D Tilt Effect on Hover
+function init3DTiltEffect() {
+    const container = document.getElementById('portfolio-grid');
+    if (!container) return;
+
+    container.addEventListener('mousemove', (e) => {
+        const card = e.target.closest('.portfolio-item');
+        if (!card) return;
+        
+        // Hanya terapkan jika ini card foto/portfolio, dan perangkat punya mouse (bukan touch)
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; // x position within the element.
+        const y = e.clientY - rect.top;  // y position within the element.
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10; // Max tilt 10deg
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        // Terapkan ke elemen wrapper di dalam card (bukan cardnya langsung agar grid tidak rusak)
+        const wrapper = card.querySelector('.card-image-wrapper');
+        if (wrapper) {
+            wrapper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            wrapper.style.transition = 'transform 0.1s ease-out';
+            wrapper.style.zIndex = '10';
+        }
+    });
+
+    container.addEventListener('mouseout', (e) => {
+        const card = e.target.closest('.portfolio-item');
+        if (!card) return;
+        
+        const wrapper = card.querySelector('.card-image-wrapper');
+        if (wrapper) {
+            wrapper.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            wrapper.style.transition = 'transform 0.5s ease-out';
+            wrapper.style.zIndex = '1';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadDynamicPortfolio();
+    init3DTiltEffect();
+});
 
 // Contact Form Logic (DITAMBAHKAN)
 const contactForm = document.getElementById('contact-form');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault(); // Mencegah form reload halaman
-    alert('Terima kasih! Pesan Anda telah terkirim kepada Dwi Adyaksa.');
+    
+    const name = contactForm.querySelectorAll('input')[0].value;
+    const email = contactForm.querySelectorAll('input')[1].value;
+    const message = contactForm.querySelector('textarea').value;
+    
+    const subject = encodeURIComponent(`Pesan dari ${name} via Portfolio`);
+    const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`);
+    
+    window.location.href = `mailto:dwiadyaksa38@gmail.com?subject=${subject}&body=${body}`;
+    
     contactForm.reset();
 });
 
@@ -588,7 +850,7 @@ let carouselImages = [];
 let carouselTitles = [];
 let currentCarouselIndex = 0;
 
-window.openCarouselModal = function (titleRaw, encodedUrls) {
+window.openCarouselModal = function (titleRaw, encodedUrls, encodedDesc = '', encodedLink = '') {
     const rawStr = decodeURIComponent(encodedUrls);
     // Split berdasarkan koma dan bersihkan spasi
     const urls = rawStr.split(',').map(u => u.trim()).filter(u => u !== '');
@@ -616,6 +878,8 @@ window.openCarouselModal = function (titleRaw, encodedUrls) {
     
     const prevBtn = document.getElementById('carousel-prev');
     const nextBtn = document.getElementById('carousel-next');
+    const descEl = document.getElementById('carousel-desc');
+    const linkEl = document.getElementById('carousel-link');
     
     if (carouselImages.length > 1) {
         prevBtn.classList.remove('hidden');
@@ -623,6 +887,22 @@ window.openCarouselModal = function (titleRaw, encodedUrls) {
     } else {
         prevBtn.classList.add('hidden');
         nextBtn.classList.add('hidden');
+    }
+
+    if (encodedDesc) {
+        const descStr = decodeURIComponent(encodedDesc);
+        descEl.textContent = descStr;
+        descEl.classList.remove('hidden');
+    } else {
+        descEl.classList.add('hidden');
+    }
+
+    if (encodedLink) {
+        const linkStr = decodeURIComponent(encodedLink);
+        linkEl.href = linkStr;
+        linkEl.classList.remove('hidden');
+    } else {
+        linkEl.classList.add('hidden');
     }
 
     updateCarouselDisplay();
@@ -1423,3 +1703,86 @@ window.togglePortfolioView = function(mode) {
         
     }, 300); // Tunggu animasi keluar selesai (300ms)
 }
+// Global Game Modal Variables
+let gameImages = [];
+let currentGameIndex = 0;
+
+window.openGameModal = function (titleRaw, encodedUrls, encodedDesc = '', encodedLink = '') {
+    const rawStr = decodeURIComponent(encodedUrls);
+    const urls = rawStr.split(',').map(u => u.trim()).filter(u => u !== '');
+    
+    if (urls.length === 0) return;
+    
+    gameImages = urls.map(url => {
+        const gMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (gMatch && gMatch[1]) {
+            return `https://lh3.googleusercontent.com/d/${gMatch[1]}=w1920`;
+        }
+        return url;
+    });
+
+    currentGameIndex = 0;
+    
+    const prevBtn = document.getElementById('game-prev');
+    const nextBtn = document.getElementById('game-next');
+    const titleEl = document.getElementById('modal-game-title');
+    const descEl = document.getElementById('modal-game-desc');
+    const linkEl = document.getElementById('modal-game-link');
+    
+    if (gameImages.length > 1) {
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+    } else {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+    }
+
+    titleEl.textContent = titleRaw;
+
+    if (encodedDesc) {
+        const descStr = decodeURIComponent(encodedDesc);
+        descEl.textContent = descStr;
+    } else {
+        descEl.textContent = '';
+    }
+
+    if (encodedLink) {
+        const linkStr = decodeURIComponent(encodedLink);
+        linkEl.href = linkStr;
+        linkEl.classList.remove('hidden');
+    } else {
+        linkEl.classList.add('hidden');
+    }
+
+    updateGameDisplay();
+    openModal('modal-game');
+};
+
+let gameDisplayTimeout;
+
+function updateGameDisplay() {
+    const imgEl = document.getElementById('modal-game-img');
+    if (!imgEl || gameImages.length === 0) return;
+
+    if (gameDisplayTimeout) clearTimeout(gameDisplayTimeout);
+
+    imgEl.style.opacity = '0.3';
+    gameDisplayTimeout = setTimeout(() => {
+        imgEl.src = gameImages[currentGameIndex];
+        imgEl.onload = () => {
+            imgEl.style.opacity = '1';
+        };
+    }, 150);
+}
+
+window.prevGameImage = function() {
+    if (gameImages.length <= 1) return;
+    currentGameIndex = (currentGameIndex - 1 + gameImages.length) % gameImages.length;
+    updateGameDisplay();
+};
+
+window.nextGameImage = function() {
+    if (gameImages.length <= 1) return;
+    currentGameIndex = (currentGameIndex + 1) % gameImages.length;
+    updateGameDisplay();
+};

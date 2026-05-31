@@ -374,26 +374,12 @@
 
             <div class="px-margin-mobile md:px-margin-desktop">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="portfolio-grid">
-                <!-- Game Portfolios is static for now -->
-                <div class="portfolio-item md:col-span-5 bg-surface-container-low p-2 rounded-3xl glow-hover cursor-pointer"
-                    data-category="game" onclick="openModal('modal-game')">
-                    <div class="card-image-wrapper h-64 md:h-96 relative">
-                        <img alt="Game Screenshot" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6BlhgO2Rc0hjZ10QzFtvQ5SFB4Vu6u3v32A_bdh6UXGN6js2VnlGqA6BMceuUuQ-Tqms1C5ZLyiDZN7-oVRQYOyVf0a4u0ErjRDGmIkjbtPy_QCZR4J8eI-nOuJ2oipliYhuReEFjRzoEn4tvhEV7mV_27EoWilAsEHntjxwbixwcWQ6V1SyYx4qHysLQdxvT6Xf7pyYk0aq8V-ktDz3Tvi-T479ErHedFZ-A64BKcyBif5ecozSsk4WIqwET9snlLbbFVw6X7hY">
-                        <div
-                            class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent">
-                            <span class="text-label-caps font-label-caps text-secondary-container">GAME
-                                DEVELOPMENT</span>
-                            <h3 class="text-headline-md font-headline-md text-on-surface text-lg">Project: NEON VOID
-                            </h3>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Container for Dynamic Content -->
                 <div id="dynamic-portfolio-container" class="contents"></div>
             </div>
         </div>
+
     </section>
 
     <!-- Section 4: Contact -->
@@ -409,11 +395,11 @@
                 </p>
                 <div class="flex flex-col gap-4">
                     <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
-                        href="mailto:hello@dwiadyaksa.com">
+                        href="mailto:dwiadyaksa38@gmail.com">
                         <span
                             class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">mail</span>
                         <span
-                            class="font-label-caps text-label-caps text-sm tracking-widest">HELLO@DWIADYAKSA.COM</span>
+                            class="font-label-caps text-label-caps text-sm tracking-widest uppercase">dwiadyaksa38@gmail.com</span>
                     </a>
                     <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
                         href="https://maps.google.com/?q=Jakarta,Indonesia" target="_blank">
@@ -465,9 +451,9 @@
             <div class="flex gap-6">
                 <!-- Tautan sosial media bisa disesuaikan href-nya -->
                 <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
-                    href="https://instagram.com" target="_blank">Instagram</a>
+                    href="https://www.instagram.com/adyaksadwi/" target="_blank">Instagram</a>
                 <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
-                    href="https://linkedin.com" target="_blank">LinkedIn</a>
+                    href="https://www.linkedin.com/in/adyaksadwi" target="_blank">LinkedIn</a>
                 <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
                     href="https://behance.net" target="_blank">Behance</a>
                 <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
@@ -524,54 +510,46 @@
             </button>
         </div>
     </div>
-    <!-- Game Modal -->
+
+
+    <!-- Game Modal (Dynamic Split Layout) -->
     <div class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-10" id="modal-game">
         <div class="absolute inset-0 bg-background/90 backdrop-blur-xl" onclick="closeModal('modal-game')"></div>
-        <div
-            class="glass-panel relative w-full h-[90vh] max-w-[1400px] rounded-xl flex flex-col md:flex-row overflow-hidden shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 modal-content">
-            <div class="w-full md:w-[70%] h-[50vh] md:h-full bg-black overflow-y-auto hide-scrollbar relative">
-                <div class="sticky top-0 w-full aspect-video bg-surface-container-lowest"><img alt="Game Hero"
-                        class="w-full h-full object-cover"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBricAQaw1ytJxUiSzm2a4UMM9DNDnddaR5qsub6D6HbubWmgH7OdWK9DXDiF-Kz4_wJl5L16UxygmOQHj-xOk5NkSX7v4wxse6bbP3lrruiRL9zOzN1UTvNlxDzoJqLP76ntDvLwittohxV0PfVlIYUkSCLeNqDc_6ESMoDNtMyTDbUOml12ZAxw2CCcjuA9HDgmCSgQjen8vQCD9DzSJTDOjLuDQ6aG-yRjnQd2VfB24navsKY-hf2FvQikGUu_4mTM7AWX1UOpA">
-                </div>
+        <div class="glass-panel relative w-full h-[90vh] max-w-[1400px] rounded-xl flex flex-col md:flex-row overflow-hidden shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 modal-content">
+            
+            <!-- Left Side: Image / Carousel -->
+            <div class="w-full md:w-[70%] h-[50vh] md:h-full bg-black overflow-y-auto hide-scrollbar relative flex items-center justify-center group/game-modal">
+                <img id="modal-game-img" alt="Game Hero" class="w-full h-full object-cover transition-opacity duration-300" src="">
+                
+                <!-- Navigation Buttons (Hidden by default, shown if multiple images) -->
+                <button id="game-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary-container text-white p-3 rounded-full z-20 transition-all backdrop-blur-md hidden" onclick="prevGameImage()">
+                    <span class="material-symbols-outlined text-[32px]">chevron_left</span>
+                </button>
+                <button id="game-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary-container text-white p-3 rounded-full z-20 transition-all backdrop-blur-md hidden" onclick="nextGameImage()">
+                    <span class="material-symbols-outlined text-[32px]">chevron_right</span>
+                </button>
             </div>
-            <div
-                class="w-full md:w-[30%] h-full bg-surface/90 backdrop-blur-md p-8 md:p-10 border-l border-white/5 flex flex-col overflow-y-auto relative">
-                <button
-                    class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors hidden md:block"
-                    onclick="closeModal('modal-game')"><span class="material-symbols-outlined">close</span></button>
+            
+            <!-- Right Side: Content -->
+            <div class="w-full md:w-[30%] h-full bg-surface/90 backdrop-blur-md p-8 md:p-10 border-l border-white/5 flex flex-col overflow-y-auto relative">
+                <button class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors hidden md:block" onclick="closeModal('modal-game')">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                
                 <div class="mt-8 md:mt-0 flex flex-col h-full">
                     <div>
-                        <span
-                            class="text-label-caps font-label-caps text-secondary-container mb-2 block tracking-widest">UNREAL
-                            ENGINE 5</span>
-                        <h2 class="text-headline-md font-headline-md text-on-surface mb-6 leading-tight">Project: NEON
-                            VOID</h2>
+                        <span class="text-label-caps font-label-caps text-secondary-container mb-2 block tracking-widest">GAME DEVELOPMENT</span>
+                        <h2 id="modal-game-title" class="text-headline-md font-headline-md text-on-surface mb-6 leading-tight"></h2>
 
-                        <!-- Deskripsi Khusus Template -->
                         <div class="mb-8">
                             <h3 class="text-label-caps font-label-caps text-outline mb-2">TENTANG PROYEK</h3>
-                            <p class="text-body-md text-on-surface-variant mb-4">Sebuah game eksplorasi sci-fi yang
-                                menggabungkan elemen cyberpunk dengan arsitektur brutalist. Proyek ini berfokus pada
-                                pencahayaan real-time (Lumen) dan sistem interaksi yang imersif.</p>
-
-                            <h3 class="text-label-caps font-label-caps text-outline mb-2">PERAN SAYA</h3>
-                            <ul class="text-body-md text-on-surface-variant list-disc pl-5 space-y-1 mb-4">
-                                <li>Level Design & Environment Art</li>
-                                <li>Lighting Optimization (Lumen)</li>
-                                <li>Material Creation</li>
-                            </ul>
+                            <p id="modal-game-desc" class="text-body-md text-on-surface-variant mb-4"></p>
                         </div>
                     </div>
 
                     <div class="mt-auto flex flex-col gap-3">
-                        <a class="w-full bg-surface-container border border-outline-variant text-on-surface py-4 rounded font-label-caps text-label-caps tracking-wider flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors"
-                            href="https://example.com" target="_blank">
+                        <a id="modal-game-link" class="hidden w-full bg-surface-container border border-outline-variant text-on-surface py-4 rounded font-label-caps text-label-caps tracking-wider flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors" href="#" target="_blank">
                             <span class="material-symbols-outlined text-[18px]">language</span> WEBSITE PROJECT
-                        </a>
-                        <a class="w-full bg-primary-container text-white py-4 rounded font-label-caps text-label-caps tracking-wider flex items-center justify-center gap-2 hover:bg-inverse-primary transition-colors hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
-                            href="#contact" onclick="closeModal('modal-game')">
-                            <span class="material-symbols-outlined text-[18px]">sports_esports</span> TANYA PROJECT INI
                         </a>
                     </div>
                 </div>
@@ -605,10 +583,16 @@
             </div>
 
             <!-- Footer Details -->
-            <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 bg-gradient-to-t from-black/90 to-transparent flex flex-col items-center justify-end z-20">
+            <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 bg-gradient-to-t from-black via-black/80 to-transparent flex flex-col items-center justify-end z-20">
                 <h3 id="carousel-title" class="text-headline-md font-headline-md text-white mb-2 text-center drop-shadow-lg"></h3>
-                <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-                    <span id="carousel-indicator" class="text-label-caps font-label-caps text-white tracking-widest"></span>
+                <p id="carousel-desc" class="text-body-md text-white/80 max-w-3xl text-center mb-4 hidden"></p>
+                <div class="flex items-center gap-4">
+                    <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                        <span id="carousel-indicator" class="text-label-caps font-label-caps text-white tracking-widest"></span>
+                    </div>
+                    <a id="carousel-link" class="hidden bg-primary-container hover:bg-inverse-primary text-white px-6 py-2 rounded-full font-label-caps tracking-widest transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(0,102,255,0.3)]" href="#" target="_blank">
+                        <span class="material-symbols-outlined text-[18px]">play_arrow</span> VISIT PROJECT
+                    </a>
                 </div>
             </div>
         </div>

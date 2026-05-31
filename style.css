@@ -114,3 +114,40 @@ body { scroll-behavior: smooth; }
                 clip-path: circle(var(--click-r, 150vmax) at var(--click-x, 100%) var(--click-y, 0%));
             }
         }
+
+/* Photography Masonry Gallery Styles */
+#portfolio-grid.masonry-active {
+  display: block; /* Disable flex/grid */
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  #portfolio-grid.masonry-active {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  #portfolio-grid.masonry-active {
+    column-count: 4;
+  }
+}
+
+#portfolio-grid.masonry-active .portfolio-item {
+  display: inline-block; /* Essential for preventing breaks across columns */
+  width: 100%;
+  margin-bottom: 1.5rem;
+  break-inside: avoid; /* Prevent items from splitting across columns */
+}
+
+/* Let the image define its own height in masonry */
+#portfolio-grid.masonry-active .card-image-wrapper {
+  height: auto;
+}
+
+#portfolio-grid.masonry-active .card-image-wrapper img {
+  position: relative;
+  height: auto;
+  object-fit: cover;
+}
