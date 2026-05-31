@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="referrer" content="no-referrer">
+    <title>Dwi Adyaksa - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500;600&family=Inter:wght@400&display=swap"
+        rel="stylesheet">
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "var(--secondary-container)",
+                        "on-background": "var(--on-background)",
+                        "surface-container-low": "var(--surface-container-low)",
+                        "surface": "var(--surface)",
+                        "background": "var(--background)",
+                        "primary-container": "var(--primary-container)",
+                        "on-primary-container": "var(--on-primary-container)",
+                        "surface-container-lowest": "var(--surface-container-lowest)",
+                        "outline-variant": "var(--outline-variant)",
+                        "outline": "var(--outline)",
+                        "on-surface": "var(--on-surface)",
+                        "primary": "var(--primary)",
+                        "on-surface-variant": "var(--on-surface-variant)",
+                        "inverse-primary": "var(--inverse-primary)"
+                    },
+                    "spacing": {
+                        "stack-lg": "80px",
+                        "stack-sm": "16px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "stack-md": "32px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "label-caps": ["Poppins"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "300" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+    class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative">
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300"
+        id="main-nav">
+        <div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+            <a class="text-body-lg font-headline-lg font-bold tracking-tighter text-on-surface hover:text-primary transition-colors duration-300"
+                href="#home">DWI ADYAKSA</a>
+            <div class="hidden md:flex gap-gutter items-center">
+                <a class="text-primary font-medium border-b-2 border-primary pb-1 text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
+                    href="#home">Home</a>
+                <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
+                    href="#about">About</a>
+                <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
+                    href="#portfolio">Portfolio</a>
+                <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
+                    href="#contact">Contact</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <!-- Trigger class untuk Tailwind CDN: translate-x-8 translate-x-0 -->
+                <button id="theme-toggle"
+                    class="relative w-16 h-8 bg-surface-container-lowest rounded-full border border-outline-variant transition-colors duration-300 flex items-center px-1 focus:outline-none focus:ring-2 focus:ring-primary group"
+                    aria-label="Toggle Theme">
+                    <div id="theme-toggle-knob"
+                        class="w-6 h-6 bg-on-surface rounded-full shadow-md flex items-center justify-center transform transition-all duration-300 group-hover:scale-105">
+                        <span class="material-symbols-outlined text-[14px] transition-all duration-300"
+                            id="theme-icon">dark_mode</span>
+                    </div>
+                </button>
+                <a class="hidden md:inline-flex bg-primary-container text-on-primary-container px-6 py-3 rounded-DEFAULT font-label-caps text-label-caps font-medium hover:bg-inverse-primary transition-all duration-300 scale-95 hover:scale-100"
+                    href="#contact">
+                    Hire Me
+                </a>
+                <button class="md:hidden text-on-surface" id="mobile-menu-btn">
+                    <span class="material-symbols-outlined text-headline-md">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="fixed inset-0 bg-surface/95 backdrop-blur-3xl z-40 hidden flex-col justify-center items-center gap-stack-md pt-20"
+        id="mobile-menu">
+        <a class="text-headline-md font-headline-md text-primary mobile-nav-link" href="#home">Home</a>
+        <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#about">About</a>
+        <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#portfolio">Portfolio</a>
+        <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#contact">Contact</a>
+    </div>
+
+    <!-- Section 1: Home -->
+    <section class="relative w-full h-screen flex items-center justify-center overflow-hidden" id="home">
+        <div class="absolute inset-0 w-full h-full bg-surface-container-lowest z-0">
+            <img id="hero-bg-image" alt="Retro computer setup"
+                class="w-full h-full object-cover opacity-10 mix-blend-luminosity scale-[1.1] transition-transform duration-100 ease-out"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuArHLfvQAcoieCU0HyAzm7LR5efyKYFu6ddzYcWJec8jZENrNOvqmFkyqNRLz4XnZTNrb23sLXEnt_VnR_zFurl_boKdFTA7uttzdiOxBPteQ5EahleRffyJKHAV8-RT_ODvA69fxw6AbqzPyK8TPpHiVlUWbt2IcCFjuQ6WOvK1f9_gDEOt1ZC7aVsKWTRyXZL9P6jznMPYuGBULEJlAZoXKbaunXjQZse2L87Pscp3nE2H0ZG10zYdOjk-JAJlIPtSoJghUpbXE8">
+        </div>
+        <!-- Three.js Canvas Container -->
+        <div id="three-canvas-container" class="absolute inset-0 w-full h-full z-0 opacity-80 pointer-events-none">
+        </div>
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10 pointer-events-none">
+        </div>
+        <div
+            class="relative z-20 text-center px-margin-mobile max-w-container-max mx-auto flex flex-col items-center gap-stack-sm">
+            <h1 id="hero-main-text"
+                class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface tracking-tight leading-tight transition-transform duration-100 ease-out inline-block min-h-[100px] md:min-h-[160px]">
+                <span id="typewriter-text">VISUALIZING THE<br><span
+                        class="text-primary-container">FUTURE</span></span><span
+                    class="animate-blink text-primary font-light">|</span>
+            </h1>
+            <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mt-4">
+                Creative Technologist &amp; Interactive Media Designer. Memadukan estetika minimalis dengan teknologi
+                mendalam.
+            </p>
+            <div class="mt-stack-sm flex gap-4">
+                <a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-DEFAULT font-label-caps text-label-caps tracking-wider hover:shadow-[0_0_30px_rgba(0,102,255,0.4)] transition-all duration-300"
+                    href="#portfolio">EXPLORE WORK</a>
+                <a class="border border-outline-variant text-on-surface px-8 py-4 rounded-DEFAULT font-label-caps text-label-caps tracking-wider hover:bg-surface-container-high transition-all duration-300"
+                    href="#about">PROFILE</a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+            <span class="text-label-caps font-label-caps text-on-surface-variant text-[10px]">SCROLL</span>
+            <div class="w-[1px] h-12 bg-outline-variant relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-secondary-container scroll-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: About Me -->
+    <section class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto scroll-reveal"
+        id="about">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+            <div class="md:col-span-5 flex justify-center relative">
+                <div class="absolute inset-0 bg-primary-container/20 blur-[100px] rounded-full z-0 pointer-events-none">
+                </div>
+                <div
+                    class="w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-2 border-surface-variant relative z-10 p-2">
+                    <img alt="Profile"
+                        class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjJjUbpCplJgqszVYkBrvf_PU34ZuuSSpVewDeq1D9uRgRnRS3o8odhLW1SnJXO0_msv6bhtI514Cd3UTMZW5BeK3ixjBsWuRwITxnVYefz3beGP16T0DhH2mKe0a8UeKFaf9d7VHlEhVg1UohdxvCTxN8PwYDVxhK1weJlswOwwsDpfsAflezJ15bprljiFcyvsS3tnJgTS6HpruxN8VfgfUHrIpDJZ0DFXH-XTuPsjAyOGUq5r0ZcRZeoYB6fAhc4lip8Mg0FBg">
+                </div>
+            </div>
+            <div class="md:col-span-7 flex flex-col gap-stack-md mt-10 md:mt-0">
+                <div>
+                    <h2 class="text-headline-lg font-headline-lg text-on-surface mb-4">MENDALAMI<br>ESTETIKA DIGITAL
+                    </h2>
+                    <p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                        Saya adalah seorang desainer dan teknolog kreatif yang berbasis di Indonesia. Dengan fokus pada
+                        interaksi digital dan pengalaman mendalam, saya menggabungkan desain grafis, pemodelan 3D, dan
+                        pengembangan interaktif untuk menciptakan karya yang tidak hanya dilihat, tetapi dirasakan.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-label-caps font-label-caps text-secondary-container mb-4">SOFTWARE ARSENAL</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
+                                class="material-symbols-outlined text-[16px]">polyline</span> BLENDER</span>
+                        <span
+                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
+                                class="material-symbols-outlined text-[16px]">brush</span> PHOTOSHOP</span>
+                        <span
+                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
+                                class="material-symbols-outlined text-[16px]">movie</span> PREMIERE</span>
+                        <span
+                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
+                                class="material-symbols-outlined text-[16px]">animation</span> AFTER EFFECTS</span>
+                        <span
+                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
+                                class="material-symbols-outlined text-[16px]">sports_esports</span> UNREAL ENGINE</span>
+                        <span
+                            class="px-4 py-2 bg-surface-container-low border border-primary-container/30 text-on-surface font-label-caps text-label-caps rounded-full flex items-center gap-2"><span
+                                class="material-symbols-outlined text-[16px]">code</span> UNITY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Portfolio -->
+    <section
+        class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative scroll-reveal"
+        id="portfolio">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-stack-md gap-4">
+            <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none">
+                ARSIP<br><span class="text-outline">KARYA</span></h2>
+            <!-- Category Filter Added Logic -->
+            <div class="flex flex-wrap gap-2 justify-end max-w-xl" id="portfolio-filters">
+                <button data-filter="all"
+                    class="filter-btn text-primary border-b border-primary px-3 py-1 text-label-caps font-label-caps transition-colors">ALL</button>
+                <button data-filter="3d"
+                    class="filter-btn text-on-surface-variant hover:text-on-surface px-3 py-1 text-label-caps font-label-caps transition-colors">3D
+                    MODELLING</button>
+                <button data-filter="game"
+                    class="filter-btn text-on-surface-variant hover:text-on-surface px-3 py-1 text-label-caps font-label-caps transition-colors">GAME
+                    DEV</button>
+                <button data-filter="motion"
+                    class="filter-btn text-on-surface-variant hover:text-on-surface px-3 py-1 text-label-caps font-label-caps transition-colors">MOTION</button>
+                <button data-filter="graphic"
+                    class="filter-btn text-on-surface-variant hover:text-on-surface px-3 py-1 text-label-caps font-label-caps transition-colors">GRAPHIC</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="portfolio-grid">
+            <!-- Game Portfolios is static for now -->
+            <div class="portfolio-item md:col-span-5 bg-surface-container-low p-2 rounded-lg glow-hover cursor-pointer"
+                data-category="game" onclick="openModal('modal-game')">
+                <div class="card-image-wrapper h-64 md:h-96 relative">
+                    <img alt="Game Screenshot" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6BlhgO2Rc0hjZ10QzFtvQ5SFB4Vu6u3v32A_bdh6UXGN6js2VnlGqA6BMceuUuQ-Tqms1C5ZLyiDZN7-oVRQYOyVf0a4u0ErjRDGmIkjbtPy_QCZR4J8eI-nOuJ2oipliYhuReEFjRzoEn4tvhEV7mV_27EoWilAsEHntjxwbixwcWQ6V1SyYx4qHysLQdxvT6Xf7pyYk0aq8V-ktDz3Tvi-T479ErHedFZ-A64BKcyBif5ecozSsk4WIqwET9snlLbbFVw6X7hY">
+                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent">
+                        <span class="text-label-caps font-label-caps text-secondary-container">GAME DEVELOPMENT</span>
+                        <h3 class="text-headline-md font-headline-md text-on-surface text-lg">Project: NEON VOID</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container for Dynamic Content -->
+            <div id="dynamic-portfolio-container" class="contents"></div>
+        </div>
+    </section>
+
+    <!-- Section 4: Contact -->
+    <section
+        class="py-24 md:py-40 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-white/5 mt-stack-lg min-h-[80vh] flex flex-col justify-center scroll-reveal"
+        id="contact">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+            <div>
+                <h2 class="text-headline-lg font-headline-lg text-on-surface mb-2">MARI<br>BERKOLABORASI</h2>
+                <p class="text-body-md font-body-md text-on-surface-variant mb-8 max-w-md">
+                    Tertarik untuk membangun pengalaman digital yang luar biasa? Hubungi saya untuk proyek, kolaborasi,
+                    atau sekadar menyapa.
+                </p>
+                <div class="flex flex-col gap-4">
+                    <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
+                        href="mailto:hello@dwiadyaksa.com">
+                        <span
+                            class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">mail</span>
+                        <span
+                            class="font-label-caps text-label-caps text-sm tracking-widest">HELLO@DWIADYAKSA.COM</span>
+                    </a>
+                    <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
+                        href="https://maps.google.com/?q=Jakarta,Indonesia" target="_blank">
+                        <span
+                            class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">location_on</span>
+                        <span class="font-label-caps text-label-caps text-sm tracking-widest">JAKARTA, INDONESIA</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-surface-container-low p-6 rounded-lg border border-white/5">
+                <form id="contact-form" class="flex flex-col gap-4">
+                    <div>
+                        <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2">NAMA</label>
+                        <input required
+                            class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm"
+                            placeholder="Masukkan nama Anda" type="text">
+                    </div>
+                    <div>
+                        <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2">EMAIL</label>
+                        <input required
+                            class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm"
+                            placeholder="email@contoh.com" type="email">
+                    </div>
+                    <div>
+                        <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2">PESAN</label>
+                        <textarea required
+                            class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors h-32 resize-none rounded-t-sm"
+                            placeholder="Ceritakan tentang proyek Anda..."></textarea>
+                    </div>
+                    <!-- Type diganti menjadi submit -->
+                    <button type="submit"
+                        class="mt-4 bg-on-surface text-background px-6 py-3 font-label-caps text-label-caps font-bold hover:bg-primary-container hover:text-white transition-all duration-300 w-fit">
+                        KIRIM PESAN
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest w-full py-stack-md border-t border-white/5 mt-auto">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-stack-sm max-w-container-max mx-auto">
+            <span class="text-label-caps font-label-caps font-bold text-on-surface tracking-widest">
+                DWI ADYAKSA
+            </span>
+            <div class="flex gap-6">
+                <!-- Tautan sosial media bisa disesuaikan href-nya -->
+                <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
+                    href="https://instagram.com" target="_blank">Instagram</a>
+                <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
+                    href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
+                    href="https://behance.net" target="_blank">Behance</a>
+                <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-secondary-container transition-all duration-300 hover:glow-sm"
+                    href="https://artstation.com" target="_blank">ArtStation</a>
+            </div>
+            <span class="text-body-md font-body-md text-on-surface-variant text-sm">
+                © 2024 DWI ADYAKSA - ALL RIGHTS RESERVED
+            </span>
+        </div>
+    </footer>
+
+    <!-- (Bagian Modal Modalnya Tetap Sama) -->
+    <!-- Image Modal -->
+    <div class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-10" id="modal-image">
+        <div class="absolute inset-0 bg-background/90 backdrop-blur-xl" onclick="closeModal('modal-image')"></div>
+        <div
+            class="glass-panel relative w-full max-w-5xl max-h-full overflow-y-auto rounded-xl flex flex-col shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 border-t border-white/10 modal-content">
+            <button
+                class="absolute top-4 right-4 text-on-surface bg-surface-container p-2 rounded-full hover:bg-primary-container transition-colors z-20"
+                onclick="closeModal('modal-image')"><span class="material-symbols-outlined">close</span></button>
+            <div class="w-full h-[50vh] md:h-[60vh] bg-black"><img id="modal-image-img" alt="Main View"
+                    class="w-full h-full object-contain" src=""></div>
+            <div class="p-6 md:p-10 bg-surface-container-low">
+                <div class="mb-8">
+                    <span id="modal-image-cat"
+                        class="px-3 py-1 bg-surface border border-primary/30 text-primary font-label-caps text-[10px] rounded-full mb-3 inline-block"></span>
+                    <h2 id="modal-image-title" class="text-headline-md font-headline-md text-on-surface mb-2"></h2>
+                    <p id="modal-image-desc" class="text-body-md font-body-md text-on-surface-variant max-w-3xl"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Modal -->
+    <div class="fixed inset-0 z-[100] hidden items-center justify-center p-0 md:p-10" id="modal-video">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="closeModal('modal-video')"></div>
+        <div
+            class="relative w-full max-w-6xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl z-10 modal-content flex items-center justify-center">
+            <button
+                class="absolute top-4 right-4 text-white/50 hover:text-white p-2 z-20 transition-colors bg-black/50 rounded-full"
+                onclick="closeModal('modal-video')">
+                <span class="material-symbols-outlined text-[32px]">close</span>
+            </button>
+
+            <!-- Google Drive Embed Player -->
+            <iframe id="portfolio-video" class="w-full h-full outline-none bg-black rounded-lg"
+                src="https://drive.google.com/file/d/1ej7eWeXVR6pYgfMsaPjGpP5PHPXdvCMI/preview" allow="autoplay"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+    <!-- Game Modal -->
+    <div class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-10" id="modal-game">
+        <div class="absolute inset-0 bg-background/90 backdrop-blur-xl" onclick="closeModal('modal-game')"></div>
+        <div
+            class="glass-panel relative w-full h-[90vh] max-w-[1400px] rounded-xl flex flex-col md:flex-row overflow-hidden shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 modal-content">
+            <div class="w-full md:w-[70%] h-[50vh] md:h-full bg-black overflow-y-auto hide-scrollbar relative">
+                <div class="sticky top-0 w-full aspect-video bg-surface-container-lowest"><img alt="Game Hero"
+                        class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBricAQaw1ytJxUiSzm2a4UMM9DNDnddaR5qsub6D6HbubWmgH7OdWK9DXDiF-Kz4_wJl5L16UxygmOQHj-xOk5NkSX7v4wxse6bbP3lrruiRL9zOzN1UTvNlxDzoJqLP76ntDvLwittohxV0PfVlIYUkSCLeNqDc_6ESMoDNtMyTDbUOml12ZAxw2CCcjuA9HDgmCSgQjen8vQCD9DzSJTDOjLuDQ6aG-yRjnQd2VfB24navsKY-hf2FvQikGUu_4mTM7AWX1UOpA">
+                </div>
+            </div>
+            <div
+                class="w-full md:w-[30%] h-full bg-surface/90 backdrop-blur-md p-8 md:p-10 border-l border-white/5 flex flex-col overflow-y-auto relative">
+                <button
+                    class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors hidden md:block"
+                    onclick="closeModal('modal-game')"><span class="material-symbols-outlined">close</span></button>
+                <div class="mt-8 md:mt-0 flex flex-col h-full">
+                    <div>
+                        <span
+                            class="text-label-caps font-label-caps text-secondary-container mb-2 block tracking-widest">UNREAL
+                            ENGINE 5</span>
+                        <h2 class="text-headline-md font-headline-md text-on-surface mb-6 leading-tight">Project: NEON
+                            VOID</h2>
+
+                        <!-- Deskripsi Khusus Template -->
+                        <div class="mb-8">
+                            <h3 class="text-label-caps font-label-caps text-outline mb-2">TENTANG PROYEK</h3>
+                            <p class="text-body-md text-on-surface-variant mb-4">Sebuah game eksplorasi sci-fi yang
+                                menggabungkan elemen cyberpunk dengan arsitektur brutalist. Proyek ini berfokus pada
+                                pencahayaan real-time (Lumen) dan sistem interaksi yang imersif.</p>
+
+                            <h3 class="text-label-caps font-label-caps text-outline mb-2">PERAN SAYA</h3>
+                            <ul class="text-body-md text-on-surface-variant list-disc pl-5 space-y-1 mb-4">
+                                <li>Level Design & Environment Art</li>
+                                <li>Lighting Optimization (Lumen)</li>
+                                <li>Material Creation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto flex flex-col gap-3">
+                        <a class="w-full bg-surface-container border border-outline-variant text-on-surface py-4 rounded font-label-caps text-label-caps tracking-wider flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors"
+                            href="https://example.com" target="_blank">
+                            <span class="material-symbols-outlined text-[18px]">language</span> WEBSITE PROJECT
+                        </a>
+                        <a class="w-full bg-primary-container text-white py-4 rounded font-label-caps text-label-caps tracking-wider flex items-center justify-center gap-2 hover:bg-inverse-primary transition-colors hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
+                            href="#contact" onclick="closeModal('modal-game')">
+                            <span class="material-symbols-outlined text-[18px]">sports_esports</span> TANYA PROJECT INI
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts for Interactions -->
+    <script src="script.js"></script>
+</body>
+
+</html>
