@@ -415,19 +415,19 @@
                 <form id="contact-form" class="flex flex-col gap-4">
                     <div>
                         <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2" data-i18n="contact_label_name">NAMA</label>
-                        <input required
+                        <input required name="name"
                             class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm"
                             placeholder="Masukkan nama Anda" type="text" data-i18n-ph="contact_ph_name">
                     </div>
                     <div>
                         <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2" data-i18n="contact_label_email">EMAIL</label>
-                        <input required
+                        <input required name="email"
                             class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm"
                             placeholder="email@contoh.com" type="email" data-i18n-ph="contact_ph_email">
                     </div>
                     <div>
                         <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2" data-i18n="contact_label_message">PESAN</label>
-                        <textarea required
+                        <textarea required name="message"
                             class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors h-32 resize-none rounded-t-sm"
                             placeholder="Ceritakan tentang proyek Anda..." data-i18n-ph="contact_ph_message"></textarea>
                     </div>

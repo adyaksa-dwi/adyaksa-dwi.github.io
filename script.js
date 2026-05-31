@@ -792,19 +792,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Contact Form Logic (DITAMBAHKAN)
 const contactForm = document.getElementById('contact-form');
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault(); // Mencegah form reload halaman
     
-    const name = contactForm.querySelectorAll('input')[0].value;
-    const email = contactForm.querySelectorAll('input')[1].value;
-    const message = contactForm.querySelector('textarea').value;
+    // Web3Forms Access Key
+    const WEB3FORMS_ACCESS_KEY = "98575b28-2d5a-4801-b2ac-553aed8220bd";
     
-    const subject = encodeURIComponent(`Pesan dari ${name} via Portfolio`);
-    const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`);
-    
-    window.location.href = `mailto:dwiadyaksa38@gmail.com?subject=${subject}&body=${body}`;
-    
-    contactForm.reset();
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "MENGIRIM...";
+    submitBtn.disabled = true;
+
+    const formData = new FormData(contactForm);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert('Terima kasih! Pesan Anda berhasil terkirim langsung ke email saya.');
+            contactForm.reset();
+        } else {
+            console.error("Web3Forms Error:", data);
+            alert('Maaf, terjadi kesalahan. Pastikan Access Key sudah benar!');
+        }
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        alert('Gagal mengirim pesan. Silakan periksa koneksi internet Anda.');
+    } finally {
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+    }
 });
 
 // Global Modal Logic
