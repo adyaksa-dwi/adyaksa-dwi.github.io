@@ -72,17 +72,19 @@
 <body
     class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw] overflow-hidden">
 
-    <!-- Cinematic Intro Sequence -->
-    <div id="intro-overlay" class="fixed inset-0 z-[9999] bg-surface-container-lowest flex items-center justify-center transition-all duration-[1200ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
-        <div class="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
-            <!-- Dynamic Text Container -->
-            <div id="intro-text-container" class="relative z-10 flex items-center justify-center overflow-hidden h-24 w-full">
-                <h1 id="intro-text" class="absolute text-3xl md:text-5xl font-headline-lg font-bold text-on-surface tracking-[0.2em] uppercase transition-all duration-300 transform translate-y-10 opacity-0">
-                    HELLO.
-                </h1>
-            </div>
-            <!-- Animated sweeping line -->
-            <div id="intro-line" class="absolute top-1/2 left-0 w-0 h-[2px] bg-primary -translate-y-1/2 z-20"></div>
+    <!-- Playful Motion Graphics Intro -->
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] flex items-center justify-center transition-all duration-[1000ms] ease-[cubic-bezier(0.85,0,0.15,1)]" style="clip-path: circle(150% at 50% 50%);">
+        <!-- Solid background blocker that hides website -->
+        <div id="intro-blocker" class="absolute inset-0 bg-background z-0"></div>
+        
+        <!-- Expanding Droplet -->
+        <div id="intro-droplet" class="absolute w-16 h-16 rounded-full bg-surface-container-lowest scale-0 transition-transform duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-10"></div>
+        
+        <div id="intro-typography" class="relative z-20 flex overflow-hidden py-4 opacity-0 transition-opacity duration-300">
+            <h1 class="text-4xl md:text-7xl font-headline-lg font-bold tracking-tight flex gap-4 md:gap-6 text-on-surface">
+                <span id="intro-word-1" class="transform -translate-y-[150%] transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] block">LUMINA</span>
+                <span id="intro-word-2" class="transform translate-y-[150%] transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] block text-primary">FLUX</span>
+            </h1>
         </div>
     </div>
 

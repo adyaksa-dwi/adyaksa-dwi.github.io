@@ -1940,88 +1940,48 @@ window.toggleProfile = function() {
 };
 
 // ----------------------------------------------------
-// CINEMATIC INTRO SEQUENCE
+// PLAYFUL PORTAL INTRO SEQUENCE
 // ----------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const introOverlay = document.getElementById('intro-overlay');
-    const introText = document.getElementById('intro-text');
-    const introLine = document.getElementById('intro-line');
+    const droplet = document.getElementById('intro-droplet');
+    const typography = document.getElementById('intro-typography');
+    const word1 = document.getElementById('intro-word-1');
+    const word2 = document.getElementById('intro-word-2');
     
-    if (!introOverlay || !introText) return;
+    if (!introOverlay || !droplet || !word1) return;
 
-    const greetings = [
-        "HELLO.",
-        "HOLA.",
-        "BONJOUR.",
-        "KONNICHIWA.",
-        "CIAO.",
-        "NAMASTE.",
-        "HALO."
-    ];
-
-    let currentGreeting = 0;
-
-    const animateText = (text, delay) => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                introText.style.opacity = '0';
-                introText.style.transform = 'translateY(-10px)';
-                
-                setTimeout(() => {
-                    introText.textContent = text;
-                    introText.style.transform = 'translateY(10px)';
-                    
-                    void introText.offsetWidth; // Force reflow
-                    
-                    introText.style.opacity = '1';
-                    introText.style.transform = 'translateY(0)';
-                    resolve();
-                }, 150); 
-            }, delay);
-        });
-    };
-
-    const runSequence = async () => {
-        // Initial fade in
-        introText.textContent = greetings[0];
+    // 1. Droplet drops in and bounces
+    setTimeout(() => {
+        droplet.style.transform = 'scale(1)';
+        
+        // 2. Droplet expands to cover screen
         setTimeout(() => {
-            introText.style.opacity = '1';
-            introText.style.transform = 'translateY(0)';
-        }, 100);
-
-        // Cycle through greetings
-        for (let i = 1; i < greetings.length; i++) {
-            await animateText(greetings[i], 180);
-        }
-
-        // Final phrase
-        await animateText("WELCOME TO LUMINA FLUX.", 300);
-
-        // Sweeping line effect
-        setTimeout(() => {
-            if(introLine) {
-                introLine.style.transition = 'width 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
-                introLine.style.width = '100%';
-            }
-        }, 800);
-
-        // End sequence and reveal
-        setTimeout(() => {
-            introText.style.opacity = '0'; 
-            introText.style.letterSpacing = '0.5em'; 
+            // Change transition to smooth expansion
+            droplet.style.transition = 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
+            droplet.style.transform = 'scale(100)'; // Enough to cover any screen
             
+            // 3. Show typography container
             setTimeout(() => {
-                introOverlay.style.transform = 'translateY(-100%)';
-                if(introLine) introLine.style.opacity = '0';
+                typography.style.opacity = '1';
                 
+                // 4. Slide words in (Spring effect)
                 setTimeout(() => {
-                    document.body.classList.remove('overflow-hidden');
-                    introOverlay.style.display = 'none';
-                }, 1200);
-            }, 300);
-        }, 1500);
-    };
-
-    // Delay start slightly to let fonts load
-    setTimeout(runSequence, 200);
+                    word1.style.transform = 'translateY(0)';
+                    word2.style.transform = 'translateY(0)';
+                    
+                    // 5. Portal Reveal (shrink overlay to 0)
+                    setTimeout(() => {
+                        introOverlay.style.clipPath = 'circle(0% at 50% 50%)';
+                        
+                        // Cleanup
+                        setTimeout(() => {
+                            document.body.classList.remove('overflow-hidden');
+                            introOverlay.style.display = 'none';
+                        }, 1000);
+                    }, 1500); // reading time
+                }, 100);
+            }, 300); // wait for expansion to cover mostly
+        }, 800); // wait for bounce
+    }, 200); // start delay
 });
