@@ -794,23 +794,9 @@
                 <span class="material-symbols-outlined text-[32px]">close</span>
             </button>
 
-            <!-- Navigation Buttons -->
-            <button id="carousel-prev"
-                class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary-container text-white p-3 rounded-full z-20 transition-all backdrop-blur-md hidden"
-                onclick="prevCarouselImage()">
-                <span class="material-symbols-outlined text-[32px]">chevron_left</span>
-            </button>
-            <button id="carousel-next"
-                class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary-container text-white p-3 rounded-full z-20 transition-all backdrop-blur-md hidden"
-                onclick="nextCarouselImage()">
-                <span class="material-symbols-outlined text-[32px]">chevron_right</span>
-            </button>
-
-            <!-- Image Container -->
-            <div class="w-full h-full max-h-[85vh] flex items-center justify-center p-4">
-                <img id="carousel-image"
-                    class="max-w-full max-h-full object-contain drop-shadow-2xl transition-opacity duration-300" src=""
-                    alt="Mockup Carousel">
+            <!-- Image Container (ArtStation Style: Vertical Scrolling) -->
+            <div id="carousel-image-container" class="w-full h-full overflow-y-auto flex flex-col items-center gap-8 p-4 md:p-10 pt-16 pb-32 scrollbar-hide">
+                <!-- Images will be injected here dynamically -->
             </div>
 
             <!-- Footer Details -->
@@ -820,7 +806,7 @@
                     class="text-headline-md font-headline-md text-white mb-2 text-center drop-shadow-lg"></h3>
                 <p id="carousel-desc" class="text-body-md text-white/80 max-w-3xl text-center mb-4 hidden"></p>
                 <div class="flex items-center gap-4">
-                    <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                    <div class="hidden bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10" id="carousel-indicator-container">
                         <span id="carousel-indicator"
                             class="text-label-caps font-label-caps text-white tracking-widest"></span>
                     </div>
