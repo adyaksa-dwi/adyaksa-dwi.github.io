@@ -760,8 +760,8 @@ function parseCSV(str) {
                 }
 
                 allHtml += `
-                        <div class="portfolio-item ${colSpan} bg-surface-container-low p-2 rounded-3xl glow-hover cursor-pointer group" data-category="${sheet.category}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
-                            <div class="card-image-wrapper ${heightClass} relative flex items-center justify-center overflow-hidden rounded-2xl">
+                        <div class="portfolio-item ${colSpan} glow-hover cursor-pointer group" data-category="${sheet.category}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
+                            <div class="card-image-wrapper ${heightClass} relative flex items-center justify-center overflow-hidden rounded-3xl shadow-xl">
                                 <img alt="${title}" class="absolute inset-0 w-full h-full ${objectFit} ${opacityClass}" src="${thumbnail}">
                                 ${playIcon}
                                 <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent z-10">
@@ -818,8 +818,9 @@ function init3DTiltEffect() {
         // Terapkan ke elemen wrapper di dalam card (bukan cardnya langsung agar grid tidak rusak)
         const wrapper = card.querySelector('.card-image-wrapper');
         if (wrapper) {
-            wrapper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            wrapper.style.transition = 'transform 0.1s ease-out';
+            wrapper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.15, 1.15, 1.15)`;
+            wrapper.style.transition = 'transform 0.1s ease-out, box-shadow 0.1s ease-out';
+            wrapper.style.boxShadow = '0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.1)';
             wrapper.style.zIndex = '10';
         }
     });
@@ -831,7 +832,8 @@ function init3DTiltEffect() {
         const wrapper = card.querySelector('.card-image-wrapper');
         if (wrapper) {
             wrapper.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            wrapper.style.transition = 'transform 0.5s ease-out';
+            wrapper.style.transition = 'transform 0.5s ease-out, box-shadow 0.5s ease-out';
+            wrapper.style.boxShadow = '';
             wrapper.style.zIndex = '1';
         }
     });
