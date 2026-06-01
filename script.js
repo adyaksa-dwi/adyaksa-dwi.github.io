@@ -1938,3 +1938,37 @@ window.toggleProfile = function() {
         }, 300);
     }
 };
+
+// ----------------------------------------------------
+// 3D PARALLAX EFFECT FOR PROFILE AVATAR
+// ----------------------------------------------------
+const interactiveProfileContainer = document.getElementById('interactive-profile');
+const profileAvatarElement = document.getElementById('profile-avatar');
+
+interactiveProfileContainer.addEventListener('mousemove', (e) => {
+    // Only apply intense parallax if not expanded, or keep it subtle if expanded
+    if (isProfileExpanded) return;
+
+    const rect = profileAvatarElement.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const xNorm = x / (rect.width / 2);
+    const yNorm = y / (rect.height / 2);
+
+    const maxTilt = 12; // Maximum tilt in degrees
+    const rotateX = -yNorm * maxTilt;
+    const rotateY = xNorm * maxTilt;
+
+    const inner = document.getElementById('parallax-inner');
+    if (inner) {
+        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    }
+});
+
+interactiveProfileContainer.addEventListener('mouseleave', () => {
+    const inner = document.getElementById('parallax-inner');
+    if (inner) {
+        inner.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    }
+});
