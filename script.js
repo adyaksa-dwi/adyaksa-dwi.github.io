@@ -147,6 +147,7 @@ mobileNavLinks.forEach(link => {
 });
 
 window.openCategoryTab = function (event, title, categoryId) {
+    window.lastScrollPositionPortfolio = window.scrollY || document.documentElement.scrollTop;
     window.activePortfolioCategory = categoryId; // Simpan status kategori yang sedang aktif
     const cardEl = event ? event.currentTarget : null;
     const imgEl = cardEl ? cardEl.querySelector('img') : null;
@@ -322,15 +323,13 @@ window.closeCategoryTab = function () {
     const portfolioSection = document.getElementById('portfolio');
     
     // 1. Kunci ukuran dan posisi SEBELUM merubah DOM
-    // Hitung posisi visual contentView saat ini di layar agar tidak lompat jika user sedang men-scroll ke bawah
-    const pOld = portfolioSection.offsetTop;
-    const cTop = contentView.offsetTop;
-    const yOld = window.scrollY;
-    
-    // Posisi absolut baru = (Posisi portfolio lama + Posisi konten lama) - Scroll Y saat ini
-    const newTop = pOld + cTop - yOld;
-    
     const rect = contentView.getBoundingClientRect();
+    const targetScrollY = window.lastScrollPositionPortfolio || portfolioSection.offsetTop;
+    
+    // Hitung posisi top absolut yang baru agar contentView tetap di posisi visual yang sama di layar
+    // setelah kita melakukan scroll ke targetScrollY.
+    const newTop = rect.top + targetScrollY - portfolioSection.offsetTop;
+    
     const offsetLeft = contentView.offsetLeft;
     
     // 2. Set absolute agar tidak terdorong saat section lain muncul
@@ -352,8 +351,8 @@ window.closeCategoryTab = function () {
     void portfolioSection.offsetHeight;
     void contentView.offsetWidth;
 
-    // 5. Scroll secara instan ke posisi portfolio yang baru
-    window.scrollTo({ top: portfolioSection.offsetTop, behavior: 'instant' });
+    // 5. Scroll secara instan ke posisi portfolio yang lama
+    window.scrollTo({ top: targetScrollY, behavior: 'instant' });
 
     // 6. Jalankan animasi di frame berikutnya agar transisi CSS ter-trigger dengan benar
     requestAnimationFrame(() => {
