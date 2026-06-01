@@ -186,29 +186,26 @@
 
             <!-- Profile Photo -->
             <div id="profile-avatar"
-                class="w-64 h-64 md:w-80 md:h-80 rounded-[50%] overflow-hidden shrink-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10 border-2 border-surface-variant" style="perspective: 1000px;">
-                
-                <div id="parallax-inner" class="w-full h-full relative transition-transform duration-200 ease-out will-change-transform">
-                    <!-- Profile Photos for Light and Dark Modes -->
-                    <img id="profile-img-light"
-                        class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 block dark:hidden object-[50%_15%]"
-                        src="https://lh3.googleusercontent.com/d/1KWKsBfnvpmOm4EYOCxdKnRJnix4-TDoy=w1000"
-                        alt="Profile Light">
-                    <img id="profile-img-dark"
-                        class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 hidden dark:block brightness-125 object-[50%_15%]"
-                        src="https://lh3.googleusercontent.com/d/1ltSVU2lE0keWSwGqVddEmv_9Seexj1xH=w1000"
-                        alt="Profile Dark">
+                class="w-64 h-64 md:w-80 md:h-80 rounded-[50%] overflow-hidden shrink-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10 border-2 border-surface-variant">
+                <!-- Profile Photos for Light and Dark Modes -->
+                <img id="profile-img-light"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 block dark:hidden object-[50%_15%]"
+                    src="https://lh3.googleusercontent.com/d/1KWKsBfnvpmOm4EYOCxdKnRJnix4-TDoy=w1000"
+                    alt="Profile Light">
+                <img id="profile-img-dark"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 hidden dark:block brightness-125 object-[50%_15%]"
+                    src="https://lh3.googleusercontent.com/d/1ltSVU2lE0keWSwGqVddEmv_9Seexj1xH=w1000"
+                    alt="Profile Dark">
 
-                    <!-- Hover Hint -->
-                    <div id="profile-hint"
-                        class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                        <span
-                            class="text-white font-label-caps tracking-widest text-sm flex items-center gap-2 drop-shadow-md">
-                            <span class="material-symbols-outlined animate-pulse text-[32px]">fingerprint</span>
-                        </span>
-                        <span class="text-white font-label-caps tracking-widest text-xs mt-2 opacity-80">CLICK TO
-                            REVEAL</span>
-                    </div>
+                <!-- Hover Hint -->
+                <div id="profile-hint"
+                    class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                    <span
+                        class="text-white font-label-caps tracking-widest text-sm flex items-center gap-2 drop-shadow-md">
+                        <span class="material-symbols-outlined animate-pulse text-[32px]">fingerprint</span>
+                    </span>
+                    <span class="text-white font-label-caps tracking-widest text-xs mt-2 opacity-80">CLICK TO
+                        REVEAL</span>
                 </div>
             </div>
 
