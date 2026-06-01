@@ -1955,16 +1955,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Get Text Wrapper bounding box
         const rect = textWrapper.getBoundingClientRect();
         
-        // 2. Set Initial State (Top-Left point of the wrapper)
-        selectionBox.style.top = `${rect.top}px`;
-        selectionBox.style.left = `${rect.left}px`;
+        // 2. Set Initial State (Bottom-Right point of the wrapper)
+        // By setting right and bottom, when width/height increase, it grows towards top-left
+        selectionBox.style.bottom = `${window.innerHeight - rect.bottom}px`;
+        selectionBox.style.right = `${window.innerWidth - rect.right}px`;
+        selectionBox.style.top = 'auto';
+        selectionBox.style.left = 'auto';
         selectionBox.style.width = '0px';
         selectionBox.style.height = '0px';
         selectionBox.style.opacity = '1';
         selectionBox.style.transition = 'all 2s cubic-bezier(0.85, 0, 0.15, 1)';
         
         textWrapper.style.opacity = '1';
-        textWrapper.style.clipPath = 'inset(0% 100% 100% 0%)'; // Clip from top-left
+        textWrapper.style.clipPath = 'inset(100% 0% 0% 100%)'; // Clip from bottom-right (cut top and left)
         textWrapper.style.transition = 'clip-path 2s cubic-bezier(0.85, 0, 0.15, 1)';
         
         // 3. Start the Marquee Reveal Animation
@@ -1976,11 +1979,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reveal Masked Text
             textWrapper.style.clipPath = 'inset(0% 0% 0% 0%)';
             
-            // 4. End of Animation (Hold, Blink, then Fade)
+            // 4. End of Animation (Hold, Blink, then Fade smoothly)
             setTimeout(() => {
                 // Fake cursor clicks and fades out
-                fakeCursor.style.transition = 'all 0.3s ease';
-                fakeCursor.style.transform = 'scale(0.8) translate(100%, 100%)';
+                fakeCursor.style.transition = 'all 0.4s ease';
+                fakeCursor.style.transform = 'scale(0.8) translate(-50%, -50%)'; // pull away slightly
                 fakeCursor.style.opacity = '0';
                 
                 // Box blinks like a selection confirming
@@ -1990,17 +1993,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => selectionBox.style.opacity = '1', 200);
                     setTimeout(() => selectionBox.style.opacity = '0', 400);
                     
-                    // Fade out whole overlay
+                    // Very smooth fade out of the entire overlay
                     setTimeout(() => {
-                        introOverlay.style.transition = 'opacity 1.2s ease';
+                        introOverlay.style.transition = 'opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
                         introOverlay.style.opacity = '0';
                         
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
                             introOverlay.style.display = 'none';
-                        }, 1200);
-                    }, 800);
-                }, 300);
+                        }, 1500);
+                    }, 600);
+                }, 400);
             }, 2200); // Wait for the drag transition to finish
         }, 500); // Delay before starting the drag
     }, 100); // Initial DOM layout delay
