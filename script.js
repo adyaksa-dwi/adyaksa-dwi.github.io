@@ -759,8 +759,11 @@ function parseCSV(str) {
                     }
                 }
 
+                // Assign random idle animation (0, 1, or 2) to each item based on its index
+                const idleAnimClass = `idle-anim-${displayIndex % 3}`;
+
                 allHtml += `
-                        <div class="portfolio-item ${colSpan} glow-hover cursor-pointer group" data-category="${sheet.category}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
+                        <div class="portfolio-item ${colSpan} glow-hover cursor-pointer group ${idleAnimClass}" data-category="${sheet.category}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
                             <div class="card-image-wrapper ${heightClass} relative flex items-center justify-center overflow-hidden rounded-3xl shadow-xl">
                                 <img alt="${title}" class="absolute inset-0 w-full h-full ${objectFit} ${opacityClass}" src="${thumbnail}">
                                 ${playIcon}
