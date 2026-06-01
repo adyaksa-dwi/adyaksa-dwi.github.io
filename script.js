@@ -1021,6 +1021,21 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     const content = modal.querySelector('.modal-content');
 
+    // Keluar dari mode full screen jika sedang aktif
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        
+        // Reset ikon fullscreen
+        const icon = document.getElementById('fullscreen-icon');
+        if (icon) icon.textContent = 'fullscreen';
+    }
+
     // Logika untuk menghentikan pemutaran video saat modal ditutup
     if (modalId === 'modal-video') {
         const video = document.getElementById('portfolio-video');
