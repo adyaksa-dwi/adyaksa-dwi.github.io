@@ -616,7 +616,7 @@ async function loadDynamicPortfolio() {
                     description = row[1] ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : ''; // Kolom 3: Images (comma separated)
                     externalLink = row[3] ? row[3].trim() : ''; // Kolom 4: Link
-                } else if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup' || sheet.category === '3danimation') {
+                } else if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup' || sheet.category === '3d' || sheet.category === '3danimation') {
                     thumbnail = (row[1] && row[1].trim() !== '' && row[1].trim() !== '-') ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : '';
                 } else {
@@ -651,8 +651,8 @@ async function loadDynamicPortfolio() {
                         }
                     }
                 }
-                // Pisahkan logika khusus untuk Mockup Carousel
-                else if (sheet.category === 'mockup' && videoUrl) {
+                // Pisahkan logika khusus untuk Mockup & 3D Carousel
+                else if ((sheet.category === 'mockup' || sheet.category === '3d') && videoUrl) {
                     opacityClass = 'opacity-60 group-hover:opacity-80 transition-opacity';
                     // videoUrl di sini adalah kumpulan link yang dipisahkan koma
                     const encodedImages = encodeURIComponent(videoUrl);
@@ -726,7 +726,7 @@ async function loadDynamicPortfolio() {
                 if (playIcon) {
                     if (sheet.category === 'magazines') {
                         playIcon = `<span class="material-symbols-outlined ${iconSize} text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">menu_book</span>`;
-                    } else if (sheet.category === 'mockup') {
+                    } else if (sheet.category === 'mockup' || sheet.category === '3d') {
                         playIcon = `<span class="material-symbols-outlined ${iconSize} text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">photo_library</span>`;
                     } else {
                         playIcon = `<span class="material-symbols-outlined ${iconSize} text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">play_arrow</span>`;
