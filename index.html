@@ -70,7 +70,21 @@
 </head>
 
 <body
-    class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw]">
+    class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw] overflow-hidden">
+
+    <!-- Cinematic Intro Sequence -->
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] bg-surface-container-lowest flex items-center justify-center transition-all duration-[1200ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
+        <div class="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+            <!-- Dynamic Text Container -->
+            <div id="intro-text-container" class="relative z-10 flex items-center justify-center overflow-hidden h-24 w-full">
+                <h1 id="intro-text" class="absolute text-3xl md:text-5xl font-headline-lg font-bold text-on-surface tracking-[0.2em] uppercase transition-all duration-300 transform translate-y-10 opacity-0">
+                    HELLO.
+                </h1>
+            </div>
+            <!-- Animated sweeping line -->
+            <div id="intro-line" class="absolute top-1/2 left-0 w-0 h-[2px] bg-primary -translate-y-1/2 z-20"></div>
+        </div>
+    </div>
 
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300"
