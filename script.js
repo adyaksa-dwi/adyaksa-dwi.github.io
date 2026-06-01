@@ -1880,8 +1880,8 @@ window.toggleProfile = function() {
         container.classList.add('max-w-5xl');
         
         // Avatar changes
-        avatar.classList.remove('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-full');
-        avatar.classList.add('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-3xl');
+        avatar.classList.remove('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-[50%]');
+        avatar.classList.add('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-[10%]', 'md:rounded-[8%]');
         
         // Image changes (Full color)
         imgs.forEach(img => {
@@ -1920,8 +1920,8 @@ window.toggleProfile = function() {
         setTimeout(() => hint.classList.remove('opacity-0'), 50);
 
         // Avatar changes
-        avatar.classList.remove('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-3xl');
-        avatar.classList.add('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-full');
+        avatar.classList.remove('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-[10%]', 'md:rounded-[8%]');
+        avatar.classList.add('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-[50%]');
         
         // Image changes (Grayscale)
         setTimeout(() => {
