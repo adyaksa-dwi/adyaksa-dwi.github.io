@@ -859,8 +859,11 @@ contactForm.addEventListener('submit', async (e) => {
 // Global Modal Logic
 window.openImageModal = function (imgUrl, title, category, description) {
     document.getElementById('modal-image-img').src = imgUrl;
-    document.getElementById('modal-image-title').textContent = title;
-    document.getElementById('modal-image-cat').textContent = category;
+    const titleEl = document.getElementById('modal-image-title');
+    if (titleEl) titleEl.textContent = title;
+    
+    const catEl = document.getElementById('modal-image-cat');
+    if (catEl) catEl.textContent = category;
 
     const descEl = document.getElementById('modal-image-desc');
     if (descEl) {

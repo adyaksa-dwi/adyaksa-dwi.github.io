@@ -648,21 +648,14 @@
     <!-- Image Modal -->
     <div class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-10" id="modal-image">
         <div class="absolute inset-0 bg-background/90 backdrop-blur-xl" onclick="closeModal('modal-image')"></div>
-        <div
-            class="glass-panel relative w-full max-w-5xl max-h-full overflow-y-auto rounded-xl flex flex-col shadow-[0_10px_50px_rgba(0,0,0,0.5)] z-10 border-t border-white/10 modal-content">
+        <div id="modal-image-content"
+            class="relative w-full h-full max-w-[1400px] bg-transparent rounded-lg overflow-hidden z-10 flex flex-col items-center justify-center group/modal select-none modal-content">
             <button
-                class="absolute top-4 right-4 text-on-surface bg-surface-container p-2 rounded-full hover:bg-primary-container transition-colors z-20"
-                onclick="closeModal('modal-image')"><span class="material-symbols-outlined">close</span></button>
-            <div class="w-full h-[50vh] md:h-[60vh] bg-black"><img id="modal-image-img" alt="Main View"
-                    class="w-full h-full object-contain" src=""></div>
-            <div class="p-6 md:p-10 bg-surface-container-low">
-                <div class="mb-8">
-                    <span id="modal-image-cat"
-                        class="px-3 py-1 bg-surface border border-primary/30 text-primary font-label-caps text-[10px] rounded-full mb-3 inline-block"></span>
-                    <h2 id="modal-image-title" class="text-headline-md font-headline-md text-on-surface mb-2"></h2>
-                    <p id="modal-image-desc" class="text-body-md font-body-md text-on-surface-variant max-w-3xl"></p>
-                </div>
-            </div>
+                class="absolute top-4 right-4 text-white/50 hover:text-white p-2 z-20 transition-colors bg-black/50 rounded-full"
+                onclick="closeModal('modal-image')">
+                <span class="material-symbols-outlined text-[32px]">close</span>
+            </button>
+            <img id="modal-image-img" alt="Main View" class="w-full h-full object-contain" src="">
         </div>
     </div>
     <!-- Video Modal -->
