@@ -321,22 +321,22 @@
     <section
         class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative scroll-reveal"
         id="portfolio">
-        <div id="portfolio-header" class="flex flex-col md:flex-row justify-between items-end mb-stack-md gap-4">
-            <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none"
+        <div id="portfolio-header" class="relative flex flex-col items-center justify-center mb-stack-md w-full">
+            <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none text-center"
                 data-i18n="portfolio_title">
-                Arsip<br><span class="text-outline">Karya</span></h2>
+                My<br><span class="text-outline">Portfolio</span></h2>
 
             <!-- View Toggle -->
-            <div class="flex bg-surface-container rounded-full p-1 border border-outline-variant/30">
+            <div class="flex gap-6 mt-6 md:mt-0 md:absolute md:right-0 md:bottom-2">
                 <button onclick="togglePortfolioView('spiral')" id="btn-view-spiral"
-                    class="px-4 py-2 rounded-full bg-primary text-on-primary flex items-center gap-2 transition-colors">
-                    <span class="material-symbols-outlined text-sm">3d_rotation</span> <span
-                        class="text-sm font-medium">Spiral</span>
+                    class="text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-1">
+                    <span class="material-symbols-outlined text-[18px]">3d_rotation</span> <span
+                        class="text-label-caps font-label-caps tracking-widest">SPIRAL</span>
                 </button>
                 <button onclick="togglePortfolioView('grid')" id="btn-view-grid"
-                    class="px-4 py-2 rounded-full text-on-surface-variant hover:text-on-surface flex items-center gap-2 transition-colors">
-                    <span class="material-symbols-outlined text-sm">grid_view</span> <span
-                        class="text-sm font-medium">Grid</span>
+                    class="text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-1">
+                    <span class="material-symbols-outlined text-[18px]">grid_view</span> <span
+                        class="text-label-caps font-label-caps tracking-widest">GRID</span>
                 </button>
             </div>
         </div>

@@ -23,7 +23,7 @@ const translations = {
         about_title: "DIVING INTO<br>DIGITAL AESTHETICS",
         about_desc: "I am a creative technologist and designer based in Indonesia. With a focus on digital interactions and immersive experiences, I combine graphic design, 3D modeling, and interactive development to create works that are not only seen, but felt.",
         lumina_desc: "Lumina Flux, the beauty of the name is in how the two words, Lumina and Flux, combine to create a new, powerful meaning that perfectly describes your skills. \"Lumina\" is a word rooted in Latin, and it means light. \"Flux\" means a continuous change or flow. Think of a river in a state of constant motion. When you put them together, Lumina Flux means \"the flow of light\". It doesn't just describe what you do; it describes how you do it—with a sense of motion, change, and creativity that flows like light itself.",
-        portfolio_title: "Artwork<br><span class=\"text-outline\">Archive</span>",
+        portfolio_title: "My<br><span class=\"text-outline\">Portfolio</span>",
         contact_title: "Let's<br>Collaborate",
         contact_desc: "Interested in building extraordinary digital experiences? Contact me for projects, collaborations, or just to say hello.",
         contact_label_name: "NAME",
@@ -47,7 +47,7 @@ const translations = {
         about_title: "MENDALAMI<br>ESTETIKA DIGITAL",
         about_desc: "Saya adalah seorang desainer dan teknolog kreatif yang berbasis di Indonesia. Dengan fokus pada interaksi digital dan pengalaman mendalam, saya menggabungkan desain grafis, pemodelan 3D, dan pengembangan interaktif untuk menciptakan karya yang tidak hanya dilihat, tetapi dirasakan.",
         lumina_desc: "Lumina Flux, keindahan namanya terletak pada bagaimana dua kata, Lumina dan Flux, bergabung menciptakan makna baru yang kuat dan secara sempurna menggambarkan keahlian Anda. \"Lumina\" berasal dari bahasa Latin yang berarti cahaya. \"Flux\" berarti perubahan atau aliran yang terus-menerus. Bayangkan sebuah sungai yang selalu bergerak. Jika digabungkan, Lumina Flux berarti \"aliran cahaya\". Ini tidak hanya mendeskripsikan apa yang Anda lakukan; tetapi juga bagaimana Anda melakukannya—dengan rasa pergerakan, perubahan, dan kreativitas yang mengalir layaknya cahaya itu sendiri.",
-        portfolio_title: "Arsip<br><span class=\"text-outline\">Karya</span>",
+        portfolio_title: "Portofolio<br><span class=\"text-outline\">Saya</span>",
         contact_title: "Mari<br>Berkolaborasi",
         contact_desc: "Tertarik untuk membangun pengalaman digital yang luar biasa? Hubungi saya untuk proyek, kolaborasi, atau sekadar menyapa.",
         contact_label_name: "NAMA",
@@ -1740,8 +1740,8 @@ window.togglePortfolioView = function(mode) {
         window.portfolioViewMode = mode;
         
         if (mode === 'spiral') {
-            btnSpiral.className = 'px-4 py-2 rounded-full bg-primary text-on-primary flex items-center gap-2 transition-colors';
-            btnGrid.className = 'px-4 py-2 rounded-full text-on-surface-variant hover:text-on-surface flex items-center gap-2 transition-colors';
+            btnSpiral.className = 'text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-1';
+            btnGrid.className = 'text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-1';
             
             container.className = 'relative w-full h-[500px] md:h-[600px] mt-8 overflow-hidden group transition-all duration-500';
             container.style.perspective = '1500px';
@@ -1756,8 +1756,8 @@ window.togglePortfolioView = function(mode) {
                 // Teks tetap muncul saat dihover saja (default behavior)
             });
         } else {
-            btnSpiral.className = 'px-4 py-2 rounded-full text-on-surface-variant hover:text-on-surface flex items-center gap-2 transition-colors';
-            btnGrid.className = 'px-4 py-2 rounded-full bg-primary text-on-primary flex items-center gap-2 transition-colors';
+            btnSpiral.className = 'text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-1';
+            btnGrid.className = 'text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-1';
             
             // Berikan padding dan hilangkan fixed height agar grid bisa bernapas
             container.className = 'relative w-full mt-8 py-8 transition-all duration-500';
