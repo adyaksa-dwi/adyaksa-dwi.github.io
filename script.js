@@ -1,4 +1,12 @@
 // ----------------------------------------------------
+// FORCE SCROLL TO TOP ON REFRESH
+// ----------------------------------------------------
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+// ----------------------------------------------------
 // LANGUAGE SWITCHER (EN / ID)
 // ----------------------------------------------------
 const translations = {
