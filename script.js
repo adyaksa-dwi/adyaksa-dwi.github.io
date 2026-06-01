@@ -1866,7 +1866,7 @@ let isProfileExpanded = false;
 window.toggleProfile = function() {
     const container = document.getElementById('interactive-profile');
     const avatar = document.getElementById('profile-avatar');
-    const img = document.getElementById('profile-img');
+    const imgs = document.querySelectorAll('#profile-img-light, #profile-img-dark');
     const hint = document.getElementById('profile-hint');
     const content = document.getElementById('profile-content');
     const text1 = document.getElementById('profile-text-1');
@@ -1884,8 +1884,10 @@ window.toggleProfile = function() {
         avatar.classList.add('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-3xl');
         
         // Image changes (Full color)
-        img.classList.remove('grayscale', 'group-hover:grayscale-[50%]');
-        img.classList.add('grayscale-0');
+        imgs.forEach(img => {
+            img.classList.remove('grayscale', 'group-hover:grayscale-[50%]');
+            img.classList.add('grayscale-0');
+        });
         
         // Hide hint
         hint.classList.add('opacity-0');
@@ -1918,12 +1920,16 @@ window.toggleProfile = function() {
         setTimeout(() => hint.classList.remove('opacity-0'), 50);
 
         // Avatar changes
-        avatar.classList.remove('w-48', 'h-48', 'rounded-3xl');
-        avatar.classList.add('w-64', 'h-64', 'rounded-full');
+        avatar.classList.remove('w-48', 'h-48', 'md:w-80', 'md:h-80', 'rounded-3xl');
+        avatar.classList.add('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-full');
         
         // Image changes (Grayscale)
-        img.classList.remove('grayscale-0');
-        img.classList.add('grayscale', 'group-hover:grayscale-[50%]');
+        setTimeout(() => {
+            imgs.forEach(img => {
+                img.classList.remove('grayscale-0');
+                img.classList.add('grayscale', 'group-hover:grayscale-[50%]');
+            });
+        }, 500);
 
         // Collapse container
         setTimeout(() => {

@@ -187,10 +187,15 @@
             <!-- Profile Photo -->
             <div id="profile-avatar"
                 class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shrink-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10 border-2 border-surface-variant">
-                <img id="profile-img"
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjJjUbpCplJgqszVYkBrvf_PU34ZuuSSpVewDeq1D9uRgRnRS3o8odhLW1SnJXO0_msv6bhtI514Cd3UTMZW5BeK3ixjBsWuRwITxnVYefz3beGP16T0DhH2mKe0a8UeKFaf9d7VHlEhVg1UohdxvCTxN8PwYDVxhK1weJlswOwwsDpfsAflezJ15bprljiFcyvsS3tnJgTS6HpruxN8VfgfUHrIpDJZ0DFXH-XTuPsjAyOGUq5r0ZcRZeoYB6fAhc4lip8Mg0FBg"
-                    alt="Profile">
+                <!-- Profile Photos for Light and Dark Modes -->
+                <img id="profile-img-light"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 block dark:hidden object-[50%_15%]"
+                    src="https://lh3.googleusercontent.com/d/14jbsSqbuDVmtzrF3UMkN-SndaNu9sGnC=w1000"
+                    alt="Profile Light">
+                <img id="profile-img-dark"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 hidden dark:block brightness-125 object-[50%_15%]"
+                    src="https://lh3.googleusercontent.com/d/1cF3geqp-3xechji2AoAZ1UrE0o6BznAe=w1000"
+                    alt="Profile Dark">
 
                 <!-- Hover Hint -->
                 <div id="profile-hint"
