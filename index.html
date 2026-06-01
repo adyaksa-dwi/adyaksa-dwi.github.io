@@ -73,42 +73,62 @@
     class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw] overflow-hidden">
 
     <!-- Marquee Selection Reveal Intro -->
-    <div id="intro-overlay" class="fixed inset-0 z-[9999] overflow-hidden bg-[#f8f9fa] dark:bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-[1500ms] ease-in-out">
-        
+    <div id="intro-overlay"
+        class="fixed inset-0 z-[9999] overflow-hidden bg-[#f8f9fa] dark:bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-[1500ms] ease-in-out">
+
         <!-- Aurora Animated Background (Darkened for contrast) -->
         <div class="absolute inset-0 z-0 opacity-40">
-            <div class="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full mix-blend-screen filter blur-[90px] opacity-60 animate-[spin_15s_linear_infinite]" style="background: radial-gradient(circle, rgba(255,0,128,0.5) 0%, transparent 70%);"></div>
-            <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[90px] opacity-60 animate-[spin_20s_reverse_linear_infinite]" style="background: radial-gradient(circle, rgba(0,255,255,0.5) 0%, transparent 70%);"></div>
-            <div class="absolute top-[20%] right-[20%] w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[70px] opacity-50 animate-[pulse_8s_ease-in-out_infinite]" style="background: radial-gradient(circle, rgba(128,0,255,0.5) 0%, transparent 70%);"></div>
+            <div class="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full mix-blend-screen filter blur-[90px] opacity-60 animate-[spin_15s_linear_infinite]"
+                style="background: radial-gradient(circle, rgba(255,0,128,0.5) 0%, transparent 70%);"></div>
+            <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[90px] opacity-60 animate-[spin_20s_reverse_linear_infinite]"
+                style="background: radial-gradient(circle, rgba(0,255,255,0.5) 0%, transparent 70%);"></div>
+            <div class="absolute top-[20%] right-[20%] w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[70px] opacity-50 animate-[pulse_8s_ease-in-out_infinite]"
+                style="background: radial-gradient(circle, rgba(128,0,255,0.5) 0%, transparent 70%);"></div>
         </div>
 
         <!-- The Full Text Container (Used to measure size and mask) -->
-        <div id="intro-text-wrapper" class="relative z-10 p-8 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300">
-            <span class="font-headline-lg font-light text-2xl md:text-4xl tracking-[0.4em] uppercase mb-2 text-black dark:text-white">welcome to</span>
-            <span class="font-headline-lg font-black text-5xl md:text-8xl tracking-tight leading-none text-black drop-shadow-[0_0_15px_rgba(0,0,0,0.15)] dark:text-white dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">LUMINA FLUX</span>
+        <div id="intro-text-wrapper"
+            class="relative z-10 p-8 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+            <span
+                class="font-headline-lg font-light text-2xl md:text-4xl tracking-[0.4em] uppercase mb-2 text-black dark:text-white">welcome
+                to</span>
+            <span
+                class="font-headline-lg font-black text-5xl md:text-8xl tracking-tight leading-none text-black drop-shadow-[0_0_15px_rgba(0,0,0,0.15)] dark:text-white dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">LUMINA
+                FLUX</span>
         </div>
 
         <!-- The Selection Box (Marquee Border) -->
-        <div id="intro-selection-box" class="absolute z-20 pointer-events-none border border-black/60 dark:border-white/60 opacity-0" style="top: 0; left: 0; width: 0; height: 0;">
+        <div id="intro-selection-box"
+            class="absolute z-20 pointer-events-none border border-black/60 dark:border-white/60 opacity-0"
+            style="top: 0; left: 0; width: 0; height: 0;">
             <!-- 4 Corner Nodes -->
-            <div class="absolute -top-[4px] -left-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
-            <div class="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
-            <div class="absolute -bottom-[4px] -left-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
-            <div class="absolute -bottom-[4px] -right-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
-            
+            <div
+                class="absolute -top-[4px] -left-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border">
+            </div>
+            <div
+                class="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border">
+            </div>
+            <div
+                class="absolute -bottom-[4px] -left-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border">
+            </div>
+            <div
+                class="absolute -bottom-[4px] -right-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border">
+            </div>
+
             <!-- The Fake Cursor -->
-            <div id="intro-fake-cursor" class="absolute z-50 drop-shadow-md pointer-events-none opacity-100" style="top: -3px; left: -5.5px;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-black stroke-white dark:fill-white dark:stroke-black">
-                    <path d="M5.5 3L18.5 16L12.5 17L9 22L5.5 3Z" stroke-width="1.5" stroke-linejoin="round"/>
+            <div id="intro-fake-cursor" class="absolute z-50 drop-shadow-md pointer-events-none opacity-100"
+                style="top: -3px; left: -5.5px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="fill-black stroke-white dark:fill-white dark:stroke-black">
+                    <path d="M5.5 3L18.5 16L12.5 17L9 22L5.5 3Z" stroke-width="1.5" stroke-linejoin="round" />
                 </svg>
             </div>
         </div>
-        
+
     </div>
 
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300 entrance-element -translate-y-full opacity-0 blur-xl"
-        data-entrance-delay="200"
-        id="main-nav">
+        data-entrance-delay="200" id="main-nav">
         <div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
             <a class="text-body-lg font-headline-lg font-bold tracking-tighter text-on-surface hover:text-primary transition-colors duration-300"
                 href="#home">LUMINA FLUX</a>
@@ -166,7 +186,8 @@
     <!-- Section 1: Home -->
     <section class="relative w-full h-screen flex items-center justify-center overflow-hidden" id="home">
         <div class="absolute inset-0 w-full h-full bg-surface-container-lowest z-0 overflow-hidden">
-            <div id="hero-bg-image" class="w-full h-full entrance-element scale-110 opacity-0 blur-xl" data-entrance-delay="0">
+            <div id="hero-bg-image" class="w-full h-full entrance-element scale-110 opacity-0 blur-xl"
+                data-entrance-delay="0">
                 <!-- Background for Dark Theme -->
                 <img alt="Casual dark multimedia workspace"
                     class="hidden dark:block w-full h-full object-cover opacity-20"
@@ -178,7 +199,8 @@
             </div>
         </div>
         <!-- Three.js Entrance Wrapper -->
-        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none entrance-element scale-110 opacity-0 blur-xl" data-entrance-delay="100">
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none entrance-element scale-110 opacity-0 blur-xl"
+            data-entrance-delay="100">
             <!-- Three.js Canvas Container -->
             <div id="three-canvas-container" class="absolute inset-0 w-full h-full opacity-80">
             </div>
@@ -195,11 +217,13 @@
                         class="text-primary-container">FUTURE</span></span><span
                     class="animate-blink text-primary font-light">|</span>
             </h1>
-            <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mt-4 entrance-element translate-y-[40px] opacity-0 blur-xl" data-entrance-delay="500" data-i18n="hero_desc">
+            <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mt-4 entrance-element translate-y-[40px] opacity-0 blur-xl"
+                data-entrance-delay="500" data-i18n="hero_desc">
                 Creative Technologist &amp; Interactive Media Designer. Memadukan estetika minimalis dengan teknologi
                 mendalam.
             </p>
-            <div class="mt-stack-sm flex gap-4 entrance-element translate-y-[40px] opacity-0 blur-xl" data-entrance-delay="600">
+            <div class="mt-stack-sm flex gap-4 entrance-element translate-y-[40px] opacity-0 blur-xl"
+                data-entrance-delay="600">
                 <a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-DEFAULT font-label-caps text-label-caps tracking-wider hover:shadow-[0_0_30px_rgba(0,102,255,0.4)] transition-all duration-300"
                     href="#portfolio" data-i18n="btn_explore">EXPLORE WORK</a>
                 <a class="border border-outline-variant text-on-surface px-8 py-4 rounded-DEFAULT font-label-caps text-label-caps tracking-wider hover:bg-surface-container-high transition-all duration-300"
@@ -271,26 +295,40 @@
                         <h3 class="text-label-caps font-label-caps text-secondary-container mb-4 tracking-widest">
                             SOFTWARE ARSENAL</h3>
                         <div class="flex flex-wrap gap-4 md:gap-6 mt-6 items-end mac-dock h-16">
-                            <div title="After Effects" class="animate-float cursor-pointer flex items-end" style="animation-delay: 0s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-after-effects.svg" alt="After Effects" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                            <div title="After Effects" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 0s;">
+                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-after-effects.svg"
+                                    alt="After Effects" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
                             </div>
-                            <div title="Illustrator" class="animate-float cursor-pointer flex items-end" style="animation-delay: 0.2s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-illustrator.svg" alt="Illustrator" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                            <div title="Illustrator" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 0.2s;">
+                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-illustrator.svg"
+                                    alt="Illustrator" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
                             </div>
-                            <div title="Premiere Pro" class="animate-float cursor-pointer flex items-end" style="animation-delay: 0.4s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-premiere.svg" alt="Premiere Pro" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                            <div title="Premiere Pro" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 0.4s;">
+                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-premiere.svg"
+                                    alt="Premiere Pro" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
                             </div>
-                            <div title="Photoshop" class="animate-float cursor-pointer flex items-end" style="animation-delay: 0.6s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-photoshop.svg" alt="Photoshop" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                            <div title="Photoshop" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 0.6s;">
+                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-photoshop.svg"
+                                    alt="Photoshop" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
                             </div>
-                            <div title="InDesign" class="animate-float cursor-pointer flex items-end" style="animation-delay: 0.8s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-indesign.svg" alt="InDesign" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                            <div title="InDesign" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 0.8s;">
+                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-indesign.svg"
+                                    alt="InDesign" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
                             </div>
-                            <div title="Unity" class="animate-float cursor-pointer flex items-end" style="animation-delay: 1.0s;">
-                                <img src="https://cdn.simpleicons.org/unity" alt="Unity" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg invert dark:invert-0">
+                            <div title="Unity" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 1.0s;">
+                                <img src="https://cdn.simpleicons.org/unity" alt="Unity"
+                                    class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg invert dark:invert-0">
                             </div>
-                            <div title="Unreal Engine" class="animate-float cursor-pointer flex items-end" style="animation-delay: 1.2s;">
-                                <img src="https://cdn.simpleicons.org/unrealengine" alt="Unreal Engine" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg dark:invert">
+                            <div title="Unreal Engine" class="animate-float cursor-pointer flex items-end"
+                                style="animation-delay: 1.2s;">
+                                <img src="https://cdn.simpleicons.org/unrealengine" alt="Unreal Engine"
+                                    class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg dark:invert">
                             </div>
                         </div>
                     </div>
@@ -324,7 +362,7 @@
         <div id="portfolio-header" class="relative flex flex-col items-center justify-center mb-stack-md w-full">
             <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none text-center"
                 data-i18n="portfolio_title">
-                My<br><span class="text-outline">Portfolio</span></h2>
+                My <span class="text-outline">Portfolio</span></h2>
 
             <!-- View Toggle -->
             <div class="flex gap-6 mt-6 md:mt-0 md:absolute md:right-0 md:bottom-2">
