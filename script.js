@@ -644,7 +644,7 @@ async function loadDynamicPortfolio() {
                     playIcon = `<span class="material-symbols-outlined text-[48px] text-white z-10 bg-primary-container/50 rounded-full p-2 backdrop-blur-md">sports_esports</span>`;
                     
                     if (!thumbnail) {
-                        const firstUrl = videoUrl.split(',')[0].trim();
+                        const firstUrl = videoUrl.split(/[,\n]+/)[0].trim();
                         const gDriveMatch = firstUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
                         if (gDriveMatch && gDriveMatch[1]) {
                             thumbnail = `https://lh3.googleusercontent.com/d/${gDriveMatch[1]}=w800`;
@@ -661,7 +661,7 @@ async function loadDynamicPortfolio() {
                     
                     // Fallback thumbnail pertama jika kosong
                     if (!thumbnail) {
-                        const firstUrl = videoUrl.split(',')[0].trim();
+                        const firstUrl = videoUrl.split(/[,\n]+/)[0].trim();
                         const gDriveMatch = firstUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
                         if (gDriveMatch && gDriveMatch[1]) {
                             thumbnail = `https://lh3.googleusercontent.com/d/${gDriveMatch[1]}=w800`;
@@ -904,11 +904,11 @@ let currentCarouselIndex = 0;
 
 window.openCarouselModal = function (titleRaw, encodedUrls, encodedDesc = '', encodedLink = '') {
     const rawStr = decodeURIComponent(encodedUrls);
-    // Split berdasarkan koma dan bersihkan spasi
-    const urls = rawStr.split(',').map(u => u.trim()).filter(u => u !== '');
+    // Split berdasarkan koma atau baris baru (newline) dan bersihkan spasi
+    const urls = rawStr.split(/[,\n]+/).map(u => u.trim()).filter(u => u !== '');
     
-    // Split judul jika dipisahkan dengan koma
-    const titles = titleRaw.split(',').map(t => t.trim());
+    // Split judul jika dipisahkan dengan koma atau baris baru
+    const titles = titleRaw.split(/[,\n]+/).map(t => t.trim());
     
     if (urls.length === 0) return;
     
@@ -1811,7 +1811,7 @@ let currentGameIndex = 0;
 
 window.openGameModal = function (titleRaw, encodedUrls, encodedDesc = '', encodedLink = '') {
     const rawStr = decodeURIComponent(encodedUrls);
-    const urls = rawStr.split(',').map(u => u.trim()).filter(u => u !== '');
+    const urls = rawStr.split(/[,\n]+/).map(u => u.trim()).filter(u => u !== '');
     
     if (urls.length === 0) return;
     
