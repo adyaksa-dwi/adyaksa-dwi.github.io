@@ -1999,18 +1999,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         introOverlay.style.transform = 'translateY(-100%)';
                         introOverlay.style.opacity = '0'; // Optional: fade it out as it swipes
                         
-                        // Staggered Reveal: Trigger entrance animations
-                        const entranceElements = document.querySelectorAll('.entrance-element');
-                        entranceElements.forEach(el => {
-                            const delay = el.getAttribute('data-entrance-delay') || 0;
-                            setTimeout(() => {
-                                // Add smooth transition
-                                el.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
-                                // Remove initial hiding and blur classes, set to active
-                                el.classList.remove('opacity-0', '-translate-y-full', 'translate-y-[40px]', 'translate-y-[20px]', 'scale-110', 'blur-xl');
-                                el.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'blur-0');
-                            }, parseInt(delay));
-                        });
+                        // Wait for swipe up to almost finish before triggering website entrance
+                        setTimeout(() => {
+                            const entranceElements = document.querySelectorAll('.entrance-element');
+                            entranceElements.forEach(el => {
+                                const delay = el.getAttribute('data-entrance-delay') || 0;
+                                setTimeout(() => {
+                                    // Add smooth transition
+                                    el.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+                                    // Remove initial hiding and blur classes, set to active
+                                    el.classList.remove('opacity-0', '-translate-y-full', 'translate-y-[80px]', 'translate-y-[40px]', 'scale-110', 'blur-xl');
+                                    el.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'blur-0');
+                                }, parseInt(delay));
+                            });
+                        }, 800); // Trigger just as the curtain is about to fully clear the screen
                         
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
