@@ -1940,48 +1940,96 @@ window.toggleProfile = function() {
 };
 
 // ----------------------------------------------------
-// PLAYFUL PORTAL INTRO SEQUENCE
+// 3D VIBRANT MOTION GRAPHICS INTRO
 // ----------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const introOverlay = document.getElementById('intro-overlay');
-    const droplet = document.getElementById('intro-droplet');
-    const typography = document.getElementById('intro-typography');
-    const word1 = document.getElementById('intro-word-1');
-    const word2 = document.getElementById('intro-word-2');
+    const camera = document.getElementById('intro-3d-camera');
+    const line1 = document.getElementById('intro-line-1');
+    const line2 = document.getElementById('intro-line-2');
+    const line3 = document.getElementById('intro-line-3');
     
-    if (!introOverlay || !droplet || !word1) return;
+    if (!introOverlay || !line3) return;
 
-    // 1. Droplet drops in and bounces
-    setTimeout(() => {
-        droplet.style.transform = 'scale(1)';
+    // Generate 3D Text Layers for Extrusion
+    const textContent = "LUMINA FLUX";
+    const numLayers = 16;
+    const layers = [];
+    
+    for (let i = 1; i <= numLayers; i++) {
+        const layer = document.createElement('span');
+        layer.textContent = textContent;
+        // Make it absolute, centered, matching the parent text
+        layer.className = 'absolute left-1/2 -translate-x-1/2 top-0 whitespace-nowrap text-transparent bg-clip-text';
         
-        // 2. Droplet expands to cover screen
+        // Calculate vibrant gradient color for extrusion sides (Cyan to Pink/Purple)
+        const progress = i / numLayers;
+        const r = Math.floor(0 + (255 - 0) * progress);
+        const g = Math.floor(255 - (255 - 0) * progress);
+        const b = Math.floor(255 - (255 - 128) * progress);
+        
+        layer.style.backgroundImage = `linear-gradient(90deg, rgb(${r},${g},${b}), rgb(255,0,128))`;
+        layer.style.transform = `translateZ(${-i * 5}px) translateX(-50%)`;
+        layer.style.opacity = '1';
+        layer.style.transition = 'transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s';
+        
+        line3.appendChild(layer);
+        layers.push(layer);
+    }
+
+    // Sequence Execution
+    setTimeout(() => {
+        // 1. Line 1
+        line1.style.opacity = '1';
+        line1.style.transform = 'translateZ(50px) translateY(0)';
+        
         setTimeout(() => {
-            // Change transition to smooth expansion
-            droplet.style.transition = 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
-            droplet.style.transform = 'scale(100)'; // Enough to cover any screen
+            // 2. Line 2
+            line2.style.opacity = '1';
+            line2.style.transform = 'translateZ(40px) translateY(0)';
             
-            // 3. Show typography container
             setTimeout(() => {
-                typography.style.opacity = '1';
+                // 3. Line 3 (3D block)
+                line3.style.opacity = '1';
+                line3.style.transform = 'translateZ(100px) scale(1)';
                 
-                // 4. Slide words in (Spring effect)
+                // 4. Cinematic Camera Pan (Rotate 3D)
                 setTimeout(() => {
-                    word1.style.transform = 'translateY(0)';
-                    word2.style.transform = 'translateY(0)';
+                    camera.style.transform = 'rotateX(20deg) rotateY(-25deg)';
                     
-                    // 5. Portal Reveal (shrink overlay to 0)
+                    // 5. The Blast & Fade Reveal
                     setTimeout(() => {
-                        introOverlay.style.clipPath = 'circle(0% at 50% 50%)';
+                        // Scatter 3D layers
+                        layers.forEach((layer) => {
+                            const scatterX = (Math.random() - 0.5) * 800 - 50; // -50 for the translateX(-50%) baseline
+                            const scatterY = (Math.random() - 0.5) * 800;
+                            const scatterZ = Math.random() * 800 + 200;
+                            layer.style.transform = `translate3d(${scatterX}%, ${scatterY}%, ${scatterZ}px) rotateZ(${(Math.random()-0.5)*60}deg)`;
+                            layer.style.opacity = '0';
+                        });
                         
-                        // Cleanup
+                        line1.style.opacity = '0';
+                        line2.style.opacity = '0';
+                        line1.style.transform = 'translateZ(800px)';
+                        line2.style.transform = 'translateZ(800px)';
+                        
+                        const frontFace = line3.firstElementChild;
+                        frontFace.style.transition = 'all 1.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                        frontFace.style.opacity = '0';
+                        frontFace.style.transform = 'translateZ(600px)';
+                        
+                        // Fade out entire overlay
                         setTimeout(() => {
-                            document.body.classList.remove('overflow-hidden');
-                            introOverlay.style.display = 'none';
-                        }, 1000);
-                    }, 1500); // reading time
-                }, 100);
-            }, 300); // wait for expansion to cover mostly
-        }, 800); // wait for bounce
-    }, 200); // start delay
+                            introOverlay.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                document.body.classList.remove('overflow-hidden');
+                                introOverlay.style.display = 'none';
+                            }, 1200);
+                        }, 500);
+                    }, 2200); // Look at the 3D text for 2.2s
+                }, 800);
+            }, 600);
+        }, 600);
+    }, 500); // Initial start delay
 });
