@@ -1940,78 +1940,68 @@ window.toggleProfile = function() {
 };
 
 // ----------------------------------------------------
-// CINEMATIC AURORA INTRO SEQUENCE
+// MARQUEE SELECTION REVEAL INTRO
 // ----------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const introOverlay = document.getElementById('intro-overlay');
-    const auroraBg = document.getElementById('intro-aurora-bg');
-    const text1 = document.getElementById('intro-text-1');
-    const text2 = document.getElementById('intro-text-2');
-    const text3 = document.getElementById('intro-text-3');
-    const flash = document.getElementById('intro-flash');
+    const textWrapper = document.getElementById('intro-text-wrapper');
+    const selectionBox = document.getElementById('intro-selection-box');
+    const fakeCursor = document.getElementById('intro-fake-cursor');
     
-    if (!introOverlay || !auroraBg) return;
+    if (!introOverlay || !selectionBox || !textWrapper) return;
 
-    // Cinematic Sequence Execution
+    // Wait slightly before calculating to ensure layout is ready
     setTimeout(() => {
-        // 1. Fade in the Aurora Background
-        auroraBg.style.opacity = '1';
+        // 1. Get Text Wrapper bounding box
+        const rect = textWrapper.getBoundingClientRect();
         
-        // 2. Show "HI," (Slow zoom in)
+        // 2. Set Initial State (Top-Left point of the wrapper)
+        selectionBox.style.top = `${rect.top}px`;
+        selectionBox.style.left = `${rect.left}px`;
+        selectionBox.style.width = '0px';
+        selectionBox.style.height = '0px';
+        selectionBox.style.opacity = '1';
+        selectionBox.style.transition = 'all 2s cubic-bezier(0.85, 0, 0.15, 1)';
+        
+        textWrapper.style.opacity = '1';
+        textWrapper.style.clipPath = 'inset(0% 100% 100% 0%)'; // Clip from top-left
+        textWrapper.style.transition = 'clip-path 2s cubic-bezier(0.85, 0, 0.15, 1)';
+        
+        // 3. Start the Marquee Reveal Animation
         setTimeout(() => {
-            text1.style.opacity = '1';
-            text1.style.transform = 'scale(1)';
+            // Expand Selection Box
+            selectionBox.style.width = `${rect.width}px`;
+            selectionBox.style.height = `${rect.height}px`;
             
-            // Fade out "HI,"
+            // Reveal Masked Text
+            textWrapper.style.clipPath = 'inset(0% 0% 0% 0%)';
+            
+            // 4. End of Animation (Hold, Blink, then Fade)
             setTimeout(() => {
-                text1.style.opacity = '0';
-                text1.style.transform = 'scale(1.05)';
+                // Fake cursor clicks and fades out
+                fakeCursor.style.transition = 'all 0.3s ease';
+                fakeCursor.style.transform = 'scale(0.8) translate(100%, 100%)';
+                fakeCursor.style.opacity = '0';
                 
-                // 3. Show "WELCOME TO"
+                // Box blinks like a selection confirming
                 setTimeout(() => {
-                    text2.style.opacity = '1';
-                    text2.style.transform = 'scale(1)';
+                    selectionBox.style.transition = 'opacity 0.2s';
+                    selectionBox.style.opacity = '0';
+                    setTimeout(() => selectionBox.style.opacity = '1', 200);
+                    setTimeout(() => selectionBox.style.opacity = '0', 400);
                     
-                    // Fade out "WELCOME TO"
+                    // Fade out whole overlay
                     setTimeout(() => {
-                        text2.style.opacity = '0';
-                        text2.style.transform = 'scale(1.05)';
+                        introOverlay.style.transition = 'opacity 1.2s ease';
+                        introOverlay.style.opacity = '0';
                         
-                        // 4. Show "LUMINA FLUX" (The Climax)
                         setTimeout(() => {
-                            text3.style.opacity = '1';
-                            text3.style.transform = 'scale(1)';
-                            
-                            // Speed up aurora (simulate intensity)
-                            auroraBg.style.transitionDuration = '500ms';
-                            auroraBg.style.transform = 'scale(1.2)';
-                            
-                            // 5. The Cinematic White Flash
-                            setTimeout(() => {
-                                flash.style.opacity = '1';
-                                
-                                // While screen is white, hide intro elements and show website
-                                setTimeout(() => {
-                                    text3.style.opacity = '0';
-                                    auroraBg.style.opacity = '0';
-                                    introOverlay.style.background = 'transparent';
-                                    
-                                    // Fade out the flash to reveal the website
-                                    setTimeout(() => {
-                                        flash.style.opacity = '0';
-                                        
-                                        // Cleanup
-                                        setTimeout(() => {
-                                            document.body.classList.remove('overflow-hidden');
-                                            introOverlay.style.display = 'none';
-                                        }, 1000);
-                                    }, 100);
-                                }, 600); // Duration of the flash peak
-                            }, 2500); // Hold Lumina Flux text
-                        }, 800); // Wait after Welcome To fades out
-                    }, 1800); // Hold Welcome To
-                }, 800); // Wait after HI fades out
-            }, 1500); // Hold HI
-        }, 500); // Wait after aurora fades in
-    }, 200); // Initial delay
+                            document.body.classList.remove('overflow-hidden');
+                            introOverlay.style.display = 'none';
+                        }, 1200);
+                    }, 800);
+                }, 300);
+            }, 2200); // Wait for the drag transition to finish
+        }, 500); // Delay before starting the drag
+    }, 100); // Initial DOM layout delay
 });
