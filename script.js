@@ -1006,10 +1006,13 @@ function openModal(modalId) {
     const content = modal.querySelector('.modal-content');
     modal.classList.remove('hidden');
     modal.classList.add('flex');
+    modal.style.opacity = '0';
+    modal.style.transition = 'opacity 0.4s ease';
     content.style.opacity = '0';
     content.style.transform = 'scale(0.95)';
     setTimeout(() => {
-        content.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        modal.style.opacity = '1';
+        content.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
         content.style.opacity = '1';
         content.style.transform = 'scale(1)';
     }, 10);
@@ -1050,6 +1053,9 @@ function closeModal(modalId) {
         }
     }
 
+    modal.style.transition = 'opacity 0.4s ease';
+    modal.style.opacity = '0';
+    content.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
     content.style.opacity = '0';
     content.style.transform = 'scale(0.95)';
     setTimeout(() => {
@@ -1062,7 +1068,7 @@ function closeModal(modalId) {
             document.getElementById('carousel-image').src = '';
             carouselImages = [];
         }
-    }, 300);
+    }, 400);
 }
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
