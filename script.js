@@ -577,6 +577,40 @@ async function loadDynamicPortfolio() {
         { gid: '404770039', category: '3danimation', label: '3D ANIMATION' }
     ];
 
+// Fungsi parser CSV yang tangguh untuk membaca newline (Alt+Enter) di dalam Google Sheets
+function parseCSV(str) {
+    let arr = [];
+    let quote = false;
+    let row = [];
+    let col = '';
+    for (let c = 0; c < str.length; c++) {
+        let cc = str[c], nc = str[c+1];
+        if (cc === '"') {
+            if (quote && nc === '"') { col += '"'; c++; }
+            else { quote = !quote; }
+        } else if (cc === ',' && !quote) {
+            row.push(col);
+            col = '';
+        } else if (cc === '\r' && nc === '\n' && !quote) {
+            row.push(col);
+            arr.push(row);
+            row = [];
+            col = '';
+            c++;
+        } else if (cc === '\n' && !quote) {
+            row.push(col);
+            arr.push(row);
+            row = [];
+            col = '';
+        } else {
+            col += cc;
+        }
+    }
+    row.push(col);
+    arr.push(row);
+    return arr;
+}
+
     const container = document.getElementById('dynamic-portfolio-container');
     if (!container) return;
     container.innerHTML = '';
@@ -590,16 +624,8 @@ async function loadDynamicPortfolio() {
             const response = await fetch(url);
             const text = await response.text();
 
-            const rows = text.split('\n').map(row => {
-                const regex = /(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|([^,]*))(?:,|$)/g;
-                let arr = [];
-                let match;
-                while (match = regex.exec(row)) {
-                    arr.push(match[1] ? match[1].replace(/\"\"/g, '\"') : match[2]);
-                    if (match.index === regex.lastIndex) regex.lastIndex++;
-                }
-                return arr;
-            }).filter(row => row.length > 1 && row[0].trim() !== '');
+            // Gunakan parser CSV yang mendukung newline di dalam sel (kutipan)
+            const rows = parseCSV(text).filter(row => row.length > 1 && row[0] && row[0].trim() !== '');
 
             for (let i = 1; i < rows.length; i++) {
                 const row = rows[i];
