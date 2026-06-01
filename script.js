@@ -1990,12 +1990,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     selectionBox.style.transition = 'opacity 0.2s';
                     selectionBox.style.opacity = '0';
-                    setTimeout(() => selectionBox.style.opacity = '1', 200);
-                    setTimeout(() => selectionBox.style.opacity = '0', 400);
+                    setTimeout(() => selectionBox.style.opacity = '1', 150);
+                    setTimeout(() => selectionBox.style.opacity = '0', 300);
                     
-                    // Very smooth fade out of the entire overlay
+                    // Smooth fade out of the entire overlay (Sped up)
                     setTimeout(() => {
-                        introOverlay.style.transition = 'opacity 2s ease-in-out';
+                        introOverlay.style.transition = 'opacity 1s ease-in-out';
                         introOverlay.style.opacity = '0';
                         
                         // Staggered Reveal: Trigger entrance animations
@@ -2004,7 +2004,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const delay = el.getAttribute('data-entrance-delay') || 0;
                             setTimeout(() => {
                                 // Add smooth transition
-                                el.style.transition = 'all 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                                el.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
                                 // Remove initial hiding classes and set to active
                                 el.classList.remove('opacity-0', '-translate-y-full', 'translate-y-[40px]', 'translate-y-[20px]', 'scale-110');
                                 el.classList.add('opacity-100', 'translate-y-0', 'scale-100');
@@ -2014,8 +2014,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
                             introOverlay.style.display = 'none';
-                        }, 2000);
-                    }, 1000); // Wait 1 second after blinking so it feels calm
+                        }, 1000);
+                    }, 500); // Wait 0.5s after blinking
                 }, 400);
             }, 2200); // Wait for the drag transition to finish
         }, 500); // Delay before starting the drag
