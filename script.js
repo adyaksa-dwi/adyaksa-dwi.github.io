@@ -1983,7 +1983,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 // Fake cursor clicks and fades out
                 fakeCursor.style.transition = 'all 0.4s ease';
-                fakeCursor.style.transform = 'scale(0.8) translate(-50%, -50%)'; // pull away slightly
+                fakeCursor.style.transform = 'translate(-15px, -15px) scale(0.8)'; // pull away slightly
                 fakeCursor.style.opacity = '0';
                 
                 // Box blinks like a selection confirming
@@ -1995,14 +1995,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Very smooth fade out of the entire overlay
                     setTimeout(() => {
-                        introOverlay.style.transition = 'opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                        introOverlay.style.transition = 'opacity 2s ease-in-out';
                         introOverlay.style.opacity = '0';
                         
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
                             introOverlay.style.display = 'none';
-                        }, 1500);
-                    }, 600);
+                        }, 2000);
+                    }, 1000); // Wait 1 second after blinking so it feels calm
                 }, 400);
             }, 2200); // Wait for the drag transition to finish
         }, 500); // Delay before starting the drag
