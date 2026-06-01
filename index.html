@@ -240,8 +240,19 @@
     </section>
 
     <!-- Section 2: About Me -->
-    <section class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto scroll-reveal"
-        id="about">
+    <section class="relative w-full py-stack-lg scroll-reveal" id="about">
+        <!-- Backgrounds -->
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <!-- Dark Theme -->
+            <img alt="Dark creative desk" class="hidden dark:block w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2000&auto=format&fit=crop">
+            <!-- Light Theme -->
+            <img alt="Light creative desk" class="block dark:hidden w-full h-full object-cover opacity-40 grayscale-[30%]" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2000&auto=format&fit=crop">
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
         <div id="interactive-profile"
             class="relative max-w-xs md:max-w-md mx-auto transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer group bg-surface-container-low border border-white/5 rounded-[40px] md:rounded-[60px] p-2 md:p-4 flex flex-col md:flex-row items-center justify-center shadow-[0_0_40px_rgba(var(--glow-rgb),0.1)] hover:shadow-[0_0_60px_rgba(var(--glow-rgb),0.2)]"
             onclick="toggleProfile()">
@@ -335,6 +346,8 @@
                 </div>
             </div>
         </div>
+            </div>
+        </div>
     </section>
 
     <!-- Section: Lumina Flux Philosophy -->
@@ -356,9 +369,19 @@
     </section>
 
     <!-- Section 3: Portfolio -->
-    <section
-        class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative scroll-reveal"
-        id="portfolio">
+    <section class="relative w-full py-stack-lg scroll-reveal" id="portfolio">
+        <!-- Backgrounds -->
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <!-- Dark Theme -->
+            <img alt="Dark abstract art" class="hidden dark:block w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop">
+            <!-- Light Theme -->
+            <img alt="Light abstract art" class="block dark:hidden w-full h-full object-cover opacity-40 grayscale-[30%]" src="https://images.unsplash.com/photo-1506869640319-ce1a24508ec3?q=80&w=2000&auto=format&fit=crop">
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
         <div id="portfolio-header" class="relative flex flex-col items-center justify-center mb-stack-md w-full">
             <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none text-center"
                 data-i18n="portfolio_title">
@@ -592,12 +615,25 @@
                 </div>
             </div>
 
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Section 4: Contact -->
-    <section
-        class="py-24 md:py-40 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-white/5 mt-stack-lg min-h-[80vh] flex flex-col justify-center scroll-reveal"
-        id="contact">
+    <section class="relative w-full py-24 md:py-40 mt-stack-lg min-h-[80vh] flex flex-col justify-center scroll-reveal border-t border-white/5" id="contact">
+        <!-- Backgrounds -->
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <!-- Dark Theme -->
+            <img alt="Dark contact" class="hidden dark:block w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000&auto=format&fit=crop">
+            <!-- Light Theme -->
+            <img alt="Light contact" class="block dark:hidden w-full h-full object-cover opacity-40 grayscale-[30%]" src="https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?q=80&w=2000&auto=format&fit=crop">
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
             <div>
                 <h2 class="text-headline-lg font-headline-lg text-on-surface mb-2" data-i18n="contact_title">
@@ -654,6 +690,8 @@
                         KIRIM PESAN
                     </button>
                 </form>
+            </div>
+        </div>
             </div>
         </div>
     </section>
