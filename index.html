@@ -72,26 +72,26 @@
 <body
     class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw] overflow-hidden">
 
-    <!-- 3D Vibrant Motion Graphics Intro -->
-    <div id="intro-overlay" class="fixed inset-0 z-[9999] overflow-hidden bg-gray-950 flex flex-col items-center justify-center transition-opacity duration-[1200ms] ease-in-out">
-        <!-- Vibrant Gradient Background -->
-        <div class="absolute inset-0 z-0 opacity-70 mix-blend-screen" style="background: radial-gradient(circle at 10% 20%, rgba(255,0,128,0.5) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(0,255,255,0.5) 0%, transparent 40%), radial-gradient(circle at 50% 50%, rgba(128,0,255,0.6) 0%, transparent 60%); filter: blur(40px);"></div>
+    <!-- Cinematic Aurora Motion Graphics Intro -->
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] overflow-hidden bg-gray-950 flex flex-col items-center justify-center transition-opacity duration-[1500ms] ease-in-out">
         
-        <div id="intro-3d-scene" class="relative z-10 w-full h-full flex flex-col items-center justify-center" style="perspective: 1200px; transform-style: preserve-3d;">
-            
-            <div id="intro-3d-camera" class="flex flex-col items-center transition-transform duration-[2500ms] ease-in-out" style="transform-style: preserve-3d;">
-                <h2 id="intro-line-1" class="text-xl md:text-3xl font-headline-lg font-bold text-white mb-2 opacity-0 transition-all duration-700 tracking-widest text-shadow-glow" style="transform: translateZ(50px) translateY(20px);">HI,</h2>
-                <h2 id="intro-line-2" class="text-xl md:text-3xl font-headline-lg font-bold text-white mb-8 opacity-0 transition-all duration-700 tracking-widest text-shadow-glow" style="transform: translateZ(40px) translateY(20px);">WELCOME TO</h2>
-                
-                <!-- The 3D Extruded Text Container -->
-                <div id="intro-line-3" class="relative font-headline-lg font-black text-5xl md:text-[8rem] leading-none tracking-tight opacity-0 transition-all duration-1000" style="transform-style: preserve-3d; transform: translateZ(100px) scale(0.9);">
-                    <!-- The front face -->
-                    <span class="relative z-50 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">LUMINA FLUX</span>
-                    <!-- JS will append the colored 3D layers here -->
-                </div>
-            </div>
-            
+        <!-- Aurora Animated Background -->
+        <div id="intro-aurora-bg" class="absolute inset-0 z-0 opacity-0 transition-opacity duration-[2000ms]">
+            <!-- Animated Orbs -->
+            <div class="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full mix-blend-screen filter blur-[80px] opacity-70 animate-[spin_15s_linear_infinite]" style="background: radial-gradient(circle, rgba(255,0,128,0.6) 0%, transparent 70%);"></div>
+            <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[80px] opacity-70 animate-[spin_20s_reverse_linear_infinite]" style="background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, transparent 70%);"></div>
+            <div class="absolute top-[20%] right-[20%] w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[60px] opacity-60 animate-[pulse_8s_ease-in-out_infinite]" style="background: radial-gradient(circle, rgba(128,0,255,0.7) 0%, transparent 70%);"></div>
         </div>
+
+        <!-- Cinematic Text Container -->
+        <div class="relative z-10 flex items-center justify-center w-full h-full text-center px-4">
+            <h2 id="intro-text-1" class="absolute text-2xl md:text-5xl font-headline-lg font-light text-white tracking-[0.5em] md:tracking-[1em] opacity-0 transition-all duration-[2500ms] ease-out transform scale-95">HI,</h2>
+            <h2 id="intro-text-2" class="absolute text-2xl md:text-5xl font-headline-lg font-light text-white tracking-[0.5em] md:tracking-[1em] opacity-0 transition-all duration-[2500ms] ease-out transform scale-95">WELCOME TO</h2>
+            <h1 id="intro-text-3" class="absolute text-4xl md:text-7xl font-headline-lg font-bold text-white tracking-[0.3em] md:tracking-[0.5em] opacity-0 transition-all duration-[3500ms] ease-out transform scale-95 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]">LUMINA FLUX</h1>
+        </div>
+        
+        <!-- Cinematic Flash -->
+        <div id="intro-flash" class="absolute inset-0 z-50 bg-white opacity-0 pointer-events-none transition-opacity duration-[600ms] ease-in"></div>
     </div>
 
     <!-- TopNavBar -->
