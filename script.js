@@ -1993,10 +1993,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => selectionBox.style.opacity = '1', 150);
                     setTimeout(() => selectionBox.style.opacity = '0', 300);
                     
-                    // Smooth fade out of the entire overlay (Sped up)
+                    // Smooth swipe up of the entire overlay
                     setTimeout(() => {
-                        introOverlay.style.transition = 'opacity 1s ease-in-out';
-                        introOverlay.style.opacity = '0';
+                        introOverlay.style.transition = 'transform 1s cubic-bezier(0.85, 0, 0.15, 1), opacity 1.5s ease-in-out';
+                        introOverlay.style.transform = 'translateY(-100%)';
+                        introOverlay.style.opacity = '0'; // Optional: fade it out as it swipes
                         
                         // Staggered Reveal: Trigger entrance animations
                         const entranceElements = document.querySelectorAll('.entrance-element');
@@ -2005,16 +2006,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             setTimeout(() => {
                                 // Add smooth transition
                                 el.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
-                                // Remove initial hiding classes and set to active
-                                el.classList.remove('opacity-0', '-translate-y-full', 'translate-y-[40px]', 'translate-y-[20px]', 'scale-110');
-                                el.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+                                // Remove initial hiding and blur classes, set to active
+                                el.classList.remove('opacity-0', '-translate-y-full', 'translate-y-[40px]', 'translate-y-[20px]', 'scale-110', 'blur-xl');
+                                el.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'blur-0');
                             }, parseInt(delay));
                         });
                         
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
                             introOverlay.style.display = 'none';
-                        }, 1000);
+                        }, 1200); // Wait for the swipe to finish
                     }, 500); // Wait 0.5s after blinking
                 }, 400);
             }, 2200); // Wait for the drag transition to finish
