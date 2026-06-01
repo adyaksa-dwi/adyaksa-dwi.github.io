@@ -1998,11 +1998,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         introOverlay.style.transition = 'opacity 2s ease-in-out';
                         introOverlay.style.opacity = '0';
                         
-                        // Crossfade: Fade in the main website simultaneously
-                        const mainContent = document.getElementById('main-content-wrapper');
-                        if (mainContent) {
-                            mainContent.style.opacity = '1';
-                        }
+                        // Staggered Reveal: Trigger entrance animations
+                        const entranceElements = document.querySelectorAll('.entrance-element');
+                        entranceElements.forEach(el => {
+                            const delay = el.getAttribute('data-entrance-delay') || 0;
+                            setTimeout(() => {
+                                // Add smooth transition
+                                el.style.transition = 'all 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                                // Remove initial hiding classes and set to active
+                                el.classList.remove('opacity-0', '-translate-y-full', 'translate-y-[40px]', 'translate-y-[20px]', 'scale-110');
+                                el.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+                            }, parseInt(delay));
+                        });
                         
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
