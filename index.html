@@ -73,7 +73,7 @@
     class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container antialiased relative overflow-x-hidden w-full max-w-[100vw] overflow-hidden">
 
     <!-- Marquee Selection Reveal Intro -->
-    <div id="intro-overlay" class="fixed inset-0 z-[9999] overflow-hidden bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-[1500ms] ease-in-out">
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] overflow-hidden bg-[#f8f9fa] dark:bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-[1500ms] ease-in-out">
         
         <!-- Aurora Animated Background (Darkened for contrast) -->
         <div class="absolute inset-0 z-0 opacity-40">
@@ -84,22 +84,22 @@
 
         <!-- The Full Text Container (Used to measure size and mask) -->
         <div id="intro-text-wrapper" class="relative z-10 p-8 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300">
-            <span class="font-headline-lg font-light text-2xl md:text-4xl tracking-[0.4em] uppercase mb-2 text-white">welcome to</span>
-            <span class="font-headline-lg font-black text-5xl md:text-8xl tracking-tight leading-none text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">LUMINA FLUX</span>
+            <span class="font-headline-lg font-light text-2xl md:text-4xl tracking-[0.4em] uppercase mb-2 text-black dark:text-white">welcome to</span>
+            <span class="font-headline-lg font-black text-5xl md:text-8xl tracking-tight leading-none text-black drop-shadow-[0_0_15px_rgba(0,0,0,0.15)] dark:text-white dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">LUMINA FLUX</span>
         </div>
 
         <!-- The Selection Box (Marquee Border) -->
-        <div id="intro-selection-box" class="absolute z-20 pointer-events-none border border-white/60 opacity-0" style="top: 0; left: 0; width: 0; height: 0;">
+        <div id="intro-selection-box" class="absolute z-20 pointer-events-none border border-black/60 dark:border-white/60 opacity-0" style="top: 0; left: 0; width: 0; height: 0;">
             <!-- 4 Corner Nodes -->
-            <div class="absolute -top-[4px] -left-[4px] w-[8px] h-[8px] bg-white border border-gray-400"></div>
-            <div class="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] bg-white border border-gray-400"></div>
-            <div class="absolute -bottom-[4px] -left-[4px] w-[8px] h-[8px] bg-white border border-gray-400"></div>
-            <div class="absolute -bottom-[4px] -right-[4px] w-[8px] h-[8px] bg-white border border-gray-400"></div>
+            <div class="absolute -top-[4px] -left-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
+            <div class="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
+            <div class="absolute -bottom-[4px] -left-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
+            <div class="absolute -bottom-[4px] -right-[4px] w-[8px] h-[8px] bg-black border-black dark:bg-white dark:border-gray-400 border"></div>
             
             <!-- The Fake Cursor -->
             <div id="intro-fake-cursor" class="absolute z-50 drop-shadow-md pointer-events-none opacity-100" style="top: -3px; left: -5.5px;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.5 3L18.5 16L12.5 17L9 22L5.5 3Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-black stroke-white dark:fill-white dark:stroke-black">
+                    <path d="M5.5 3L18.5 16L12.5 17L9 22L5.5 3Z" stroke-width="1.5" stroke-linejoin="round"/>
                 </svg>
             </div>
         </div>
