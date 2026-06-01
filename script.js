@@ -1998,6 +1998,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         introOverlay.style.transition = 'opacity 2s ease-in-out';
                         introOverlay.style.opacity = '0';
                         
+                        // Crossfade: Fade in the main website simultaneously
+                        const mainContent = document.getElementById('main-content-wrapper');
+                        if (mainContent) {
+                            mainContent.style.opacity = '1';
+                        }
+                        
                         setTimeout(() => {
                             document.body.classList.remove('overflow-hidden');
                             introOverlay.style.display = 'none';
