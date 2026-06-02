@@ -101,15 +101,35 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);
 });
 
-// Navigation Scroll Spy
+// Navigation Scroll Spy & Background Wallpaper Transitions
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
-window.addEventListener("scroll", () => {
+const bgElements = document.querySelectorAll("[data-bg-section]");
+
+const bgSectionMap = {
+    "home": "home",
+    "about": "about",
+    "lumina-flux": "about", // Philosophy section uses Profile/About wallpaper
+    "portfolio": "portfolio",
+    "contact": "contact"
+};
+
+let currentBgSection = "";
+
+function handleScrollAndBgs() {
+    if (document.body.style.position === 'fixed') return; // Jangan update UI (seperti navbar & bg) saat layar sedang dikunci oleh overlay
+    
     let current = "";
     sections.forEach((section) => {
+        // Abaikan section yang sedang di-hide (misal saat membuka detail kategori portfolio)
+        if (section.offsetParent === null) return;
         const sectionTop = section.offsetTop;
-        if (scrollY >= sectionTop - 100) { current = section.getAttribute("id"); }
+        if (scrollY >= sectionTop - 150) { 
+            current = section.getAttribute("id"); 
+        }
     });
+
+    // Update active nav links
     navLinks.forEach((link) => {
         link.classList.remove("text-primary", "font-bold", "border-b-2", "border-primary", "pb-1");
         link.classList.add("text-on-surface-variant", "font-medium");
@@ -118,6 +138,36 @@ window.addEventListener("scroll", () => {
             link.classList.add("text-primary", "font-bold", "border-b-2", "border-primary", "pb-1");
         }
     });
+
+    // Update background wallpaper transitions
+    if (current && bgSectionMap[current]) {
+        const targetBgSection = bgSectionMap[current];
+        if (targetBgSection !== currentBgSection) {
+            currentBgSection = targetBgSection;
+            bgElements.forEach(el => {
+                if (el.getAttribute("data-bg-section") === targetBgSection) {
+                    el.classList.remove("opacity-0");
+                    el.classList.add("opacity-100");
+                } else {
+                    el.classList.remove("opacity-100");
+                    el.classList.add("opacity-0");
+                }
+            });
+        }
+    }
+
+    // Update Three.js canvas container visibility (fade out when not on home)
+    const threeContainer = document.getElementById("global-three-container");
+    if (threeContainer) {
+        if (!current || current === "home") {
+            threeContainer.classList.remove("opacity-0");
+            threeContainer.classList.add("opacity-100");
+        } else {
+            threeContainer.classList.remove("opacity-100");
+            threeContainer.classList.add("opacity-0");
+        }
+    }
+
     const nav = document.getElementById('main-nav');
     if (window.scrollY > 50) {
         nav.classList.add('bg-surface/90', 'shadow-md');
@@ -126,7 +176,11 @@ window.addEventListener("scroll", () => {
         nav.classList.remove('bg-surface/90', 'shadow-md');
         nav.classList.add('bg-surface/80', 'shadow-sm');
     }
-});
+}
+
+window.addEventListener("scroll", handleScrollAndBgs);
+// Initialize backgrounds and scroll spy status immediately
+setTimeout(handleScrollAndBgs, 50);
 
 // Mobile Menu Toggle
 const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -146,8 +200,89 @@ mobileNavLinks.forEach(link => {
     });
 });
 
+window.openPortfolioOverlay = function() {
+    const overlay = document.getElementById('portfolio-overlay');
+    if (!overlay) return;
+    
+    // Lock body scroll and perfectly preserve scroll position
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    window.lastMainPageScroll = window.scrollY;
+    
+    // Compensate for disappearing scrollbar to prevent layout jump
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.getElementById('main-nav').style.paddingRight = `${scrollbarWidth}px`; // Juga kompensasi untuk fixed navbar
+    
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${window.lastMainPageScroll}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+    // iOS Safari requires overflow:hidden on html too to fully prevent background scroll
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+    
+    // Trigger the 3D staggered entrance animation IMMEDIATELY
+    // before the overlay even becomes visible to prevent flash/glitch
+    if (window.portfolioViewMode === 'spiral' && document.getElementById('category-content-view').classList.contains('hidden')) {
+        if (window.spiralCarousel) {
+            window.spiralCarousel.triggerEntrance();
+        }
+    }
+    
+    // Show overlay
+    overlay.classList.remove('hidden');
+    overlay.classList.add('flex'); // Because it uses flex-col
+    
+    // Trigger cinematic animation
+    setTimeout(() => {
+        overlay.classList.remove('opacity-0', 'translate-y-24', 'scale-[0.95]');
+        overlay.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+        
+        // Ensure scrollbar is hidden if in spiral mode, or shown if in grid/category
+        if (window.portfolioViewMode === 'spiral' && document.getElementById('category-content-view').classList.contains('hidden')) {
+            overlay.style.overflowY = 'hidden';
+        } else {
+            overlay.style.overflowY = 'auto';
+        }
+    }, 10);
+};
+
+window.closePortfolioOverlay = function() {
+    const overlay = document.getElementById('portfolio-overlay');
+    if (!overlay) return;
+    
+    // Restore body scroll and perfect position IMMEDIATELY to prevent delayed scrollbar pop
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.body.style.touchAction = '';
+    document.documentElement.style.overflow = '';
+    document.getElementById('main-nav').style.paddingRight = '';
+    
+    if (window.lastMainPageScroll !== undefined) {
+        // Force instant scroll bypassing CSS smooth behavior if any
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, window.lastMainPageScroll);
+        // Restore CSS behavior
+        setTimeout(() => {
+            document.documentElement.style.scrollBehavior = '';
+        }, 10);
+    }
+    
+    // Trigger cinematic exit animation
+    overlay.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+    overlay.classList.add('opacity-0', 'translate-y-24', 'scale-[0.95]');
+    
+    // Wait for transition to finish before hiding
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+    }, 800); // 800ms matches the transition-duration
+};
+
 window.openCategoryTab = function (event, title, categoryId) {
-    window.lastScrollPositionPortfolio = window.scrollY || document.documentElement.scrollTop;
+    window.lastScrollPositionPortfolio = document.getElementById('portfolio-overlay').scrollTop || 0;
     window.activePortfolioCategory = categoryId; // Simpan status kategori yang sedang aktif
     const cardEl = event ? event.currentTarget : null;
     const imgEl = cardEl ? cardEl.querySelector('img') : null;
@@ -178,16 +313,15 @@ window.openCategoryTab = function (event, title, categoryId) {
         const firstRect = imgEl.getBoundingClientRect();
         const computedStyle = getComputedStyle(cardEl);
         
-        // Persiapan: Sembunyikan section lain
+        // Persiapan: Sembunyikan view seleksi kategori
         document.getElementById('category-selection-view').classList.add('hidden');
         document.getElementById('portfolio-header').classList.add('hidden');
-        document.getElementById('main-nav')?.classList.add('hidden');
-        document.getElementById('home')?.classList.add('hidden');
-        document.getElementById('about')?.classList.add('hidden');
-        document.getElementById('lumina-flux')?.classList.add('hidden');
-        document.getElementById('contact')?.classList.add('hidden');
-        document.getElementById('main-footer')?.classList.add('hidden');
-        
+        const topHeader = document.getElementById('overlay-top-header');
+        if (topHeader) {
+            topHeader.style.position = 'absolute'; // Instantly remove from layout flow
+            topHeader.classList.add('opacity-0', '-translate-y-full');
+            setTimeout(() => topHeader.classList.add('hidden'), 500);
+        }
         
         // Toggle Masonry layout untuk Photography
         const grid = document.getElementById('portfolio-grid');
@@ -195,6 +329,34 @@ window.openCategoryTab = function (event, title, categoryId) {
             grid.classList.add('masonry-active');
         } else {
             grid.classList.remove('masonry-active');
+        }
+
+        // Reset styles that might have been applied by previous close animation
+        const contentView = document.getElementById('category-content-view');
+        contentView.style.position = '';
+        contentView.style.top = '';
+        contentView.style.left = '';
+        contentView.style.width = '';
+        contentView.style.zIndex = '';
+        contentView.style.transform = '';
+        contentView.style.opacity = '';
+        contentView.style.transition = '';
+        contentView.classList.remove('hidden');
+        
+        // Enable scrolling for category content view
+        document.getElementById('portfolio-overlay').style.overflowY = 'auto';
+
+        // Tampilkan filter tabs khusus untuk Motion Graphics
+        const motionFilters = document.getElementById('motion-filters');
+        if (motionFilters) {
+            if (categoryId === 'motion') {
+                motionFilters.classList.remove('hidden');
+                // Auto-click "All" to reset filter state when opening
+                const allFilterBtn = document.querySelector('.motion-filter-btn[data-filter="all"]');
+                if (allFilterBtn) allFilterBtn.click();
+            } else {
+                motionFilters.classList.add('hidden');
+            }
         }
         
         // Tampilkan content view normal
@@ -274,21 +436,28 @@ window.openCategoryTab = function (event, title, categoryId) {
                 }, index * 100 + 200); // Tunda 200ms setelah gambar mendarat, lalu stagger tiap 100ms
             });
         };
-        
     } else {
         // Fallback jika tidak ada event animasi
         document.getElementById('category-selection-view').classList.add('hidden');
         document.getElementById('portfolio-header').classList.add('hidden');
-        document.getElementById('category-content-view').classList.remove('hidden');
+        const topHeader = document.getElementById('overlay-top-header');
+        if (topHeader) {
+            topHeader.style.position = 'absolute'; // Instantly remove from layout flow
+            topHeader.classList.add('opacity-0', '-translate-y-full');
+            setTimeout(() => topHeader.classList.add('hidden'), 500);
+        }
+        const fallbackContentView = document.getElementById('category-content-view');
+        fallbackContentView.style.position = '';
+        fallbackContentView.style.top = '';
+        fallbackContentView.style.left = '';
+        fallbackContentView.style.width = '';
+        fallbackContentView.style.zIndex = '';
+        fallbackContentView.style.transform = '';
+        fallbackContentView.style.opacity = '';
+        fallbackContentView.style.transition = '';
+        fallbackContentView.classList.remove('hidden');
         
-        document.getElementById('main-nav')?.classList.add('hidden');
-        document.getElementById('home')?.classList.add('hidden');
-        document.getElementById('about')?.classList.add('hidden');
-        document.getElementById('lumina-flux')?.classList.add('hidden');
-        document.getElementById('contact')?.classList.add('hidden');
-        document.getElementById('main-footer')?.classList.add('hidden');
-        
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        document.getElementById('portfolio-overlay').scrollTo({ top: 0, behavior: 'instant' });
         document.getElementById('category-hero-overlay')?.classList.remove('opacity-0');
         document.getElementById('category-close-btn')?.classList.remove('opacity-0', 'scale-90');
         titleEl.classList.remove('opacity-0', 'translate-y-8');
@@ -308,6 +477,65 @@ window.openCategoryTab = function (event, title, categoryId) {
     }
 };
 
+window.filterPortfolio = function(filterValue) {
+    // Update active button state
+    const buttons = document.querySelectorAll('.motion-filter-btn');
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === filterValue) {
+            btn.classList.add('bg-primary-container', 'text-white', 'border-primary-container');
+            btn.classList.remove('text-on-surface-variant', 'border-outline-variant', 'hover:text-on-surface');
+        } else {
+            btn.classList.remove('bg-primary-container', 'text-white', 'border-primary-container');
+            btn.classList.add('text-on-surface-variant', 'border-outline-variant', 'hover:text-on-surface');
+        }
+    });
+
+    // Filter items
+    const categoryId = window.activePortfolioCategory || 'motion';
+    const items = document.querySelectorAll(`.portfolio-item[data-category="${categoryId}"]`);
+    
+    let delayIndex = 0;
+    
+    items.forEach(item => {
+        const itemFilter = item.getAttribute('data-sub-category');
+        const shouldShow = filterValue === 'all' || itemFilter === filterValue;
+        
+        if (shouldShow) {
+            item.classList.remove('hidden-item');
+            
+            // Re-trigger animate in
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'none';
+            
+            // Force reflow
+            void item.offsetWidth;
+            
+            setTimeout(() => {
+                item.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    item.style.transition = '';
+                }, 400);
+            }, delayIndex * 50);
+            
+            delayIndex++;
+        } else {
+            // Hide item
+            item.style.transition = 'opacity 0.3s ease-in, transform 0.3s ease-in';
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                item.classList.add('hidden-item');
+                item.style.transition = '';
+            }, 300);
+        }
+    });
+}
+
 window.closeCategoryTab = function () {
     window.activePortfolioCategory = null; // Reset kategori aktif
     const titleEl = document.getElementById('active-category-title');
@@ -320,50 +548,64 @@ window.closeCategoryTab = function () {
     const contentView = document.getElementById('category-content-view');
     const selectionView = document.getElementById('category-selection-view');
     const header = document.getElementById('portfolio-header');
-    const portfolioSection = document.getElementById('portfolio');
+    const overlay = document.getElementById('portfolio-overlay');
     
     // 1. Kunci ukuran dan posisi SEBELUM merubah DOM
     const rect = contentView.getBoundingClientRect();
-    const targetScrollY = window.lastScrollPositionPortfolio || portfolioSection.offsetTop;
+    const parentRect = contentView.parentElement.getBoundingClientRect();
+    const currentScrollY = overlay.scrollTop;
+    const targetScrollY = window.lastScrollPositionPortfolio || 0;
+    const scrollDelta = currentScrollY - targetScrollY;
     
-    // Hitung posisi top absolut yang baru agar contentView tetap di posisi visual yang sama di layar
-    // setelah kita melakukan scroll ke targetScrollY.
-    const newTop = rect.top + targetScrollY - portfolioSection.offsetTop;
+    // 2. Set absolute position to offset the scroll jump flawlessly
+    // absoluteTop = jarak visual layar (rect.top) dikurangi batas kontainer (parentRect.top) 
+    // dikurangi lonjakan scroll agar elemen terkunci diam secara visual
+    const absoluteTop = rect.top - parentRect.top - scrollDelta;
     
-    const offsetLeft = contentView.offsetLeft;
-    
-    // 2. Set absolute agar tidak terdorong saat section lain muncul
+    // Biarkan left otomatis (auto) agar terkunci di posisi statis (content edge)
+    // KUNCI: Wajib set width & height spesifik agar elemen tidak merenggang ke ukuran padding-box (w-full pada absolute)
     contentView.style.position = 'absolute';
-    contentView.style.top = newTop + 'px';
-    contentView.style.left = offsetLeft + 'px';
+    contentView.style.top = absoluteTop + 'px';
     contentView.style.width = rect.width + 'px';
+    contentView.style.height = rect.height + 'px';
     contentView.style.zIndex = '50';
     
-    // 3. Munculkan kembali semua section
-    document.getElementById('main-nav')?.classList.remove('hidden');
-    document.getElementById('home')?.classList.remove('hidden');
-    document.getElementById('about')?.classList.remove('hidden');
-    document.getElementById('lumina-flux')?.classList.remove('hidden');
-    document.getElementById('contact')?.classList.remove('hidden');
-    document.getElementById('main-footer')?.classList.remove('hidden');
-
-    // 4. Paksa browser melakukan reflow (kalkulasi layout ulang)
-    void portfolioSection.offsetHeight;
+    // 4. Paksa browser melakukan reflow
+    void overlay.offsetHeight;
     void contentView.offsetWidth;
 
-    // 5. Scroll secara instan ke posisi portfolio yang lama
-    window.scrollTo({ top: targetScrollY, behavior: 'instant' });
+    // 5. Scroll secara instan ke posisi portfolio yang lama di overlay
+    overlay.scrollTo({ top: targetScrollY, behavior: 'instant' });
 
-    // 6. Jalankan animasi di frame berikutnya agar transisi CSS ter-trigger dengan benar
+    // Ensure overlay scrollbar state is restored based on mode
+    if (window.portfolioViewMode === 'spiral') {
+        overlay.style.overflowY = 'hidden';
+    } else {
+        overlay.style.overflowY = 'auto';
+    }
+
+    // 6. Jalankan animasi di frame berikutnya
     requestAnimationFrame(() => {
         // Animasi keluar (Merosot & Memudar)
         contentView.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         contentView.style.opacity = '0';
         contentView.style.transform = 'translateY(80px)';
-        
         // Siapkan arsip karya
         selectionView.classList.remove('hidden');
         header.classList.remove('hidden');
+        
+        // Trigger ulang animasi Helix jika mode saat ini adalah spiral
+        if (window.portfolioViewMode === 'spiral' && window.spiralCarousel) {
+            window.spiralCarousel.triggerEntrance();
+        }
+        
+        const topHeader = document.getElementById('overlay-top-header');
+        if (topHeader) {
+            topHeader.classList.remove('hidden');
+            topHeader.style.position = ''; // Restore to sticky
+            void topHeader.offsetWidth; // Force reflow
+            topHeader.classList.remove('opacity-0', '-translate-y-full');
+        }
         selectionView.style.opacity = '0';
         selectionView.style.transform = 'scale(0.85)';
         
@@ -568,7 +810,7 @@ async function loadDynamicPortfolio() {
     const sheets = [
         { gid: '0', category: 'motion', label: 'MOTION GRAPHICS' },
         { gid: '284798931', category: '3d', label: '3D MODELLING' },
-        { gid: '1127387480', category: 'graphic', label: 'GRAPHIC DESIGN' },
+        // { gid: '1127387480', category: 'graphic', label: 'GRAPHIC DESIGN' }, // Hidden per user request
         { gid: '1532829572', category: 'photography', label: 'PHOTOGRAPHY' },
         { gid: '2069598161', category: 'videography', label: 'VIDEOGRAPHY' },
         { gid: '1969393925', category: 'magazines', label: 'MAGAZINES' },
@@ -637,12 +879,17 @@ function parseCSV(str) {
                 let imageCol = '';
 
                 let externalLink = '';
+                let subCategory = '';
 
                 if (sheet.category === 'game') {
                     description = row[1] ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : ''; // Kolom 3: Images (comma separated)
                     externalLink = row[3] ? row[3].trim() : ''; // Kolom 4: Link
-                } else if (sheet.category === 'motion' || sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup' || sheet.category === '3d' || sheet.category === '3danimation') {
+                } else if (sheet.category === 'motion') {
+                    thumbnail = (row[1] && row[1].trim() !== '' && row[1].trim() !== '-') ? row[1].trim() : '';
+                    videoUrl = row[2] ? row[2].trim() : '';
+                    subCategory = row[3] ? row[3].trim() : '';
+                } else if (sheet.category === 'videography' || sheet.category === 'magazines' || sheet.category === 'mockup' || sheet.category === '3d' || sheet.category === '3danimation') {
                     thumbnail = (row[1] && row[1].trim() !== '' && row[1].trim() !== '-') ? row[1].trim() : '';
                     videoUrl = row[2] ? row[2].trim() : '';
                 } else {
@@ -738,6 +985,9 @@ function parseCSV(str) {
                 let heightClass = 'h-64 md:h-80'; // Tinggi seragam
                 let objectFit = 'object-cover';
                 
+                // Normalize subCategory to remove spaces and special chars, e.g. "Featured Projects" -> "featured-projects", "Bumper" -> "bumper"
+                const normalizedSubCat = subCategory.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
                 if (sheet.category === 'magazines') {
                     colSpan = 'md:col-span-4'; // Majalah tetap 3 kolom (karena proporsi portrait A4 butuh ruang lebih)
                     heightClass = 'aspect-[1/1.414] h-auto md:h-auto'; // Proporsi kertas A4
@@ -761,15 +1011,23 @@ function parseCSV(str) {
 
                 // Assign random idle animation (0, 1, or 2) to each item based on its index
                 const idleAnimClass = `idle-anim-${displayIndex % 3}`;
+                
+                // Atur background teks judul, jadikan transparan khusus untuk photography
+                let textBgClass = 'bg-gradient-to-t from-background/90 to-transparent';
+                let textShadowClass = '';
+                if (sheet.category === 'photography') {
+                    textBgClass = 'bg-transparent';
+                    textShadowClass = 'drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]'; // Tambahkan bayangan kuat agar teks tetap terbaca di foto terang
+                }
 
                 allHtml += `
-                        <div class="portfolio-item ${colSpan} glow-hover cursor-pointer group ${idleAnimClass}" data-category="${sheet.category}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
+                        <div class="portfolio-item ${colSpan} glow-hover cursor-pointer group ${idleAnimClass}" data-category="${sheet.category}" data-sub-category="${normalizedSubCat}" style="view-transition-name: p-item-${displayIndex}" ${onClickAttr}>
                             <div class="card-image-wrapper ${heightClass} relative flex items-center justify-center overflow-hidden rounded-3xl shadow-xl">
                                 <img alt="${title}" class="absolute inset-0 w-full h-full ${objectFit} ${opacityClass}" src="${thumbnail}">
                                 ${playIcon}
-                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background/90 to-transparent z-10">
-                                    <span class="text-label-caps font-label-caps text-secondary-container">${sheet.label}</span>
-                                    <h3 class="text-headline-md font-headline-md text-on-surface text-lg">${title}</h3>
+                                <div class="absolute bottom-0 left-0 w-full p-4 ${textBgClass} z-10 pointer-events-none transition-opacity duration-300">
+                                    <span class="text-label-caps font-label-caps text-secondary-container ${textShadowClass}">${sheet.label}</span>
+                                    <h3 class="text-headline-md font-headline-md text-white text-lg ${textShadowClass}">${title}</h3>
                                 </div>
                             </div>
                         </div>`;
@@ -1017,6 +1275,7 @@ function openModal(modalId) {
         content.style.transform = 'scale(1)';
     }, 10);
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 }
 
 
@@ -1062,6 +1321,7 @@ function closeModal(modalId) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
         
         // Reset Carousel saat ditutup
         if (modalId === 'modal-carousel') {
@@ -1089,10 +1349,10 @@ function initThreeJS() {
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // antialias untuk pinggiran halus
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optimasi performa
     container.appendChild(renderer.domElement);
 
@@ -1285,8 +1545,8 @@ function initThreeJS() {
 
     // Resize Handler
     window.addEventListener('resize', () => {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+        const width = container.clientWidth;
+        const height = container.clientHeight;
         renderer.setSize(width, height);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
@@ -1390,6 +1650,11 @@ function applyThemeUI(isDark) {
                 }
             }
         }
+    }
+
+    // Update Aurora colors on theme change
+    if (typeof window.updateAuroraColors === 'function') {
+        window.updateAuroraColors(isDark);
     }
 }
 
@@ -1541,59 +1806,85 @@ class SpiralCarousel {
         
         // Settings
         this.rotations = 2; // Berapa kali melilit dalam satu putaran penuh
-        this.totalHeight = window.innerWidth < 768 ? 750 : 900; // Dikurangi agar lebih padat
+        this.totalHeight = window.innerWidth < 768 ? 900 : 1200; // Diperbesar agar kartu ter-render hingga ke luar layar
         this.radius = window.innerWidth < 768 ? 90 : 320; // Dikurangi drastis di mobile agar tidak terpotong (clipping)
+
+        // Entrance Animation State
+        this.isEntering = false;
+        this.entranceStartTime = 0;
+        this.entranceDuration = 1400; // 1.4 seconds total entrance time (dipercepat dari 2.5s)
 
         this.init();
     }
 
+    triggerEntrance() {
+        this.isEntering = true;
+        this.entranceStartTime = performance.now();
+        // Reset rotasi awal sedikit mundur agar putarannya dramatis
+        this.progress = -0.15; 
+    }
+
     init() {
-        this.container.addEventListener('mouseenter', () => this.targetSpeed = 0);
-        this.container.addEventListener('mouseleave', () => this.targetSpeed = this.baseSpeed);
+        const overlay = document.getElementById('portfolio-overlay');
+        if (!overlay) return;
+
+        // Hanya pause animasi idle jika user menyorot (hover) sebuah kartu spesifik
+        this.cards.forEach(card => {
+            card.addEventListener('mouseenter', () => this.targetSpeed = 0);
+            card.addEventListener('mouseleave', () => this.targetSpeed = this.baseSpeed);
+        });
+        
         let touchStartY = 0;
         let touchStartX = 0;
 
-        this.container.addEventListener('touchstart', (e) => {
+        overlay.addEventListener('touchstart', (e) => {
+            if (window.portfolioViewMode !== 'spiral' || !document.getElementById('category-content-view').classList.contains('hidden')) return;
             this.targetSpeed = 0;
             touchStartY = e.touches[0].clientY;
             touchStartX = e.touches[0].clientX;
         }, { passive: true });
 
-        this.container.addEventListener('touchmove', (e) => {
-            if (window.portfolioViewMode === 'grid') return;
-            const deltaY = touchStartY - e.touches[0].clientY;
-            const deltaX = touchStartX - e.touches[0].clientX;
-            
-            // Gunakan pergerakan terjauh (vertikal atau horizontal) untuk memutar
-            const delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
-            this.scrollOffset += delta * 0.0015; // Sensitivitas swipe
-            
-            touchStartY = e.touches[0].clientY;
-            touchStartX = e.touches[0].clientX;
-            
-            // Cegah scroll halaman / pull-to-refresh jika swiping di dalam carousel
-            e.preventDefault();
+        overlay.addEventListener('touchmove', (e) => {
+            if (window.portfolioViewMode === 'spiral' && document.getElementById('category-content-view').classList.contains('hidden')) {
+                const deltaY = touchStartY - e.touches[0].clientY;
+                const deltaX = touchStartX - e.touches[0].clientX;
+                
+                // Gunakan pergerakan terjauh (vertikal atau horizontal) untuk memutar
+                const delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
+                this.scrollOffset += delta * 0.0015; // Sensitivitas swipe
+                
+                touchStartY = e.touches[0].clientY;
+                touchStartX = e.touches[0].clientX;
+                
+                // Cegah scroll halaman / pull-to-refresh jika swiping di dalam carousel
+                e.preventDefault();
+            }
         }, { passive: false });
 
-        this.container.addEventListener('touchend', () => {
+        overlay.addEventListener('touchend', () => {
             this.targetSpeed = this.baseSpeed;
         });
 
-        // Memungkinkan scroll untuk memutar untaian DNA saat cursor ada di areanya
-        this.container.addEventListener('wheel', (e) => {
-            e.preventDefault(); // Mencegah halaman ikut scroll
-            this.scrollOffset += e.deltaY * 0.001; // Tambahkan ke scrollOffset
+        // Memungkinkan scroll untuk memutar untaian DNA dari bagian mana saja di overlay
+        overlay.addEventListener('wheel', (e) => {
+            // Hanya cegah scroll dan putar spiral JIKA sedang di mode spiral dan tidak membuka detail
+            if (window.portfolioViewMode === 'spiral' && document.getElementById('category-content-view').classList.contains('hidden')) {
+                e.preventDefault(); // Mencegah overlay ikut scroll
+                this.scrollOffset += e.deltaY * 0.001; // Tambahkan ke scrollOffset spiral
+            }
         }, { passive: false });
 
         window.addEventListener('resize', () => {
-            this.totalHeight = window.innerWidth < 768 ? 750 : 900; 
+            this.totalHeight = window.innerWidth < 768 ? 900 : 1200; 
             this.radius = window.innerWidth < 768 ? 90 : 320;
         });
 
         this.animate();
     }
 
-    animate() {
+    animate(currentTime) {
+        if (!currentTime) currentTime = performance.now();
+
         if (window.portfolioViewMode === 'grid') {
             // Hentikan kalkulasi transform 3D saat mode grid
             this.cards.forEach(card => {
@@ -1602,8 +1893,18 @@ class SpiralCarousel {
                 card.style.filter = '';
                 card.style.pointerEvents = '';
             });
-            requestAnimationFrame(() => this.animate());
+            requestAnimationFrame((t) => this.animate(t));
             return;
+        }
+
+        // Hitung progres global entrance animation
+        let entranceGlobalProgress = 1;
+        if (this.isEntering) {
+            entranceGlobalProgress = (currentTime - this.entranceStartTime) / this.entranceDuration;
+            if (entranceGlobalProgress >= 1) {
+                entranceGlobalProgress = 1;
+                this.isEntering = false;
+            }
         }
 
         // Interpolasi kecepatan putaran otomatis (smooth stop/start)
@@ -1630,42 +1931,76 @@ class SpiralCarousel {
             // Pasang warna glow spesifik untuk kartu ini
             card.style.setProperty('--glow-rgb', activeColors[i % activeColors.length]);
 
+            // Staggered Entrance Progress (tiap kartu masuk bergantian)
+            let cardEntranceProgress = 1;
+            if (this.isEntering) {
+                // Jeda (stagger) berdasarkan urutan index kartu
+                // Kartu terakhir mulai masuk pada 40% dari total durasi entrance
+                let staggerDelay = (i / this.totalCards) * 0.4;
+                let normalizedTime = entranceGlobalProgress - staggerDelay;
+                let durationMultiplier = 1 / 0.6; // Masing-masing kartu butuh 60% dari total durasi
+                
+                cardEntranceProgress = Math.max(0, Math.min(1, normalizedTime * durationMultiplier));
+                // Ease Out Quart: Melambat secara mulus di akhir
+                cardEntranceProgress = 1 - Math.pow(1 - cardEntranceProgress, 4);
+            }
+
             // Posisi di sepanjang garis helix (0 sampai 1)
             let normalizedI = (i / this.totalCards + totalProgress) % 1;
             
             // Konversi ke posisi Y (Atas ke Bawah)
-            let y = (normalizedI - 0.5) * this.totalHeight;
+            let baseY = (normalizedI - 0.5) * this.totalHeight;
+            let y = baseY;
             
             // Konversi ke Rotasi (Sudut)
-            let angle = normalizedI * 360 * this.rotations;
+            let baseAngle = normalizedI * 360 * this.rotations;
+            let angle = baseAngle;
             
-            card.style.transform = `translate(-50%, -50%) translateY(${y}px) rotateY(${angle}deg) translateZ(${this.radius}px)`;
+            let extraScale = 1;
+
+            // Terapkan efek entrance
+            if (this.isEntering) {
+                // Terbang dari bawah: Y ditambah 800px dan perlahan naik
+                y = baseY + (1 - cardEntranceProgress) * 800;
+                // Berputar masuk: Tambahan putaran 180 derajat
+                angle = baseAngle + (1 - cardEntranceProgress) * 180;
+                // Membesar: Mulai dari skala 0
+                extraScale = cardEntranceProgress;
+            }
+
+            card.style.transform = `translate(-50%, -50%) translateY(${y}px) rotateY(${angle}deg) translateZ(${this.radius}px) scale(${extraScale})`;
             
-            // Perhitungan Opasitas untuk memudarkan kartu di ujung atas dan bawah
+            // Perhitungan Opasitas untuk memudarkan kartu di ujung atas dan bawah (Off-screen fade)
             let edgeDist = Math.abs(normalizedI - 0.5) * 2; // 0 di tengah, 1 di ujung
             let opacity = 1;
-            if (edgeDist > 0.7) {
-                opacity = 1 - (edgeDist - 0.7) * 3.33; // Memudar dengan cepat di 30% ujung
+            // Memudar secara organik saat kartu mulai keluar dari pandangan layar (y > 450)
+            if (edgeDist > 0.75) {
+                opacity = Math.max(0, 1 - (edgeDist - 0.75) * 4); // Cepat memudar hingga 0 di ujung ekstrim
+            }
+            if (this.isEntering) {
+                opacity = Math.max(0, opacity * cardEntranceProgress);
             }
             card.style.opacity = Math.max(0, opacity);
 
             // Perhitungan kedalaman (menghadap ke depan atau belakang)
-            let rad = angle * (Math.PI / 180);
+            // Gunakan baseAngle agar perhitungan shadow/filter sesuai dengan posisi aslinya
+            let rad = baseAngle * (Math.PI / 180);
             let facing = Math.cos(rad);
             
             // Perbaikan CSS 3D Stacking: Atur Z-Index berdasarkan posisi Z agar browser merender urutan yang benar
             card.style.zIndex = Math.round(facing * 1000) + 1000;
             
-            if (facing < 0 || opacity < 0.1) {
-                card.style.pointerEvents = 'none'; // Tidak bisa diklik kalau membelakangi layar
-                card.style.filter = `brightness(${0.3 + (facing + 1) * 0.35})`; // Lebih gelap saat di belakang
+            if (facing < 0 || opacity < 0.1 || cardEntranceProgress < 0.1) {
+                card.style.pointerEvents = 'none'; // Tidak bisa diklik kalau membelakangi layar atau transparan
+                let blurAmount = Math.abs(facing) * 6; // Kartu makin ke belakang makin blur (max 6px)
+                card.style.filter = `brightness(${0.3 + (facing + 1) * 0.35}) blur(${blurAmount}px)`;
             } else {
                 card.style.pointerEvents = 'auto'; // Bisa diklik saat menghadap layar
-                card.style.filter = `brightness(${1})`;
+                card.style.filter = 'brightness(1) blur(0px)';
             }
         });
 
-        requestAnimationFrame(() => this.animate());
+        requestAnimationFrame((t) => this.animate(t));
     }
 }
 
@@ -1693,7 +2028,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealObserver.observe(el));
     
     // Inisialisasi 3D Spiral Carousel
-    new SpiralCarousel('category-selection-view');
+    window.spiralCarousel = new SpiralCarousel('category-selection-view');
 });
 
 // ----------------------------------------------------
@@ -1742,7 +2077,6 @@ window.togglePortfolioView = function(mode) {
     
     const container = document.getElementById('category-selection-view');
     const stage = document.getElementById('spiral-stage');
-    const overlay = document.getElementById('spiral-gradient-overlay');
     const btnSpiral = document.getElementById('btn-view-spiral');
     const btnGrid = document.getElementById('btn-view-grid');
     
@@ -1754,38 +2088,78 @@ window.togglePortfolioView = function(mode) {
         window.portfolioViewMode = mode;
         
         if (mode === 'spiral') {
-            btnSpiral.className = 'text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-1';
-            btnGrid.className = 'text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-1';
+            btnSpiral.className = 'text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-0.5';
+            btnGrid.className = 'text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-0.5';
             
-            container.className = 'relative w-full h-[500px] md:h-[600px] mt-8 overflow-hidden group transition-all duration-500';
+            // Restoring the full-screen flex classes for spiral
+            container.className = 'relative w-full flex-grow group transition-all duration-500 flex items-center justify-center';
             container.style.perspective = '1500px';
-            stage.className = 'absolute top-1/2 left-1/2 w-0 h-0 transition-all duration-500';
+            
+            // Hapus mask CSS agar kartu bebas melayang melewati Navigation Bar
+            container.style.maskImage = 'none';
+            container.style.webkitMaskImage = 'none';
+            
+            stage.className = 'absolute w-0 h-0 transition-all duration-500';
             stage.style.transformStyle = 'preserve-3d';
-            if (overlay) overlay.classList.remove('opacity-0', 'hidden');
+            
+            // Disable scrollbar for spiral mode
+            document.getElementById('portfolio-overlay').style.overflowY = 'hidden';
             
             document.querySelectorAll('.spiral-card').forEach(card => {
+                card.classList.add('transition-none'); // KUNCI UTAMA: Cegah flying animation
                 card.classList.add('absolute', 'w-[75vw]', 'max-w-[240px]', 'h-40', 'md:max-w-none', 'md:w-96', 'md:h-64', '-translate-x-1/2', '-translate-y-1/2', 'rounded-[40px]', 'md:rounded-[60px]');
-                card.classList.remove('relative', 'w-full', 'aspect-[4/3]', 'rounded-3xl');
+                card.classList.remove('relative', 'w-full', 'aspect-[4/3]', 'rounded-3xl', 'hover:scale-105', 'hover:-translate-y-3', 'hover:z-[60]', 'transition-all');
                 card.querySelector('.bg-gradient-to-r').classList.remove('hidden'); 
-                // Teks tetap muncul saat dihover saja (default behavior)
             });
-        } else {
-            btnSpiral.className = 'text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-1';
-            btnGrid.className = 'text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-1';
             
-            // Berikan padding dan hilangkan fixed height agar grid bisa bernapas
-            container.className = 'relative w-full mt-8 py-8 transition-all duration-500';
+            setTimeout(() => {
+                if (window.portfolioViewMode === 'spiral') {
+                    document.querySelectorAll('.spiral-card').forEach(card => {
+                        card.classList.remove('transition-none');
+                        card.classList.add('transition-[box-shadow,border-color]');
+                    });
+                }
+            }, 50);
+            
+            // Trigger ulang animasi masuk spiral
+            if (window.spiralCarousel) {
+                window.spiralCarousel.triggerEntrance();
+            }
+        } else {
+            btnSpiral.className = 'text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 transition-colors border-b-2 border-transparent hover:border-outline-variant pb-0.5';
+            btnGrid.className = 'text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-0.5';
+            
+            // Grid layout classes
+            container.className = 'relative w-full flex-grow py-8 transition-all duration-500';
             container.style.perspective = 'none';
-            stage.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 transition-all duration-500';
+            
+            // Matikan efek mask agar scroll grid normal
+            container.style.maskImage = 'none';
+            container.style.webkitMaskImage = 'none';
+            
+            stage.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 transition-all duration-500 w-full';
             stage.style.transformStyle = 'flat';
-            if (overlay) overlay.classList.add('opacity-0', 'hidden'); // Sembunyikan efek gradient atas bawah
+            
+            // Enable scrollbar for grid mode
+            document.getElementById('portfolio-overlay').style.overflowY = 'auto';
             
             document.querySelectorAll('.spiral-card').forEach(card => {
-                card.classList.remove('absolute', 'w-[75vw]', 'max-w-[240px]', 'h-40', 'md:max-w-none', 'md:w-96', 'md:h-64', '-translate-x-1/2', '-translate-y-1/2', 'rounded-[40px]', 'md:rounded-[60px]');
-                card.classList.add('relative', 'w-full', 'aspect-[4/3]', 'rounded-3xl'); // Buat kartu sedikit lebih tinggi
+                card.classList.add('transition-none'); // KUNCI UTAMA: Cegah flying animation
+                card.classList.remove('absolute', 'w-[75vw]', 'max-w-[240px]', 'h-40', 'md:max-w-none', 'md:w-96', 'md:h-64', '-translate-x-1/2', '-translate-y-1/2', 'rounded-[40px]', 'md:rounded-[60px]', 'transition-[box-shadow,border-color]');
+                // Pasang class grid & hover DITAMBAH TANPA animasi transisi dulu
+                card.classList.add('relative', 'w-full', 'aspect-[4/3]', 'rounded-3xl', 'hover:scale-105', 'hover:-translate-y-3', 'hover:z-[60]'); 
                 card.querySelector('.bg-gradient-to-r').classList.add('hidden'); // Hilangkan lengkungan shadow
-                // Teks otomatis tetap hanya muncul saat dihover karena kita tidak menghapus kelasnya
             });
+
+            // Tunda pemberian efek transition agar penempatan awal grid tidak ter-animasi secara chaos
+            setTimeout(() => {
+                if (window.portfolioViewMode === 'grid') {
+                    document.querySelectorAll('.spiral-card').forEach(card => {
+                        card.classList.remove('transition-none');
+                        card.classList.add('transition-all');
+                    });
+                }
+            }, 50);
         }
         
         // 2. Animasi masuk (Fade in & Scale normal)
@@ -2046,3 +2420,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); // Delay before starting the drag
     }, 100); // Initial DOM layout delay
 });
+
+
+

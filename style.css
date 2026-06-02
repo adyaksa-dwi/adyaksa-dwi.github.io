@@ -34,7 +34,124 @@
   --inverse-primary: #0284c7;
 }
 
-body { scroll-behavior: smooth; }
+/* Ken Burns Background Animation */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.05) translate(-1%, -1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+#global-bg-container img {
+  animation: ken-burns 30s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+body {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ==========================================================================
+   MOBILE COMPATIBILITY
+   ========================================================================== */
+
+/* iOS Safe Area Insets — Prevent content from being hidden behind notch/Dynamic Island/home indicator */
+@supports (padding: env(safe-area-inset-top)) {
+  #main-nav {
+    padding-top: env(safe-area-inset-top);
+  }
+  #mobile-menu {
+    padding-top: calc(80px + env(safe-area-inset-top));
+  }
+  #main-footer {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  /* Portfolio overlay modal safe areas */
+  #portfolio-overlay {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Prevent iOS Safari from auto-zooming on form input focus (requires >= 16px font-size) */
+@media screen and (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Touch-friendly minimum sizes for interactive elements on mobile */
+@media (pointer: coarse) {
+  button, a, [onclick] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Exception: inline text links and nav links should not be forced to 44px width */
+  a:not([class*="flex"]):not([class*="p-"]):not([onclick]) {
+    min-width: auto;
+    min-height: auto;
+  }
+}
+
+/* Hide scrollbar for mobile carousels and smooth scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Legacy iOS smooth scrolling for overflow containers */
+#portfolio-overlay,
+#carousel-image-container {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================================================
+   AESTHETIC CUSTOM SCROLLBAR
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  border: 1px solid transparent;
+}
+
+/* Firefox Support */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--outline-variant) transparent;
+}
+
+/* Ensure main content sits above fixed background layers */
+section, main, footer, header:not(#main-nav) {
+  position: relative;
+  z-index: 5;
+}
+
         .glass-panel {
             background: rgba(15, 23, 42, 0.4);
             backdrop-filter: blur(16px);
@@ -78,6 +195,16 @@ body { scroll-behavior: smooth; }
         }
         .animate-blink {
             animation: blink-cursor 1s step-end infinite;
+        }
+
+        /* Floating Animation */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-floating {
+            animation: floating 4s ease-in-out infinite;
         }
 
         /* Disable all CSS transitions during View Transitions to prevent stuttering */
@@ -191,33 +318,64 @@ body { scroll-behavior: smooth; }
 .idle-anim-1 { animation: idle-sway 7s ease-in-out infinite; }
 .idle-anim-2 { animation: idle-breathe 8s ease-in-out infinite; }
 
-/* Liquid Glass Effect (iOS style) */
+/* Liquid Glass Effect (Cohesive with Navigation Bar) */
 .liquid-glass {
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(248, 245, 240, 0.8) !important; /* bg-surface/80 in light mode */
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* border-white/10 precisely like nav bar */
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    0 8px 32px rgba(0, 0, 0, 0.05) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    0 8px 32px rgba(0, 0, 0, 0.03) !important;
 }
 
 .dark .liquid-glass {
-  background: rgba(15, 23, 42, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(30, 41, 59, 0.8) !important; /* bg-surface/80 in dark mode */
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* border-white/10 precisely like nav bar */
   box-shadow: 
     inset 0 1px 1px rgba(255, 255, 255, 0.05),
-    0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    0 12px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
 .liquid-glass:hover {
+  background: rgba(248, 245, 240, 0.85) !important;
   box-shadow: 
     inset 0 1px 1px rgba(255, 255, 255, 0.3),
-    0 12px 48px rgba(var(--glow-rgb), 0.2) !important;
+    0 12px 32px rgba(var(--glow-rgb), 0.08) !important;
 }
 
 .dark .liquid-glass:hover {
+  background: rgba(30, 41, 59, 0.85) !important;
   box-shadow: 
     inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    0 12px 48px rgba(var(--glow-rgb), 0.3) !important;
+    0 16px 40px rgba(var(--glow-rgb), 0.18) !important;
+}
+
+/* Photo Avatar Glass Border Overlay (Cohesive with Navigation Bar) */
+#profile-avatar {
+  position: relative;
+  border: none !important; /* Hilangkan border solid Tailwind lama */
+}
+
+#profile-avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 20;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important; /* border-white/10 precisely like nav bar */
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.03);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark #profile-avatar::after {
+  border: 2px solid rgba(255, 255, 255, 0.1) !important; /* border-white/10 precisely like nav bar */
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.05),
+    0 8px 24px rgba(0, 0, 0, 0.3);
 }
