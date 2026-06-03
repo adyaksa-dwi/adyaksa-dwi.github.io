@@ -20,8 +20,8 @@ const translations = {
         btn_explore: "EXPLORE WORK",
         btn_profile: "PROFILE",
         scroll: "SCROLL",
-        about_title: "DIVING INTO<br>DIGITAL AESTHETICS",
-        about_desc: "I am a creative technologist and designer based in Indonesia. With a focus on digital interactions and immersive experiences, I combine graphic design, 3D modeling, and interactive development to create works that are not only seen, but felt.",
+        about_title: "MOTION GRAPHIC DESIGNER",
+        about_desc: "Hello, I am Dwi Adyaksa, a graduate from Jakarta State Polytechnic working in the multimedia industry, with a focus on Motion Graphics and Videography. I am also actively exploring new things, one of which is the 3D world. For me, the 3D world is a universal bridge to connect various other media, such as 3D Animation, 3D Modelling, and 3D Game Development. I believe that strong visual communication is born from small details and boundless innovation.",
         lumina_desc: "Lumina Flux, the beauty of the name is in how the two words, Lumina and Flux, combine to create a new, powerful meaning that perfectly describes your skills. \"Lumina\" is a word rooted in Latin, and it means light. \"Flux\" means a continuous change or flow. Think of a river in a state of constant motion. When you put them together, Lumina Flux means \"the flow of light\". It doesn't just describe what you do; it describes how you do it—with a sense of motion, change, and creativity that flows like light itself.",
         portfolio_title: "My <span class=\"text-outline\">Portfolio</span>",
         contact_title: "Let's<br>Collaborate",
@@ -44,8 +44,8 @@ const translations = {
         btn_explore: "JELAJAHI KARYA",
         btn_profile: "PROFIL",
         scroll: "GULIR",
-        about_title: "MENDALAMI<br>ESTETIKA DIGITAL",
-        about_desc: "Saya adalah seorang desainer dan teknolog kreatif yang berbasis di Indonesia. Dengan fokus pada interaksi digital dan pengalaman mendalam, saya menggabungkan desain grafis, pemodelan 3D, dan pengembangan interaktif untuk menciptakan karya yang tidak hanya dilihat, tetapi dirasakan.",
+        about_title: "MOTION GRAPHIC DESIGNER",
+        about_desc: "Halo, saya Dwi Adyaksa, mahasiswa lulusan Politeknik Negeri Jakarta yang bergerak di industri multimedia, dengan fokus pada Motion Graphics dan Videography. Saya juga aktif untuk eksplorasi berbagai hal baru, salah satunya adalah dunia 3D. Bagi saya, dunia 3D adalah jembatan universal untuk menghubungkan berbagai media yang lain, seperti Animasi 3D, 3D Modelling, dan 3D Game Development. Saya percaya bahwa komunikasi visual yang kuat lahir dari detail kecil dan inovasi tanpa batas.",
         lumina_desc: "Lumina Flux, keindahan namanya terletak pada bagaimana dua kata, Lumina dan Flux, bergabung menciptakan makna baru yang kuat dan secara sempurna menggambarkan keahlian Anda. \"Lumina\" berasal dari bahasa Latin yang berarti cahaya. \"Flux\" berarti perubahan atau aliran yang terus-menerus. Bayangkan sebuah sungai yang selalu bergerak. Jika digabungkan, Lumina Flux berarti \"aliran cahaya\". Ini tidak hanya mendeskripsikan apa yang Anda lakukan; tetapi juga bagaimana Anda melakukannya—dengan rasa pergerakan, perubahan, dan kreativitas yang mengalir layaknya cahaya itu sendiri.",
         portfolio_title: "Portofolio <span class=\"text-outline\">Saya</span>",
         contact_title: "Mari<br>Berkolaborasi",
@@ -1741,11 +1741,11 @@ if (typewriterElement) {
         if (instantUpdate && oldTotalLength > 0) {
             const currentPhrase = phrases[phraseIndex];
             const newTotalLength = currentPhrase.prefix.length + currentPhrase.highlight.length;
-            
+
             // Menghitung rasio pengetikan agar status animasi tetap sama
             const ratio = charIndex / oldTotalLength;
             charIndex = Math.round(ratio * newTotalLength);
-            
+
             // Update the display immediately without resetting animation state
             if (charIndex <= currentPhrase.prefix.length) {
                 typewriterElement.innerHTML = currentPhrase.prefix.substring(0, charIndex);

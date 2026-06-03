@@ -78,31 +78,46 @@
 
 
     <!-- Global Fixed Background Wallpaper Container -->
-    <div id="global-bg-container" class="fixed inset-0 z-[2] pointer-events-none w-full h-full overflow-hidden select-none">
+    <div id="global-bg-container"
+        class="fixed inset-0 z-[2] pointer-events-none w-full h-full overflow-hidden select-none">
         <!-- Home Wallpapers -->
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100" data-bg-section="home">
-            <img alt="Casual dark multimedia workspace" class="hidden dark:block w-full h-full object-cover opacity-[0.08]" src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=2000&auto=format&fit=crop">
-            <img alt="Casual light multimedia workspace" class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]" src="assets/images/light_home_bg_1780313720559.png">
+            <img alt="Casual dark multimedia workspace"
+                class="hidden dark:block w-full h-full object-cover opacity-[0.08]"
+                src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=2000&auto=format&fit=crop">
+            <img alt="Casual light multimedia workspace"
+                class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]"
+                src="assets/images/light_home_bg_1780313720559.png">
         </div>
         <!-- About Wallpapers -->
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0" data-bg-section="about">
-            <img alt="Dark aurora aesthetic" class="hidden dark:block w-full h-full object-cover opacity-25" src="assets/images/dark_profile_aurora_bg_1780315465108.png">
-            <img alt="Light creative desk" class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]" src="assets/images/light_profile_bg_1780313741054.png">
+            <img alt="Dark aurora aesthetic" class="hidden dark:block w-full h-full object-cover opacity-25"
+                src="assets/images/dark_profile_aurora_bg_1780315465108.png">
+            <img alt="Light creative desk"
+                class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]"
+                src="assets/images/light_profile_bg_1780313741054.png">
         </div>
         <!-- Portfolio Wallpapers -->
-        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0" data-bg-section="portfolio">
-            <img alt="Dark abstract art" class="hidden dark:block w-full h-full object-cover opacity-[0.08]" src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop">
-            <img alt="Light abstract art" class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]" src="assets/images/light_portfolio_bg_1780313762793.png">
+        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0"
+            data-bg-section="portfolio">
+            <img alt="Dark abstract art" class="hidden dark:block w-full h-full object-cover opacity-[0.08]"
+                src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop">
+            <img alt="Light abstract art"
+                class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]"
+                src="assets/images/light_portfolio_bg_1780313762793.png">
         </div>
         <!-- Contact Wallpapers -->
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0" data-bg-section="contact">
-            <img alt="Dark contact" class="hidden dark:block w-full h-full object-cover opacity-[0.08]" src="https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000&auto=format&fit=crop">
-            <img alt="Light contact" class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]" src="assets/images/light_contact_bg_1780313783046.png">
+            <img alt="Dark contact" class="hidden dark:block w-full h-full object-cover opacity-[0.08]"
+                src="https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000&auto=format&fit=crop">
+            <img alt="Light contact" class="block dark:hidden w-full h-full object-cover grayscale-[30%] opacity-[0.08]"
+                src="assets/images/light_contact_bg_1780313783046.png">
         </div>
     </div>
 
     <!-- Global Three.js Canvas Container (Fixed in the background, avoids clipping) -->
-    <div id="global-three-container" class="fixed inset-0 z-[3] pointer-events-none w-full h-full transition-opacity duration-1000 ease-in-out opacity-100">
+    <div id="global-three-container"
+        class="fixed inset-0 z-[3] pointer-events-none w-full h-full transition-opacity duration-1000 ease-in-out opacity-100">
         <!-- Three.js Entrance Wrapper -->
         <div class="absolute inset-0 w-full h-full pointer-events-none entrance-element scale-110 opacity-0 blur-xl"
             data-entrance-delay="100">
@@ -169,7 +184,8 @@
 
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300 entrance-element -translate-y-full opacity-0 blur-xl"
         data-entrance-delay="200" id="main-nav">
-        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-3 md:py-4 max-w-container-max mx-auto">
+        <div
+            class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-3 md:py-4 max-w-container-max mx-auto">
             <a class="text-body-lg font-headline-lg font-bold tracking-tighter text-on-surface hover:text-primary transition-colors duration-300"
                 href="#home">LUMINA FLUX</a>
             <div class="hidden md:flex gap-gutter items-center">
@@ -255,102 +271,107 @@
 
     <!-- Section 2: About Me -->
     <section class="relative w-full py-stack-lg scroll-reveal" id="about">
-        
+
         <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-        <div id="interactive-profile"
-            class="relative max-w-xs md:max-w-md mx-auto transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer group liquid-glass rounded-[40px] md:rounded-[60px] p-2 md:p-4 flex flex-col md:flex-row items-center justify-center hover:shadow-[0_0_60px_rgba(var(--glow-rgb),0.2)]"
-            onclick="toggleProfile()">
+            <div id="interactive-profile"
+                class="relative max-w-xs md:max-w-md mx-auto transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer group liquid-glass rounded-[40px] md:rounded-[60px] p-2 md:p-4 flex flex-col md:flex-row items-center justify-center hover:shadow-[0_0_60px_rgba(var(--glow-rgb),0.2)]"
+                onclick="toggleProfile()">
 
-            <!-- Profile Photo -->
-            <div id="profile-avatar"
-                class="w-64 h-64 md:w-80 md:h-80 rounded-[50%] overflow-hidden shrink-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10">
-                <!-- Profile Photos for Light and Dark Modes -->
-                <img id="profile-img-light"
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 block dark:hidden object-[50%_15%]"
-                    src="https://lh3.googleusercontent.com/d/1KWKsBfnvpmOm4EYOCxdKnRJnix4-TDoy=w1000"
-                    alt="Profile Light">
-                <img id="profile-img-dark"
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 hidden dark:block brightness-125 object-[50%_15%]"
-                    src="https://lh3.googleusercontent.com/d/1ltSVU2lE0keWSwGqVddEmv_9Seexj1xH=w1000"
-                    alt="Profile Dark">
+                <!-- Profile Photo -->
+                <div id="profile-avatar"
+                    class="w-64 h-64 md:w-80 md:h-80 rounded-[50%] overflow-hidden shrink-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10">
+                    <!-- Profile Photos for Light and Dark Modes -->
+                    <img id="profile-img-light"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 block dark:hidden object-[50%_15%]"
+                        src="https://lh3.googleusercontent.com/d/1KWKsBfnvpmOm4EYOCxdKnRJnix4-TDoy=w1000"
+                        alt="Profile Light">
+                    <img id="profile-img-dark"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-[50%] transition-all duration-500 hidden dark:block brightness-125 object-[50%_15%]"
+                        src="https://lh3.googleusercontent.com/d/1ltSVU2lE0keWSwGqVddEmv_9Seexj1xH=w1000"
+                        alt="Profile Dark">
 
-                <!-- Hover Hint -->
-                <div id="profile-hint"
-                    class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                    <span
-                        class="text-white font-label-caps tracking-widest text-sm flex items-center gap-2 drop-shadow-md">
-                        <span class="material-symbols-outlined animate-pulse text-[32px]">fingerprint</span>
-                    </span>
-                    <span class="text-white font-label-caps tracking-widest text-xs mt-2 opacity-80">CLICK TO
-                        REVEAL</span>
-                </div>
-            </div>
-
-            <!-- Hidden Content Area -->
-            <div id="profile-content"
-                class="w-0 opacity-0 overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-center">
-                <!-- Inner container with fixed minimum width to prevent text reflow during expansion -->
-                <div class="p-4 md:p-10 w-[80vw] md:w-[600px] min-w-0 md:min-w-[600px]">
-                    <div id="profile-text-1"
-                        class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100">
-                        <h2 class="text-headline-md md:text-headline-lg font-headline-lg text-on-surface mb-4 leading-tight"
-                            data-i18n="about_title">MENDALAMI<br>ESTETIKA DIGITAL</h2>
-                        <p class="text-body-sm md:text-body-md font-body-md text-on-surface-variant leading-relaxed mb-6"
-                            data-i18n="about_desc">
-                            Saya adalah seorang desainer dan teknolog kreatif yang berbasis di Indonesia. Dengan fokus
-                            pada
-                            interaksi digital dan pengalaman mendalam, saya menggabungkan desain grafis, pemodelan 3D,
-                            dan
-                            pengembangan interaktif untuk menciptakan karya yang tidak hanya dilihat, tetapi dirasakan.
-                        </p>
+                    <!-- Hover Hint -->
+                    <div id="profile-hint"
+                        class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                        <span
+                            class="text-white font-label-caps tracking-widest text-sm flex items-center gap-2 drop-shadow-md">
+                            <span class="material-symbols-outlined animate-pulse text-[32px]">fingerprint</span>
+                        </span>
+                        <span class="text-white font-label-caps tracking-widest text-xs mt-2 opacity-80">CLICK TO
+                            REVEAL</span>
                     </div>
+                </div>
 
-                    <div id="profile-text-2"
-                        class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-200">
-                        <h3 class="text-label-caps font-label-caps text-secondary-container mb-4 tracking-widest">
-                            SOFTWARE ARSENAL</h3>
-                        <div class="flex flex-wrap gap-4 md:gap-6 mt-6 items-end mac-dock h-16">
-                            <div title="After Effects" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 0s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-after-effects.svg"
-                                    alt="After Effects" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
-                            </div>
-                            <div title="Illustrator" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 0.2s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-illustrator.svg"
-                                    alt="Illustrator" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
-                            </div>
-                            <div title="Premiere Pro" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 0.4s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-premiere.svg"
-                                    alt="Premiere Pro" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
-                            </div>
-                            <div title="Photoshop" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 0.6s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-photoshop.svg"
-                                    alt="Photoshop" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
-                            </div>
-                            <div title="InDesign" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 0.8s;">
-                                <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-indesign.svg"
-                                    alt="InDesign" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
-                            </div>
-                            <div title="Unity" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 1.0s;">
-                                <img src="https://cdn.simpleicons.org/unity" alt="Unity"
-                                    class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg invert dark:invert-0">
-                            </div>
-                            <div title="Unreal Engine" class="animate-float cursor-pointer flex items-end"
-                                style="animation-delay: 1.2s;">
-                                <img src="https://cdn.simpleicons.org/unrealengine" alt="Unreal Engine"
-                                    class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg dark:invert">
+                <!-- Hidden Content Area -->
+                <div id="profile-content"
+                    class="w-0 opacity-0 overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-center">
+                    <!-- Inner container with fixed minimum width to prevent text reflow during expansion -->
+                    <div class="p-4 md:p-10 w-[80vw] md:w-[600px] min-w-0 md:min-w-[600px]">
+                        <div id="profile-text-1"
+                            class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100">
+                            <h2 class="text-headline-md md:text-headline-lg font-headline-lg text-on-surface mb-4 leading-tight"
+                                data-i18n="about_title">MOTION GRAPHIC DESIGNER</h2>
+                            <p class="text-body-sm md:text-body-md font-body-md text-on-surface-variant leading-relaxed mb-6"
+                                data-i18n="about_desc">
+                                Halo, saya Dwi Adyaksa, mahasiswa lulusan Politeknik Negeri Jakarta yang bergerak di
+                                industri multimedia,
+                                dengan fokus pada Motion Graphics dan Videography. Saya juga aktif untuk eksplorasi
+                                berbagai hal baru, salah satunya adalah dunia 3D.
+                                Bagi saya, dunia 3D adalah jembatan universal untuk menghubungkan berbagai media yang
+                                lain, seperti Animasi 3D, 3D Modelling, dan 3D Game Development.
+                                Saya percaya bahwa komunikasi visual yang kuat lahir dari detail kecil dan inovasi tanpa
+                                batas
+                            </p>
+                        </div>
+
+                        <div id="profile-text-2"
+                            class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-200">
+                            <h3 class="text-label-caps font-label-caps text-secondary-container mb-4 tracking-widest">
+                                SOFTWARE ARSENAL</h3>
+                            <div class="flex flex-wrap gap-4 md:gap-6 mt-6 items-end mac-dock h-16">
+                                <div title="After Effects" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 0s;">
+                                    <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-after-effects.svg"
+                                        alt="After Effects"
+                                        class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                                </div>
+                                <div title="Illustrator" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 0.2s;">
+                                    <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-illustrator.svg"
+                                        alt="Illustrator" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                                </div>
+                                <div title="Premiere Pro" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 0.4s;">
+                                    <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-premiere.svg"
+                                        alt="Premiere Pro"
+                                        class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                                </div>
+                                <div title="Photoshop" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 0.6s;">
+                                    <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-photoshop.svg"
+                                        alt="Photoshop" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                                </div>
+                                <div title="InDesign" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 0.8s;">
+                                    <img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/adobe-indesign.svg"
+                                        alt="InDesign" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg">
+                                </div>
+                                <div title="Unity" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 1.0s;">
+                                    <img src="https://cdn.simpleicons.org/unity" alt="Unity"
+                                        class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg invert dark:invert-0">
+                                </div>
+                                <div title="Unreal Engine" class="animate-float cursor-pointer flex items-end"
+                                    style="animation-delay: 1.2s;">
+                                    <img src="https://cdn.simpleicons.org/unrealengine" alt="Unreal Engine"
+                                        class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg dark:invert">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            </div>
         </div>
     </section>
 
@@ -374,10 +395,12 @@
 
     <!-- Section 3: Portfolio (Banner Mode) -->
     <section class="relative w-full py-24 md:py-32 scroll-reveal" id="portfolio">
-        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col items-center">
-            
+        <div
+            class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col items-center">
+
             <div class="text-center mb-10">
-                <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none mb-4" data-i18n="portfolio_title">
+                <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none mb-4"
+                    data-i18n="portfolio_title">
                     My <span class="text-outline">Portfolio</span>
                 </h2>
                 <p class="text-body-md md:text-lg text-on-surface-variant max-w-2xl mx-auto">
@@ -386,41 +409,53 @@
             </div>
 
             <!-- Aesthetic Preview Cards (Clickable) -->
-            <div class="relative flex justify-center items-center w-full max-w-2xl h-64 md:h-80 mb-8 cursor-pointer group transition-all duration-700 hover:-translate-y-8 md:hover:-translate-y-12 hover:scale-105 md:hover:scale-110" onclick="openPortfolioOverlay()">
+            <div class="relative flex justify-center items-center w-full max-w-2xl h-64 md:h-80 mb-8 cursor-pointer group transition-all duration-700 hover:-translate-y-8 md:hover:-translate-y-12 hover:scale-105 md:hover:scale-110"
+                onclick="openPortfolioOverlay()">
                 <div class="relative flex justify-center items-center w-full h-full animate-floating">
                     <!-- Left Card -->
-                    <div class="absolute w-40 h-56 md:w-48 md:h-64 rounded-2xl md:rounded-[30px] bg-surface-variant overflow-hidden transform -rotate-12 -translate-x-16 md:-translate-x-24 shadow-2xl opacity-70 border border-white/5 transition-all duration-700 group-hover:-translate-x-20 md:group-hover:-translate-x-32 group-hover:-rotate-6 group-hover:opacity-100 group-hover:shadow-[0_0_40px_rgba(var(--glow-rgb),0.5)]">
-                        <img src="./assets/images/3d-modelling-cover.png" class="w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute w-40 h-56 md:w-48 md:h-64 rounded-2xl md:rounded-[30px] bg-surface-variant overflow-hidden transform -rotate-12 -translate-x-16 md:-translate-x-24 shadow-2xl opacity-70 border border-white/5 transition-all duration-700 group-hover:-translate-x-20 md:group-hover:-translate-x-32 group-hover:-rotate-6 group-hover:opacity-100 group-hover:shadow-[0_0_40px_rgba(var(--glow-rgb),0.5)]">
+                        <img src="./assets/images/3d-modelling-cover.png"
+                            class="w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <!-- Right Card -->
-                    <div class="absolute w-40 h-56 md:w-48 md:h-64 rounded-2xl md:rounded-[30px] bg-surface-variant overflow-hidden transform rotate-12 translate-x-16 md:translate-x-24 shadow-2xl opacity-70 border border-white/5 transition-all duration-700 group-hover:translate-x-20 md:group-hover:translate-x-32 group-hover:rotate-6 group-hover:opacity-100 group-hover:shadow-[0_0_40px_rgba(var(--glow-rgb),0.5)]">
-                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute w-40 h-56 md:w-48 md:h-64 rounded-2xl md:rounded-[30px] bg-surface-variant overflow-hidden transform rotate-12 translate-x-16 md:translate-x-24 shadow-2xl opacity-70 border border-white/5 transition-all duration-700 group-hover:translate-x-20 md:group-hover:translate-x-32 group-hover:rotate-6 group-hover:opacity-100 group-hover:shadow-[0_0_40px_rgba(var(--glow-rgb),0.5)]">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=400&auto=format&fit=crop"
+                            class="w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <!-- Center Card -->
-                    <div class="absolute z-10 w-48 h-64 md:w-56 md:h-80 rounded-2xl md:rounded-[30px] bg-surface-variant overflow-hidden shadow-[0_0_30px_rgba(var(--glow-rgb),0.3)] border border-white/10 transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(var(--glow-rgb),0.8)] dark:group-hover:shadow-[0_0_80px_rgba(var(--glow-rgb),0.5)]">
-                        <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute z-10 w-48 h-64 md:w-56 md:h-80 rounded-2xl md:rounded-[30px] bg-surface-variant overflow-hidden shadow-[0_0_30px_rgba(var(--glow-rgb),0.3)] border border-white/10 transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(var(--glow-rgb),0.8)] dark:group-hover:shadow-[0_0_80px_rgba(var(--glow-rgb),0.5)]">
+                        <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=400&auto=format&fit=crop"
+                            class="w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110">
                     </div>
                 </div>
             </div>
 
             <!-- Hint Text -->
-            <p class="text-primary font-label-caps tracking-widest text-sm md:text-base font-bold flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+            <p
+                class="text-primary font-label-caps tracking-widest text-sm md:text-base font-bold flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
                 <span class="material-symbols-outlined text-lg animate-bounce">touch_app</span> ENTER IMMERSIVE GALLERY
             </p>
-            
+
         </div>
     </section>
 
     <!-- IMMERSIVE PORTFOLIO OVERLAY -->
-    <div id="portfolio-overlay" class="dark fixed inset-0 z-[100] bg-gradient-to-br from-[#121214] to-[#050508] hidden flex-col w-full h-full overflow-y-auto overflow-x-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-24 scale-[0.95]">
-        
+    <div id="portfolio-overlay"
+        class="dark fixed inset-0 z-[100] bg-gradient-to-br from-[#121214] to-[#050508] hidden flex-col w-full h-full overflow-y-auto overflow-x-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-24 scale-[0.95]">
+
         <!-- Overlay Header & Close Button -->
-        <div id="overlay-top-header" class="sticky top-0 z-[60] w-full px-4 md:px-6 py-3 md:py-6 flex justify-between items-center bg-gradient-to-b from-[#121214] via-[#121214]/80 to-transparent pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
+        <div id="overlay-top-header"
+            class="sticky top-0 z-[60] w-full px-4 md:px-6 py-3 md:py-6 flex justify-between items-center bg-gradient-to-b from-[#121214] via-[#121214]/80 to-transparent pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style="padding-top: max(0.75rem, env(safe-area-inset-top));">
             <h2 class="text-xl md:text-2xl font-display-md text-white font-bold drop-shadow-md">Portfolio Showcase</h2>
-            
+
             <div class="flex items-center gap-3 md:gap-6 pointer-events-auto">
                 <!-- View Toggle -->
-                <div class="flex gap-4 md:gap-6 bg-surface-variant/30 px-5 py-2 md:py-2.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
+                <div
+                    class="flex gap-4 md:gap-6 bg-surface-variant/30 px-5 py-2 md:py-2.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
                     <button onclick="togglePortfolioView('spiral')" id="btn-view-spiral"
                         class="text-primary flex items-center gap-1.5 transition-colors border-b-2 border-primary pb-0.5">
                         <span class="material-symbols-outlined text-[18px]">3d_rotation</span> <span
@@ -432,289 +467,310 @@
                             class="text-label-caps font-label-caps tracking-widest hidden md:inline">GRID</span>
                     </button>
                 </div>
-                
+
                 <!-- Close Button -->
-                <button onclick="closePortfolioOverlay()" class="p-3 md:p-3.5 rounded-full bg-surface-variant/50 hover:bg-error/20 hover:text-error text-on-surface transition-colors flex items-center justify-center group/close shadow-lg backdrop-blur-md border border-white/10">
-                    <span class="material-symbols-outlined text-2xl group-hover/close:rotate-90 transition-transform duration-300">close</span>
+                <button onclick="closePortfolioOverlay()"
+                    class="p-3 md:p-3.5 rounded-full bg-surface-variant/50 hover:bg-error/20 hover:text-error text-on-surface transition-colors flex items-center justify-center group/close shadow-lg backdrop-blur-md border border-white/10">
+                    <span
+                        class="material-symbols-outlined text-2xl group-hover/close:rotate-90 transition-transform duration-300">close</span>
                 </button>
             </div>
         </div>
 
-        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full flex-grow pt-4 flex flex-col">
-        <!-- (Hidden old header structure to avoid breaking JS scripts) -->
-        <div id="portfolio-header" class="hidden"></div>
+        <div
+            class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full flex-grow pt-4 flex flex-col">
+            <!-- (Hidden old header structure to avoid breaking JS scripts) -->
+            <div id="portfolio-header" class="hidden"></div>
 
-        <!-- CATEGORY SELECTION VIEW -->
-        <div id="category-selection-view"
-            class="relative w-full flex-grow min-h-[70vh] md:min-h-[80vh] group transition-all duration-500"
-            style="perspective: 1500px;">
+            <!-- CATEGORY SELECTION VIEW -->
+            <div id="category-selection-view"
+                class="relative w-full flex-grow min-h-[70vh] md:min-h-[80vh] group transition-all duration-500"
+                style="perspective: 1500px;">
 
-            <div id="spiral-stage" class="absolute top-1/2 left-1/2 w-0 h-0 transition-all duration-500"
-                style="transform-style: preserve-3d;">
+                <div id="spiral-stage" class="absolute top-1/2 left-1/2 w-0 h-0 transition-all duration-500"
+                    style="transform-style: preserve-3d;">
 
-                <!-- 3D Modelling -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, '3D Modelling', '3d')">
-                    <img src="./assets/images/3d-modelling-cover.png"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="3D Modelling">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- 3D Modelling -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, '3D Modelling', '3d')">
+                        <img src="./assets/images/3d-modelling-cover.png"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="3D Modelling">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                3D
+                                Modelling</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">3D
-                            Modelling</h3>
-                    </div>
-                </div>
 
-                <!-- Game Dev -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, 'Game Development', 'game')">
-                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=800&auto=format&fit=crop"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="Game Dev">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- Game Dev -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, 'Game Development', 'game')">
+                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=800&auto=format&fit=crop"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="Game Dev">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                Game
+                                Dev</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">Game
-                            Dev</h3>
-                    </div>
-                </div>
 
-                <!-- Motion -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, 'Motion Graphics', 'motion')">
-                    <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=800&auto=format&fit=crop"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="Motion Graphics">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- Motion -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, 'Motion Graphics', 'motion')">
+                        <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=800&auto=format&fit=crop"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="Motion Graphics">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                Motion Graphics</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
-                            Motion Graphics</h3>
-                    </div>
-                </div>
 
 
 
-                <!-- Photography -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, 'Photography', 'photography')">
-                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="Photography">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- Photography -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, 'Photography', 'photography')">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="Photography">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                Photography</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
-                            Photography</h3>
-                    </div>
-                </div>
 
-                <!-- Videography -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, 'Videography', 'videography')">
-                    <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="Videography">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- Videography -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, 'Videography', 'videography')">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="Videography">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                Videography</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
-                            Videography</h3>
-                    </div>
-                </div>
 
-                <!-- Magazines -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, 'Magazines', 'magazines')">
-                    <img src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=800&auto=format&fit=crop"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="Magazines">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- Magazines -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, 'Magazines', 'magazines')">
+                        <img src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=800&auto=format&fit=crop"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="Magazines">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                Magazines</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
-                            Magazines</h3>
-                    </div>
-                </div>
 
-                <!-- Mockup Designs -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, 'Mockup Designs', 'mockup')">
-                    <img src="./assets/images/mockup-design-cover.png"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="Mockup Designs">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- Mockup Designs -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, 'Mockup Designs', 'mockup')">
+                        <img src="./assets/images/mockup-design-cover.png"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="Mockup Designs">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                Mockup Designs</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
-                            Mockup Designs</h3>
-                    </div>
-                </div>
 
-                <!-- 3D Animation -->
-                <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
-                    onclick="openCategoryTab(event, '3D Animation', '3danimation')">
-                    <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=800&auto=format&fit=crop"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        alt="3D Animation">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                    <!-- 3D Animation -->
+                    <div class="spiral-card absolute w-[75vw] max-w-[240px] h-40 md:max-w-none md:w-96 md:h-64 -translate-x-1/2 -translate-y-1/2 rounded-[40px] md:rounded-[60px] overflow-hidden cursor-pointer group/card shadow-[0_0_20px_rgba(var(--glow-rgb),0.5)] hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.8)] dark:shadow-[0_0_20px_rgba(var(--glow-rgb),0.3)] dark:hover:shadow-[0_0_35px_rgba(var(--glow-rgb),0.6)] transition-[box-shadow,border-color] duration-300"
+                        onclick="openCategoryTab(event, '3D Animation', '3danimation')">
+                        <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=800&auto=format&fit=crop"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            alt="3D Animation">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80 pointer-events-none opacity-40 dark:opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover/card:opacity-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                            <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">
+                                3D
+                                Animation</h3>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-black/0 group-hover/card:bg-black/60 transition-colors duration-500">
-                    </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
-                        <h3 class="text-white font-headline-md text-xl md:text-2xl text-center px-4 drop-shadow-lg">3D
-                            Animation</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CATEGORY CONTENT VIEW (Hidden by default) -->
-        <div id="category-content-view" class="hidden w-full pb-20">
-            <!-- Hero Header FLIP Target -->
-            <div class="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden mb-12 flex items-end">
-                <img id="category-hero-image" src="" class="absolute inset-0 w-full h-full object-cover">
-                <!-- Overlay Gradient untuk Teks -->
-                <div id="category-hero-overlay"
-                    class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-0 transition-opacity duration-700 ease-in-out">
-                </div>
-                <!-- Title & Close Button -->
-                <div class="relative z-10 w-full flex justify-between items-end p-8 md:p-12">
-                    <h2 id="active-category-title"
-                        class="text-display-lg-mobile md:text-display-lg font-display-lg text-white drop-shadow-2xl leading-none opacity-0 translate-y-8 transition-all duration-700 ease-out">
-                        Category</h2>
-                    <button id="category-close-btn" onclick="closeCategoryTab()"
-                        class="p-3 bg-black/30 backdrop-blur-md text-white border border-white/20 hover:bg-primary rounded-full transition-all duration-700 opacity-0 scale-90 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[24px]">close</span>
-                    </button>
                 </div>
             </div>
 
-            <div class="px-margin-mobile md:px-margin-desktop">
-            <!-- Motion Graphics Filters (Hidden by default) -->
-            <div id="motion-filters" class="hidden mb-10 flex flex-wrap gap-3 items-center justify-center">
-                <button class="motion-filter-btn px-6 py-2 rounded-full border border-primary-container bg-primary-container text-white font-label-caps text-sm tracking-widest transition-colors duration-300" data-filter="all" onclick="filterPortfolio('all')">ALL</button>
-                <button class="motion-filter-btn px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:text-on-surface font-label-caps text-sm tracking-widest transition-colors duration-300" data-filter="bumper" onclick="filterPortfolio('bumper')">BUMPER</button>
-                <button class="motion-filter-btn px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:text-on-surface font-label-caps text-sm tracking-widest transition-colors duration-300" data-filter="featured-projects" onclick="filterPortfolio('featured-projects')">FEATURED PROJECTS</button>
-                <button class="motion-filter-btn px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:text-on-surface font-label-caps text-sm tracking-widest transition-colors duration-300" data-filter="calendar-highlights-2026" onclick="filterPortfolio('calendar-highlights-2026')">CALENDAR HIGHLIGHTS 2026</button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="portfolio-grid">
-
-                    <!-- Container for Dynamic Content -->
-                    <div id="dynamic-portfolio-container" class="contents"></div>
+            <!-- CATEGORY CONTENT VIEW (Hidden by default) -->
+            <div id="category-content-view" class="hidden w-full pb-20">
+                <!-- Hero Header FLIP Target -->
+                <div class="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden mb-12 flex items-end">
+                    <img id="category-hero-image" src="" class="absolute inset-0 w-full h-full object-cover">
+                    <!-- Overlay Gradient untuk Teks -->
+                    <div id="category-hero-overlay"
+                        class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-0 transition-opacity duration-700 ease-in-out">
+                    </div>
+                    <!-- Title & Close Button -->
+                    <div class="relative z-10 w-full flex justify-between items-end p-8 md:p-12">
+                        <h2 id="active-category-title"
+                            class="text-display-lg-mobile md:text-display-lg font-display-lg text-white drop-shadow-2xl leading-none opacity-0 translate-y-8 transition-all duration-700 ease-out">
+                            Category</h2>
+                        <button id="category-close-btn" onclick="closeCategoryTab()"
+                            class="p-3 bg-black/30 backdrop-blur-md text-white border border-white/20 hover:bg-primary rounded-full transition-all duration-700 opacity-0 scale-90 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[24px]">close</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
+                <div class="px-margin-mobile md:px-margin-desktop">
+                    <!-- Motion Graphics Filters (Hidden by default) -->
+                    <div id="motion-filters" class="hidden mb-10 flex flex-wrap gap-3 items-center justify-center">
+                        <button
+                            class="motion-filter-btn px-6 py-2 rounded-full border border-primary-container bg-primary-container text-white font-label-caps text-sm tracking-widest transition-colors duration-300"
+                            data-filter="all" onclick="filterPortfolio('all')">ALL</button>
+                        <button
+                            class="motion-filter-btn px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:text-on-surface font-label-caps text-sm tracking-widest transition-colors duration-300"
+                            data-filter="bumper" onclick="filterPortfolio('bumper')">BUMPER</button>
+                        <button
+                            class="motion-filter-btn px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:text-on-surface font-label-caps text-sm tracking-widest transition-colors duration-300"
+                            data-filter="featured-projects" onclick="filterPortfolio('featured-projects')">FEATURED
+                            PROJECTS</button>
+                        <button
+                            class="motion-filter-btn px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:text-on-surface font-label-caps text-sm tracking-widest transition-colors duration-300"
+                            data-filter="calendar-highlights-2026"
+                            onclick="filterPortfolio('calendar-highlights-2026')">CALENDAR HIGHLIGHTS 2026</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="portfolio-grid">
+
+                        <!-- Container for Dynamic Content -->
+                        <div id="dynamic-portfolio-container" class="contents"></div>
+                    </div>
                 </div>
-            </div>
-                </div>
+
             </div>
         </div>
     </div>
+    </div>
+    </div>
+    </div>
 
     <!-- Section 4: Contact -->
-    <section class="relative w-full py-24 md:py-40 mt-stack-lg min-h-[80vh] flex flex-col justify-center scroll-reveal border-t border-white/5" id="contact">
+    <section
+        class="relative w-full py-24 md:py-40 mt-stack-lg min-h-[80vh] flex flex-col justify-center scroll-reveal border-t border-white/5"
+        id="contact">
 
         <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-            <div>
-                <h2 class="text-headline-lg font-headline-lg text-on-surface mb-2" data-i18n="contact_title">
-                    Mari<br>Berkolaborasi</h2>
-                <p class="text-body-md font-body-md text-on-surface-variant mb-8 max-w-md" data-i18n="contact_desc">
-                    Tertarik untuk membangun pengalaman digital yang luar biasa? Hubungi saya untuk proyek, kolaborasi,
-                    atau sekadar menyapa.
-                </p>
-                <div class="flex flex-col gap-4">
-                    <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
-                        href="mailto:dwiadyaksa38@gmail.com">
-                        <span
-                            class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">mail</span>
-                        <span
-                            class="font-label-caps text-label-caps text-sm tracking-widest uppercase">dwiadyaksa38@gmail.com</span>
-                    </a>
-                    <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
-                        href="https://maps.google.com/?q=Jakarta,Indonesia" target="_blank">
-                        <span
-                            class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">location_on</span>
-                        <span class="font-label-caps text-label-caps text-sm tracking-widest">JAKARTA, INDONESIA</span>
-                    </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                <div>
+                    <h2 class="text-headline-lg font-headline-lg text-on-surface mb-2" data-i18n="contact_title">
+                        Mari<br>Berkolaborasi</h2>
+                    <p class="text-body-md font-body-md text-on-surface-variant mb-8 max-w-md" data-i18n="contact_desc">
+                        Tertarik untuk membangun pengalaman digital yang luar biasa? Hubungi saya untuk proyek,
+                        kolaborasi,
+                        atau sekadar menyapa.
+                    </p>
+                    <div class="flex flex-col gap-4">
+                        <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
+                            href="mailto:dwiadyaksa38@gmail.com">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">mail</span>
+                            <span
+                                class="font-label-caps text-label-caps text-sm tracking-widest uppercase">dwiadyaksa38@gmail.com</span>
+                        </a>
+                        <a class="flex items-center gap-4 text-on-surface hover:text-primary transition-colors group"
+                            href="https://maps.google.com/?q=Jakarta,Indonesia" target="_blank">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary-container transition-colors">location_on</span>
+                            <span class="font-label-caps text-label-caps text-sm tracking-widest">JAKARTA,
+                                INDONESIA</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="liquid-glass p-6 rounded-[30px]">
+                    <form id="contact-form" class="flex flex-col gap-4">
+                        <div>
+                            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2"
+                                data-i18n="contact_label_name">NAMA</label>
+                            <input required name="name"
+                                class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm text-base"
+                                placeholder="Masukkan nama Anda" type="text" data-i18n-ph="contact_ph_name">
+                        </div>
+                        <div>
+                            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2"
+                                data-i18n="contact_label_email">EMAIL</label>
+                            <input required name="email"
+                                class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm text-base"
+                                placeholder="email@contoh.com" type="email" data-i18n-ph="contact_ph_email">
+                        </div>
+                        <div>
+                            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2"
+                                data-i18n="contact_label_message">PESAN</label>
+                            <textarea required name="message"
+                                class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors h-32 resize-none rounded-t-sm text-base"
+                                placeholder="Ceritakan tentang proyek Anda..."
+                                data-i18n-ph="contact_ph_message"></textarea>
+                        </div>
+                        <!-- Type diganti menjadi submit -->
+                        <button type="submit"
+                            class="mt-4 bg-on-surface text-background px-6 py-3 font-label-caps text-label-caps font-bold hover:bg-primary-container hover:text-white transition-all duration-300 w-fit"
+                            data-i18n="contact_submit">
+                            KIRIM PESAN
+                        </button>
+                    </form>
                 </div>
             </div>
-
-            <!-- Contact Form -->
-            <div class="liquid-glass p-6 rounded-[30px]">
-                <form id="contact-form" class="flex flex-col gap-4">
-                    <div>
-                        <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2"
-                            data-i18n="contact_label_name">NAMA</label>
-                        <input required name="name"
-                            class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm text-base"
-                            placeholder="Masukkan nama Anda" type="text" data-i18n-ph="contact_ph_name">
-                    </div>
-                    <div>
-                        <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2"
-                            data-i18n="contact_label_email">EMAIL</label>
-                        <input required name="email"
-                            class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors rounded-t-sm text-base"
-                            placeholder="email@contoh.com" type="email" data-i18n-ph="contact_ph_email">
-                    </div>
-                    <div>
-                        <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2"
-                            data-i18n="contact_label_message">PESAN</label>
-                        <textarea required name="message"
-                            class="w-full bg-surface border-b border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-body-md py-3 px-4 transition-colors h-32 resize-none rounded-t-sm text-base"
-                            placeholder="Ceritakan tentang proyek Anda..." data-i18n-ph="contact_ph_message"></textarea>
-                    </div>
-                    <!-- Type diganti menjadi submit -->
-                    <button type="submit"
-                        class="mt-4 bg-on-surface text-background px-6 py-3 font-label-caps text-label-caps font-bold hover:bg-primary-container hover:text-white transition-all duration-300 w-fit"
-                        data-i18n="contact_submit">
-                        KIRIM PESAN
-                    </button>
-                </form>
-            </div>
         </div>
-            </div>
         </div>
     </section>
 
@@ -855,7 +911,8 @@
             </button>
 
             <!-- Image Container (ArtStation Style: Vertical Scrolling) -->
-            <div id="carousel-image-container" class="w-full h-full overflow-y-auto flex flex-col items-center gap-8 p-4 md:p-10 pt-16 pb-32 scrollbar-hide">
+            <div id="carousel-image-container"
+                class="w-full h-full overflow-y-auto flex flex-col items-center gap-8 p-4 md:p-10 pt-16 pb-32 scrollbar-hide">
                 <!-- Images will be injected here dynamically -->
             </div>
 
@@ -866,7 +923,8 @@
                     class="text-headline-md font-headline-md text-white mb-2 text-center drop-shadow-lg"></h3>
                 <p id="carousel-desc" class="text-body-md text-white/80 max-w-3xl text-center mb-4 hidden"></p>
                 <div class="flex items-center gap-4">
-                    <div class="hidden bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10" id="carousel-indicator-container">
+                    <div class="hidden bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10"
+                        id="carousel-indicator-container">
                         <span id="carousel-indicator"
                             class="text-label-caps font-label-caps text-white tracking-widest"></span>
                     </div>
