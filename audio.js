@@ -319,12 +319,12 @@
         isMuted: () => isMuted,
         pauseBGM: () => {
             if (bgmAudio && !bgmAudio.paused) {
-                bgmAudio.pause();
+                fadeOutAudio(bgmAudio, FADE_DURATION);
             }
         },
         resumeBGM: () => {
             if (bgmAudio && bgmAudio.paused && !isMuted) {
-                bgmAudio.play().catch(e => console.log('BGM Resume prevented:', e));
+                fadeInAudio(bgmAudio, BGM_VOLUME, FADE_DURATION);
             }
         }
     };
