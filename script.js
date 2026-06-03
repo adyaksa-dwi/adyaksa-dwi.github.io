@@ -561,11 +561,12 @@ window.closeCategoryTab = function () {
     // absoluteTop = jarak visual layar (rect.top) dikurangi batas kontainer (parentRect.top) 
     // dikurangi lonjakan scroll agar elemen terkunci diam secara visual
     const absoluteTop = rect.top - parentRect.top - scrollDelta;
+    const absoluteLeft = rect.left - parentRect.left;
 
-    // Biarkan left otomatis (auto) agar terkunci di posisi statis (content edge)
-    // KUNCI: Wajib set width & height spesifik agar elemen tidak merenggang ke ukuran padding-box (w-full pada absolute)
+    // KUNCI: Wajib set posisi kiri/atas presisi & dimensi agar elemen terkunci diam persis di layarnya
     contentView.style.position = 'absolute';
     contentView.style.top = absoluteTop + 'px';
+    contentView.style.left = absoluteLeft + 'px';
     contentView.style.width = rect.width + 'px';
     contentView.style.height = rect.height + 'px';
     contentView.style.zIndex = '50';
