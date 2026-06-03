@@ -267,10 +267,25 @@
     // --------------------------------------------------------
     // AUTO-START: Initialize on first user interaction
     // --------------------------------------------------------
+    function tryPlayBGM() {
+        if (!isMuted && bgmAudio && bgmAudio.paused) {
+            const playPromise = bgmAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    console.log('BGM Play prevented or failed:', err);
+                    // Re-attach only strong user interactions to try playing BGM later
+                    document.addEventListener('click', tryPlayBGM, { once: true });
+                    document.addEventListener('touchstart', tryPlayBGM, { once: true });
+                    document.addEventListener('keydown', tryPlayBGM, { once: true });
+                });
+            }
+        }
+    }
+
     function handleFirstInteraction(e) {
         if (isInitialized) return;
 
-        initAudio();
+        initAudio(); // This sets isInitialized = true, enabling SFX
 
         // Remove listeners immediately to prevent spam
         document.removeEventListener('click', handleFirstInteraction);
@@ -279,21 +294,10 @@
         document.removeEventListener('mousemove', handleFirstInteraction);
         document.removeEventListener('scroll', handleFirstInteraction);
 
-        if (!isMuted && bgmAudio && bgmAudio.paused) {
-            const playPromise = bgmAudio.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(err => {
-                    console.log('BGM Autoplay prevented (expected for mousemove):', err);
-                    isInitialized = false; // Reset so next interaction tries again
-                    // Re-attach only strong user interactions (click, touch) since mousemove failed
-                    document.addEventListener('click', handleFirstInteraction, { once: true });
-                    document.addEventListener('touchstart', handleFirstInteraction, { once: true });
-                    document.addEventListener('keydown', handleFirstInteraction, { once: true });
-                });
-            }
-        }
-
         updateSoundIcon();
+
+        // Try playing BGM (if it fails, it will re-attach BGM-only listeners, keeping SFX active)
+        tryPlayBGM();
     }
 
     // Listen for any interaction
