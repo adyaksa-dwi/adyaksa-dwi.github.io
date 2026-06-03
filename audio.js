@@ -22,6 +22,12 @@
     const SFX_VOLUME = 0.5;         // Modern UI SFX volume
     const FADE_DURATION = 1.5;      // Seconds for mute/unmute fade
 
+    // Initialize BGM Audio Element immediately so it preloads before first click
+    bgmAudio = new Audio('./assets/audio/bgm.mp3');
+    bgmAudio.loop = true;
+    bgmAudio.volume = BGM_VOLUME;
+    bgmAudio.preload = 'auto'; // Force browser to buffer it
+
     // --------------------------------------------------------
     // INITIALIZATION
     // --------------------------------------------------------
@@ -40,11 +46,6 @@
             sfxGain = audioCtx.createGain();
             sfxGain.gain.value = SFX_VOLUME;
             sfxGain.connect(masterGain);
-
-            // Initialize BGM Audio Element
-            bgmAudio = new Audio('./assets/audio/bgm.mp3');
-            bgmAudio.loop = true;
-            bgmAudio.volume = BGM_VOLUME;
 
             // Restore mute preference
             const savedPref = localStorage.getItem('lumina-sound');
