@@ -320,37 +320,47 @@ section, main, footer, header:not(#main-nav) {
 
 /* Liquid Glass Effect (Cohesive with Navigation Bar) */
 .liquid-glass {
-  background: rgba(248, 245, 240, 0.8) !important; /* bg-surface/80 in light mode */
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* border-white/10 precisely like nav bar */
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(24px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+  /* Pastel colored border contrasting with light bg */
+  border: 2px solid rgba(167, 139, 250, 0.5) !important; /* Pastel violet */
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.25),
-    0 8px 32px rgba(0, 0, 0, 0.03) !important;
-}
-
-.dark .liquid-glass {
-  background: rgba(30, 41, 59, 0.8) !important; /* bg-surface/80 in dark mode */
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* border-white/10 precisely like nav bar */
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-    0 12px 32px rgba(0, 0, 0, 0.25) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(167, 139, 250, 0.2),
+    0 8px 32px rgba(167, 139, 250, 0.1) !important;
 }
 
 .liquid-glass:hover {
-  background: rgba(248, 245, 240, 0.85) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 2px solid rgba(139, 92, 246, 0.6) !important; /* Slightly stronger pastel violet */
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.3),
-    0 12px 32px rgba(var(--glow-rgb), 0.08) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 1),
+    inset 0 -1px 2px rgba(139, 92, 246, 0.3),
+    0 12px 32px rgba(139, 92, 246, 0.2) !important;
+}
+
+.dark .liquid-glass {
+  background: rgba(30, 41, 59, 0.6) !important; 
+  backdrop-filter: blur(24px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+  /* Stronger glass edge for dark mode */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+  border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 12px 32px rgba(0, 0, 0, 0.4) !important;
 }
 
 .dark .liquid-glass:hover {
-  background: rgba(30, 41, 59, 0.85) !important;
+  background: rgba(30, 41, 59, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.3) !important;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    0 16px 40px rgba(var(--glow-rgb), 0.18) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 16px 40px rgba(var(--glow-rgb), 0.2) !important;
 }
 
 /* Photo Avatar Glass Border Overlay (Cohesive with Navigation Bar) */
