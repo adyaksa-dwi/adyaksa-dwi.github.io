@@ -1207,6 +1207,12 @@ function openVideoModal(encodedUrl) {
             iframe.src = videoUrl;
         }
     }
+
+    // Pause BGM when video modal is opened
+    if (window.luminaAudio) {
+        window.luminaAudio.pauseBGM();
+    }
+
     openModal('modal-video');
 }
 
@@ -1335,6 +1341,11 @@ function closeModal(modalId) {
                 video.src = '';
                 video.src = tempSrc;
             }
+        }
+
+        // Resume BGM when video modal is closed
+        if (window.luminaAudio) {
+            window.luminaAudio.resumeBGM();
         }
     }
 

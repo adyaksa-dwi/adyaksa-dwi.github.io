@@ -317,6 +317,16 @@
         playSfxClose,
         playSfxHover,
         isMuted: () => isMuted,
+        pauseBGM: () => {
+            if (bgmAudio && !bgmAudio.paused) {
+                bgmAudio.pause();
+            }
+        },
+        resumeBGM: () => {
+            if (bgmAudio && bgmAudio.paused && !isMuted) {
+                bgmAudio.play().catch(e => console.log('BGM Resume prevented:', e));
+            }
+        }
     };
 
 })();
