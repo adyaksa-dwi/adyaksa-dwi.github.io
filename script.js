@@ -1717,6 +1717,11 @@ if (typewriterElement) {
     let typeWriterTimeout;
 
     window.updateTypewriterPhrases = function (instantUpdate = false) {
+        let oldTotalLength = 0;
+        if (phrases.length > 0) {
+            oldTotalLength = phrases[phraseIndex].prefix.length + phrases[phraseIndex].highlight.length;
+        }
+
         if (currentLang === 'id') {
             phrases = [
                 { prefix: "Dimana cahaya dan aliran ", highlight: "Menciptakan Dunia Baru" },
@@ -1733,22 +1738,21 @@ if (typewriterElement) {
             ];
         }
 
-        if (instantUpdate) {
-            // Update the display immediately without waiting for animation cycle
+        if (instantUpdate && oldTotalLength > 0) {
             const currentPhrase = phrases[phraseIndex];
-            const totalLength = currentPhrase.prefix.length + currentPhrase.highlight.length;
+            const newTotalLength = currentPhrase.prefix.length + currentPhrase.highlight.length;
             
-            charIndex = totalLength;
-            typewriterElement.innerHTML = `${currentPhrase.prefix}<br><span class="text-primary">${currentPhrase.highlight}</span>`;
+            // Menghitung rasio pengetikan agar status animasi tetap sama
+            const ratio = charIndex / oldTotalLength;
+            charIndex = Math.round(ratio * newTotalLength);
             
-            // Clear existing timeout and pause before deleting
-            clearTimeout(typeWriterTimeout);
-            isPaused = true;
-            isDeleting = true;
-            typeWriterTimeout = setTimeout(() => { 
-                isPaused = false; 
-                typeWriter(); 
-            }, 3000);
+            // Update the display immediately without resetting animation state
+            if (charIndex <= currentPhrase.prefix.length) {
+                typewriterElement.innerHTML = currentPhrase.prefix.substring(0, charIndex);
+            } else {
+                const highlightChars = charIndex - currentPhrase.prefix.length;
+                typewriterElement.innerHTML = `${currentPhrase.prefix}<br><span class="text-primary">${currentPhrase.highlight.substring(0, highlightChars)}</span>`;
+            }
         }
     };
 
