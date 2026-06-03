@@ -267,27 +267,41 @@
     // --------------------------------------------------------
     // AUTO-START: Initialize on first user interaction
     // --------------------------------------------------------
-    function handleFirstInteraction() {
+    function handleFirstInteraction(e) {
         if (isInitialized) return;
 
         initAudio();
 
-        if (!isMuted) {
-            startBGM();
-        }
-
-        updateSoundIcon();
-
-        // Remove listeners after first interaction
+        // Remove listeners immediately to prevent spam
         document.removeEventListener('click', handleFirstInteraction);
         document.removeEventListener('touchstart', handleFirstInteraction);
         document.removeEventListener('keydown', handleFirstInteraction);
+        document.removeEventListener('mousemove', handleFirstInteraction);
+        document.removeEventListener('scroll', handleFirstInteraction);
+
+        if (!isMuted && bgmAudio && bgmAudio.paused) {
+            const playPromise = bgmAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    console.log('BGM Autoplay prevented (expected for mousemove):', err);
+                    isInitialized = false; // Reset so next interaction tries again
+                    // Re-attach only strong user interactions (click, touch) since mousemove failed
+                    document.addEventListener('click', handleFirstInteraction, { once: true });
+                    document.addEventListener('touchstart', handleFirstInteraction, { once: true });
+                    document.addEventListener('keydown', handleFirstInteraction, { once: true });
+                });
+            }
+        }
+
+        updateSoundIcon();
     }
 
-    // Listen for first interaction
-    document.addEventListener('click', handleFirstInteraction, { once: false });
-    document.addEventListener('touchstart', handleFirstInteraction, { once: false });
-    document.addEventListener('keydown', handleFirstInteraction, { once: false });
+    // Listen for any interaction
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
+    document.addEventListener('keydown', handleFirstInteraction);
+    document.addEventListener('mousemove', handleFirstInteraction);
+    document.addEventListener('scroll', handleFirstInteraction);
 
     // --------------------------------------------------------
     // PUBLIC API
