@@ -185,7 +185,8 @@ section, main, footer, header:not(#main-nav) {
         
         .scroll-reveal.is-visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
+            will-change: auto;
         }
 
         /* Terminal Cursor Blink (No Fade) */
