@@ -2289,7 +2289,7 @@ window.toggleProfile = function () {
     if (isProfileExpanded) {
         // Expand container
         container.classList.remove('max-w-xs', 'md:max-w-md');
-        container.classList.add('max-w-6xl');
+        container.classList.add('max-w-7xl');
 
         // Avatar changes
         avatar.classList.remove('w-64', 'h-64', 'md:w-80', 'md:h-80', 'rounded-[50%]');
@@ -2345,7 +2345,7 @@ window.toggleProfile = function () {
 
         // Collapse container
         setTimeout(() => {
-            container.classList.remove('max-w-6xl');
+            container.classList.remove('max-w-7xl');
             container.classList.add('max-w-xs', 'md:max-w-md');
         }, 300);
     }
