@@ -1180,7 +1180,7 @@ function openVideoModal(encodedUrl) {
             iframe.src = `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`;
         } else if (gDriveMatch && gDriveMatch[1]) {
             // Terapkan crop khusus Google Drive untuk menyembunyikan tombol popout asli
-            iframe.className = "absolute top-[-60px] left-0 w-full h-[calc(100%+120px)] outline-none bg-black";
+            iframe.className = "absolute top-[-60px] left-0 w-full h-[calc(100%+60px)] outline-none bg-black";
             iframe.src = `https://drive.google.com/file/d/${gDriveMatch[1]}/preview`;
         } else {
             // Fallback jika berupa MP4 URL langsung atau URL lainnya
