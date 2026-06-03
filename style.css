@@ -163,7 +163,11 @@ section, main, footer, header:not(#main-nav) {
             transform: scale(1.02);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .card-image-wrapper { overflow: hidden; border-radius: 0.25rem; }
+        .card-image-wrapper { 
+            overflow: hidden; 
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            isolation: isolate;
+        }
         .card-image-wrapper img { transition: transform 0.5s ease; }
         .card-image-wrapper:hover img { transform: scale(1.05); }
         .scroll-pulse { animation: pulse-y 2s infinite ease-in-out; }
