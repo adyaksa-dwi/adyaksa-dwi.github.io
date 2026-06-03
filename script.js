@@ -111,6 +111,11 @@ navLinks.forEach(link => {
 });
 const bgElements = document.querySelectorAll("[data-bg-section]");
 
+// Attach hover SFX to buttons, social links, and portfolio cards
+document.querySelectorAll('button, .button, .btn, .social-link, .spiral-card, .portfolio-item').forEach(el => {
+    el.addEventListener('mouseenter', () => window.luminaAudio?.playSfxHover());
+});
+
 const bgSectionMap = {
     "home": "home",
     "about": "about",
@@ -2310,6 +2315,8 @@ window.toggleProfile = function () {
     isProfileExpanded = !isProfileExpanded;
 
     if (isProfileExpanded) {
+        window.luminaAudio?.playSfxOpen();
+        
         // Expand container
         container.classList.remove('max-w-xs', 'md:max-w-md');
         container.classList.add('max-w-7xl');
@@ -2342,6 +2349,8 @@ window.toggleProfile = function () {
         }, 500);
 
     } else {
+        window.luminaAudio?.playSfxClose();
+        
         // Hide text immediately
         text1.classList.add('opacity-0', 'translate-y-8');
         text2.classList.add('opacity-0', 'translate-y-8');
