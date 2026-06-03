@@ -89,6 +89,7 @@ function applyLanguage(lang) {
 }
 
 window.toggleLanguage = function () {
+    window.luminaAudio?.playSfxClick();
     const newLang = currentLang === 'en' ? 'id' : 'en';
     applyLanguage(newLang);
     // Restart typewriter if it's running
@@ -104,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Navigation Scroll Spy & Background Wallpaper Transitions
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
+// Attach hover SFX to desktop nav links
+navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => window.luminaAudio?.playSfxHover());
+});
 const bgElements = document.querySelectorAll("[data-bg-section]");
 
 const bgSectionMap = {
@@ -187,6 +192,7 @@ const mobileBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 mobileBtn.addEventListener('click', () => {
+    window.luminaAudio?.playSfxClick();
     mobileMenu.classList.toggle('hidden');
     mobileMenu.classList.toggle('flex');
     const icon = mobileBtn.querySelector('span');
@@ -194,6 +200,7 @@ mobileBtn.addEventListener('click', () => {
 });
 mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {
+        window.luminaAudio?.playSfxClick();
         mobileMenu.classList.add('hidden');
         mobileMenu.classList.remove('flex');
         mobileBtn.querySelector('span').textContent = 'menu';
@@ -228,6 +235,9 @@ window.openPortfolioOverlay = function () {
         }
     }
 
+    // Play open SFX
+    window.luminaAudio?.playSfxOpen();
+
     // Show overlay
     overlay.classList.remove('hidden');
     overlay.classList.add('flex'); // Because it uses flex-col
@@ -247,6 +257,7 @@ window.openPortfolioOverlay = function () {
 };
 
 window.closePortfolioOverlay = function () {
+    window.luminaAudio?.playSfxClose();
     const overlay = document.getElementById('portfolio-overlay');
     if (!overlay) return;
 
@@ -282,6 +293,7 @@ window.closePortfolioOverlay = function () {
 };
 
 window.openCategoryTab = function (event, title, categoryId) {
+    window.luminaAudio?.playSfxOpen();
     window.lastScrollPositionPortfolio = document.getElementById('portfolio-overlay').scrollTop || 0;
     window.activePortfolioCategory = categoryId; // Simpan status kategori yang sedang aktif
     const cardEl = event ? event.currentTarget : null;
@@ -537,6 +549,7 @@ window.filterPortfolio = function (filterValue) {
 }
 
 window.closeCategoryTab = function () {
+    window.luminaAudio?.playSfxClose();
     window.activePortfolioCategory = null; // Reset kategori aktif
     const titleEl = document.getElementById('active-category-title');
     titleEl.classList.add('opacity-0', 'translate-y-8'); // Sembunyikan teks
@@ -1266,6 +1279,7 @@ window.openCarouselModal = function (titleRaw, encodedUrls, encodedDesc = '', en
 };
 
 function openModal(modalId) {
+    window.luminaAudio?.playSfxOpen();
     const modal = document.getElementById(modalId);
     const content = modal.querySelector('.modal-content');
     modal.classList.remove('hidden');
@@ -1286,6 +1300,7 @@ function openModal(modalId) {
 
 
 function closeModal(modalId) {
+    window.luminaAudio?.playSfxClose();
     const modal = document.getElementById(modalId);
     const content = modal.querySelector('.modal-content');
 
@@ -1678,6 +1693,7 @@ if (localStorage.getItem('theme') === 'light') {
 
 if (themeToggle) {
     themeToggle.addEventListener('click', (e) => {
+        window.luminaAudio?.playSfxClick();
         const x = e.clientX;
         const y = e.clientY;
 
@@ -2096,6 +2112,7 @@ window.portfolioViewMode = 'spiral';
 
 window.togglePortfolioView = function (mode) {
     if (window.portfolioViewMode === mode) return;
+    window.luminaAudio?.playSfxClick();
 
     const container = document.getElementById('category-selection-view');
     const stage = document.getElementById('spiral-stage');

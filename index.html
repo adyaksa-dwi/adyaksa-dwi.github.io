@@ -199,6 +199,12 @@
                     href="#contact" data-i18n="nav_contact">Contact</a>
             </div>
             <div class="flex items-center gap-4">
+                <!-- Sound Toggle -->
+                <button id="sound-toggle"
+                    class="w-8 h-8 flex items-center justify-center rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors"
+                    aria-label="Toggle Sound" onclick="window.luminaAudio?.toggleSound()">
+                    <span class="material-symbols-outlined text-[18px]" id="sound-icon">volume_up</span>
+                </button>
                 <!-- Language Switcher -->
                 <button id="lang-toggle"
                     class="text-label-caps font-label-caps font-bold px-2 py-1 border border-outline-variant rounded-md hover:bg-surface-container-high transition-colors"
@@ -923,6 +929,7 @@
     </div>
 
     <!-- Scripts for Interactions -->
+    <script src="audio.js"></script>
     <script src="script.js"></script>
 </body>
 
