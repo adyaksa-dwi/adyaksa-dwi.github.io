@@ -1173,13 +1173,18 @@ function openVideoModal(encodedUrl) {
         const gDriveMatch = videoUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
 
         if (ytMatch && ytMatch[1]) {
+            iframe.className = "w-full h-full outline-none bg-black rounded-lg";
             iframe.src = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
         } else if (vimeoMatch && vimeoMatch[1]) {
+            iframe.className = "w-full h-full outline-none bg-black rounded-lg";
             iframe.src = `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`;
         } else if (gDriveMatch && gDriveMatch[1]) {
+            // Terapkan crop khusus Google Drive untuk menyembunyikan tombol popout asli
+            iframe.className = "absolute top-[-60px] left-0 w-full h-[calc(100%+120px)] outline-none bg-black";
             iframe.src = `https://drive.google.com/file/d/${gDriveMatch[1]}/preview`;
         } else {
             // Fallback jika berupa MP4 URL langsung atau URL lainnya
+            iframe.className = "w-full h-full outline-none bg-black rounded-lg";
             iframe.src = videoUrl;
         }
     }

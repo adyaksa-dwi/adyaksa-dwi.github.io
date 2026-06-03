@@ -807,15 +807,17 @@
         <div id="modal-video-content"
             class="relative w-full h-full max-w-[1400px] bg-black rounded-lg overflow-hidden shadow-2xl z-10 modal-content flex items-center justify-center group/modal">
             <button
-                class="absolute top-4 right-4 text-white/50 hover:text-white p-2 z-20 transition-colors bg-black/50 rounded-full"
+                class="absolute top-4 right-4 text-white hover:text-primary p-2 z-30 transition-colors bg-surface-container/80 backdrop-blur-md rounded-full border border-white/10"
                 onclick="closeModal('modal-video')">
                 <span class="material-symbols-outlined text-[32px]">close</span>
             </button>
 
-            <!-- Google Drive Embed Player -->
-            <iframe id="portfolio-video" class="w-full h-full outline-none bg-black rounded-lg"
-                src="https://drive.google.com/file/d/1ej7eWeXVR6pYgfMsaPjGpP5PHPXdvCMI/preview" allow="autoplay"
-                allowfullscreen></iframe>
+            <!-- Container to crop iframe top bar -->
+            <div class="w-full h-full relative overflow-hidden rounded-lg">
+                <iframe id="portfolio-video" class="absolute top-[-60px] left-0 w-full h-[calc(100%+120px)] outline-none bg-black"
+                    src="https://drive.google.com/file/d/1ej7eWeXVR6pYgfMsaPjGpP5PHPXdvCMI/preview" allow="autoplay"
+                    allowfullscreen></iframe>
+            </div>
 
             <!-- Full Screen Button -->
             <button id="fullscreen-btn"
