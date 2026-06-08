@@ -329,8 +329,8 @@ window.openCategoryTab = function (event, title, categoryId) {
         '3D Animation': 'Life in Three Dimensions',
         '3D Modelling': 'Built from Nothing',
         'Game Development': 'Built to Be Explored',
-        'Mockup Design': 'The First Look',
-        'Magazine': 'Every Page, a Statement',
+        'Mockup Designs': 'The First Look',
+        'Magazines': 'Every Page, a Statement',
         'Photography': 'Light, Captured'
     };
 
