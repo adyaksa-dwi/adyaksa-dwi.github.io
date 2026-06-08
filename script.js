@@ -2062,7 +2062,7 @@ class SpiralCarousel {
 // SCROLL REVEAL ANIMATION
 // ----------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.scroll-reveal');
+    const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-fade');
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
