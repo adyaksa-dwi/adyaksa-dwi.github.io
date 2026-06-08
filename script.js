@@ -166,10 +166,10 @@ function handleScrollAndBgs() {
         }
     }
 
-    // Update Three.js canvas container visibility (fade out when not on home)
+    // Update Three.js canvas container visibility (fade out when not on home or about)
     const threeContainer = document.getElementById("global-three-container");
     if (threeContainer) {
-        if (!current || current === "home") {
+        if (!current || current === "home" || current === "about") {
             threeContainer.classList.remove("opacity-0");
             threeContainer.classList.add("opacity-100");
         } else {
