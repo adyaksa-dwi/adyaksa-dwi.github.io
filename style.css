@@ -185,11 +185,12 @@ section, main, footer, header:not(#main-nav) {
             transform: translateY(40px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
+            backface-visibility: hidden;
         }
         
         .scroll-reveal.is-visible {
             opacity: 1;
-            transform: none;
+            transform: translateY(0);
             will-change: auto;
         }
 
