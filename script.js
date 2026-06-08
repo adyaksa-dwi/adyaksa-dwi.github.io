@@ -46,7 +46,7 @@ const translations = {
         btn_profile: "PROFIL",
         scroll: "GULIR",
         about_title: "MOTION GRAPHIC <span class=\"text-outline\">DESIGNER</span>",
-        about_desc: "Saya Dwi Adyaksa, seorang kreator multimedia dengan fokus utama di Motion Graphics dan Videography. Buat saya, multimedia bukan sekadar bidang yang saya geluti — ini adalah cara saya berpikir dan berkarya. Motion Graphics adalah cara saya memberi bentuk pada ide, mengubah pikiran menjadi visual yang bergerak dan terasa hidup. Videography, di sisi lain, membuat saya tetap terhubung dengan kenyataan — melihat dunia satu frame dalam satu waktu. Dan di antara keduanya, karya terbaik saya lahir.",
+        about_desc: "Saya Dwi Adyaksa, seorang kreator multimedia dengan fokus utama di Motion Graphics dan Videography. Buat saya, multimedia bukan sekadar bidang yang saya geluti — ini adalah cara saya berpikir dan berkarya. Motion Graphics adalah cara saya memberi bentuk pada ide, mengubah pikiran menjadi visual yang bergerak dan terasa hidup. Videography, di sisi lain, membuat saya tetap terhubung dengan kenyataan — melihat dunia satu frame dalam satu waktu. Dan di antara keduanya, karya terbaik saya datang.",
         lumina_desc: "Lumina Flux — keindahan nama ini bukan hanya soal bunyi atau tampilannya, tapi soal makna yang tersembunyi di balik dua kata yang berpadu.<br><br>\"Lumina\" berasal dari bahasa Latin, artinya cahaya. \"Flux\" artinya aliran yang terus bergerak, seperti sungai yang tidak pernah benar-benar berhenti.<br><br>Ketika digabungkan, Lumina Flux berarti \"aliran cahaya\". Nama ini tidak hanya menggambarkan apa yang dilakukan, tapi juga bagaimana cara melakukannya — selalu bergerak, selalu berkembang, dengan kreativitas yang mengalir begitu saja, seperti cahaya.",
         portfolio_title: "Hasil <span class=\"text-outline\">Karya</span>",
         portfolio_desc: "Sekilas tentang apa yang aku kerjakan",
@@ -323,6 +323,26 @@ window.openCategoryTab = function (event, title, categoryId) {
     const titleEl = document.getElementById('active-category-title');
     titleEl.textContent = title;
 
+    const categoryQuotes = {
+        'Motion Graphics': 'Ideas in Motion',
+        'Videography': 'Every Frame, a Story',
+        '3D Animation': 'Life in Three Dimensions',
+        '3D Modelling': 'Built from Nothing',
+        'Game Development': 'Built to Be Explored',
+        'Mockup Design': 'The First Look',
+        'Magazine': 'Every Page, a Statement',
+        'Photography': 'Light, Captured'
+    };
+
+    const quoteEl = document.getElementById('active-category-quote');
+    if (quoteEl) {
+        if (categoryQuotes[title]) {
+            quoteEl.textContent = `"${categoryQuotes[title]}"`;
+        } else {
+            quoteEl.textContent = '';
+        }
+    }
+
     if (imgEl && event) {
         // --- PACÔME PERTANT FLIP ANIMATION ---
         const heroImg = document.getElementById('category-hero-image');
@@ -389,6 +409,7 @@ window.openCategoryTab = function (event, title, categoryId) {
 
         // Sembunyikan sementara teks dan gambar asli
         titleEl.classList.add('opacity-0', 'translate-y-8');
+        quoteEl?.classList.add('opacity-0', 'translate-y-8');
         heroImg.style.visibility = 'hidden';
 
         // 3. PLAY: Buat elemen Clone untuk terbang
@@ -439,6 +460,7 @@ window.openCategoryTab = function (event, title, categoryId) {
             document.getElementById('category-hero-overlay')?.classList.remove('opacity-0');
             document.getElementById('category-close-btn')?.classList.remove('opacity-0', 'scale-90');
             titleEl.classList.remove('opacity-0', 'translate-y-8');
+            quoteEl?.classList.remove('opacity-0', 'translate-y-8');
 
             // Animasi Stagger untuk kartu portfolio di dalam kategori ini
             const visibleItems = document.querySelectorAll(`.portfolio-item[data-category="${categoryId}"]`);
@@ -480,6 +502,7 @@ window.openCategoryTab = function (event, title, categoryId) {
         document.getElementById('category-hero-overlay')?.classList.remove('opacity-0');
         document.getElementById('category-close-btn')?.classList.remove('opacity-0', 'scale-90');
         titleEl.classList.remove('opacity-0', 'translate-y-8');
+        quoteEl?.classList.remove('opacity-0', 'translate-y-8');
 
         // Fallback Stagger (jika tidak ada animasi terbang)
         const visibleItems = document.querySelectorAll(`.portfolio-item[data-category="${categoryId}"]`);
@@ -560,6 +583,7 @@ window.closeCategoryTab = function () {
     window.activePortfolioCategory = null; // Reset kategori aktif
     const titleEl = document.getElementById('active-category-title');
     titleEl.classList.add('opacity-0', 'translate-y-8'); // Sembunyikan teks
+    document.getElementById('active-category-quote')?.classList.add('opacity-0', 'translate-y-8');
 
     // Sembunyikan overlay dan tombol kembali
     document.getElementById('category-hero-overlay')?.classList.add('opacity-0');
@@ -2329,7 +2353,7 @@ window.toggleProfile = function () {
 
     if (isProfileExpanded) {
         window.luminaAudio?.playSfxOpen();
-        
+
         // Expand container
         container.classList.remove('max-w-xs', 'md:max-w-md');
         container.classList.add('max-w-7xl');
@@ -2363,7 +2387,7 @@ window.toggleProfile = function () {
 
     } else {
         window.luminaAudio?.playSfxClose();
-        
+
         // Hide text immediately
         text1.classList.add('opacity-0', 'translate-y-8');
         text2.classList.add('opacity-0', 'translate-y-8');
