@@ -186,6 +186,8 @@
                 <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
                     href="#about" data-i18n="nav_about">About</a>
                 <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
+                    href="#showreel" data-i18n="nav_showreel">Showreel</a>
+                <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
                     href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
                 <a class="text-on-surface-variant font-light text-label-caps font-label-caps hover:text-primary transition-colors duration-300 nav-link"
                     href="#contact" data-i18n="nav_contact">Contact</a>
@@ -228,6 +230,8 @@
             data-i18n="nav_home">Home</a>
         <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#about"
             data-i18n="nav_about">About</a>
+        <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#showreel"
+            data-i18n="nav_showreel">Showreel</a>
         <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#portfolio"
             data-i18n="nav_portfolio">Portfolio</a>
         <a class="text-headline-md font-headline-md text-on-surface mobile-nav-link" href="#contact"
@@ -378,6 +382,81 @@
                 Together, Lumina Flux means "the flow of light." And it doesn't just describe what you do — it describes
                 how you do it. With a sense of motion, change, and creativity that flows like light itself.
             </p>
+        </div>
+    </section>
+
+    <!-- Section: Featured Showreel -->
+    <section class="relative w-full py-20 md:py-28" id="showreel">
+        <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col items-center">
+
+            <!-- Section Title -->
+            <div class="text-center mb-10 md:mb-14 scroll-reveal">
+                <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface leading-none mb-4"
+                    data-i18n="showreel_title">
+                    Roll My <span class="text-outline">Showreel</span>
+                </h2>
+                <p class="text-body-md md:text-lg text-on-surface-variant max-w-2xl mx-auto"
+                    data-i18n="showreel_desc">
+                    A bit of my work
+                </p>
+            </div>
+
+            <!-- Floating Card Wrapper -->
+            <div class="relative w-full max-w-4xl animate-floating [perspective:1000px] z-20">
+                <!-- Video Card Container (Clickable to open modal) -->
+                <div id="showreel-card"
+                    class="relative w-full group cursor-pointer scroll-reveal liquid-glass rounded-[32px] md:rounded-[48px] p-4 md:p-6 shadow-[0_30px_80px_rgba(0,0,0,0.2)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.7)] hover:shadow-[0_0_60px_rgba(var(--glow-rgb),0.4)] transition-all duration-700 ease-out"
+                    data-video-url=""
+                    data-thumbnail-url=""
+                    onclick="openShowreelVideo()">
+
+                    <!-- 16:9 Aspect Ratio Frame -->
+                    <div class="relative w-full aspect-video rounded-[24px] md:rounded-[36px] overflow-hidden bg-black/90 flex items-center justify-center border border-white/10 dark:border-white/5 shadow-inner">
+
+                    <!-- Thumbnail / Cover Poster -->
+                    <img id="showreel-thumbnail"
+                        src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1600&auto=format&fit=crop"
+                        alt="Showreel Preview"
+                        class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-out">
+
+                    <!-- Cinematic Ambient Gradient Overlays -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none transition-opacity duration-500 group-hover:opacity-60"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 pointer-events-none"></div>
+
+                    <!-- Badge (Top Left) -->
+                    <div class="absolute top-4 left-4 md:top-6 md:left-6 z-20 flex items-center gap-2 bg-surface-container-lowest/80 dark:bg-black/60 backdrop-blur-md px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 shadow-lg">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-label-caps font-label-caps text-[11px] md:text-xs tracking-widest text-on-surface uppercase font-bold"
+                            data-i18n="showreel_badge">
+                            SHOWREEL • 2026
+                        </span>
+                    </div>
+
+                    <!-- Floating Pulsing Play Button (Center) -->
+                    <div class="relative z-20 flex items-center justify-center">
+                        <!-- Outer Ripple Ring -->
+                        <div class="absolute w-20 h-20 md:w-28 md:h-28 rounded-full bg-primary/20 animate-ping opacity-50 pointer-events-none"></div>
+
+                        <!-- Middle Glow Ring -->
+                        <div class="absolute w-20 h-20 md:w-28 md:h-28 rounded-full bg-primary/30 blur-md group-hover:scale-125 transition-transform duration-500"></div>
+
+                        <!-- Main Play Button -->
+                        <div class="w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary-container/90 text-white flex items-center justify-center shadow-[0_0_30px_rgba(var(--glow-rgb),0.6)] backdrop-blur-md border border-white/20 group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
+                            <span class="material-symbols-outlined text-[36px] md:text-[54px] translate-x-0.5">play_arrow</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Info Bar inside video frame -->
+                    <div class="absolute bottom-0 left-0 w-full p-4 md:p-8 z-20 flex flex-col md:flex-row justify-end md:items-end gap-2 pointer-events-none">
+                        <div class="flex items-center gap-2 text-white/80 group-hover:text-white transition-colors">
+                            <span class="text-label-caps font-label-caps text-xs tracking-widest uppercase font-semibold"
+                                data-i18n="showreel_action">WATCH VIDEO</span>
+                            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
     </section>
 

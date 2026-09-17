@@ -13,6 +13,7 @@ const translations = {
     en: {
         nav_home: "Home",
         nav_about: "About",
+        nav_showreel: "Showreel",
         nav_portfolio: "Portfolio",
         nav_contact: "Contact",
         nav_hire: "Hire Me",
@@ -20,6 +21,13 @@ const translations = {
         btn_explore: "EXPLORE WORK",
         btn_profile: "PROFILE",
         scroll: "SCROLL",
+        showreel_tag: "FEATURED COMPILATION",
+        showreel_title: "Roll My <span class=\"text-outline\">Showreel</span>",
+        showreel_desc: "A bit of my work",
+        showreel_badge: "SHOWREEL • 2026",
+        showreel_meta: "MOTION GRAPHICS & EDITING",
+        showreel_card_title: "Visual Storytelling Reel",
+        showreel_action: "WATCH VIDEO",
         about_title: "MOTION GRAPHIC <span class=\"text-outline\">DESIGNER</span>",
         about_desc: "I'm Dwi Adyaksa, a multimedia creative whose world revolves around Motion Graphics and Videography. For me, multimedia is more than just a field — it's how I think and create. Motion Graphics is how I give form to ideas, turning thoughts into visuals that move and breathe. Videography, on the other hand, grounds me in reality — seeing the world one frame at a time. The balance between the two is where my best work comes from.",
         lumina_desc: "The beauty of this name lies in how two words — Lumina and Flux — come together to form something new, something that truly captures the essence of what you do.<br><br>\"Lumina\" is rooted in Latin, and it means light. \"Flux\" means a continuous, ever-moving flow — think of a river, always moving, never quite the same.<br><br>Together, Lumina Flux means \"the flow of light.\" And it doesn't just describe what you do — it describes how you do it. With a sense of motion, change, and creativity that flows like light itself.",
@@ -38,6 +46,7 @@ const translations = {
     id: {
         nav_home: "Beranda",
         nav_about: "Profil",
+        nav_showreel: "Showreel",
         nav_portfolio: "Portofolio",
         nav_contact: "Kontak",
         nav_hire: "Rekrut Saya",
@@ -45,6 +54,13 @@ const translations = {
         btn_explore: "JELAJAHI KARYA",
         btn_profile: "PROFIL",
         scroll: "GULIR",
+        showreel_tag: "KOMPILASI TERPILIH",
+        showreel_title: "Roll My <span class=\"text-outline\">Showreel</span>",
+        showreel_desc: "Sedikit tentang karyaku",
+        showreel_badge: "SHOWREEL • 2026",
+        showreel_meta: "MOTION GRAPHICS & EDITING",
+        showreel_card_title: "Visual Storytelling Reel",
+        showreel_action: "PUTAR VIDEO",
         about_title: "MOTION GRAPHIC <span class=\"text-outline\">DESIGNER</span>",
         about_desc: "Saya Dwi Adyaksa, seorang kreator multimedia dengan fokus utama di Motion Graphics dan Videography. Buat saya, multimedia bukan sekadar bidang yang saya geluti — ini adalah cara saya berpikir dan berkarya. Motion Graphics adalah cara saya memberi bentuk pada ide, mengubah pikiran menjadi visual yang bergerak dan terasa hidup. Videography, di sisi lain, membuat saya tetap terhubung dengan kenyataan — melihat dunia satu frame dalam satu waktu. Dan di antara keduanya, karya terbaik saya datang.",
         lumina_desc: "Lumina Flux — keindahan nama ini bukan hanya soal bunyi atau tampilannya, tapi soal makna yang tersembunyi di balik dua kata yang berpadu.<br><br>\"Lumina\" berasal dari bahasa Latin, artinya cahaya. \"Flux\" artinya aliran yang terus bergerak, seperti sungai yang tidak pernah benar-benar berhenti.<br><br>Ketika digabungkan, Lumina Flux berarti \"aliran cahaya\". Nama ini tidak hanya menggambarkan apa yang dilakukan, tapi juga bagaimana cara melakukannya — selalu bergerak, selalu berkembang, dengan kreativitas yang mengalir begitu saja, seperti cahaya.",
@@ -102,6 +118,7 @@ window.toggleLanguage = function () {
 
 document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);
+    loadShowreelData();
 });
 
 // Navigation Scroll Spy & Background Wallpaper Transitions
@@ -122,6 +139,7 @@ const bgSectionMap = {
     "home": "home",
     "about": "about",
     "lumina-flux": "about", // Philosophy section uses Profile/About wallpaper
+    "showreel": "portfolio", // Showreel section uses Portfolio/Showcase wallpaper
     "portfolio": "portfolio",
     "contact": "contact"
 };
@@ -1147,6 +1165,7 @@ function init3DTiltEffect() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadDynamicPortfolio();
+    loadShowreelData();
     init3DTiltEffect();
 });
 
@@ -1240,6 +1259,98 @@ function openVideoModal(encodedUrl) {
     }
 
     openModal('modal-video');
+}
+window.openVideoModal = openVideoModal;
+
+// ----------------------------------------------------
+// SHOWREEL COMPONENT LOGIC & DATABASE INTEGRATION
+// ----------------------------------------------------
+window.showreelConfig = {
+    sheetGid: '1665286218', // Diisi GID tab Showreel di Google Sheets jika nanti dibuat
+    videoUrl: '', // URL video aktif (Google Drive, YouTube, atau Vimeo)
+    thumbnailUrl: '',
+    title: 'Visual Storytelling Reel'
+};
+
+window.openShowreelVideo = function () {
+    window.luminaAudio?.playSfxOpen();
+    const card = document.getElementById('showreel-card');
+    let videoUrl = window.showreelConfig.videoUrl;
+
+    if (card && card.getAttribute('data-video-url') && card.getAttribute('data-video-url').trim() !== '') {
+        videoUrl = card.getAttribute('data-video-url').trim();
+    }
+
+    // Fallback: Jika belum ada URL video yang diisi, gunakan video preview default dari galeri
+    if (!videoUrl || videoUrl.trim() === '') {
+        videoUrl = 'https://drive.google.com/file/d/1ej7eWeXVR6pYgfMsaPjGpP5PHPXdvCMI/preview';
+    }
+
+    window.openVideoModal(encodeURIComponent(videoUrl));
+};
+
+async function loadShowreelData() {
+    const sheetId = '1anhPdL6etR7KwwtEUUj1ZYpO49EwIY6JYO76V4DX-p4';
+    const card = document.getElementById('showreel-card');
+    const thumbImg = document.getElementById('showreel-thumbnail');
+    const titleEl = document.getElementById('showreel-title-display');
+
+    // 1. Baca data attribute langsung dari HTML (mudah dikustomisasi)
+    if (card && card.getAttribute('data-video-url') && card.getAttribute('data-video-url').trim() !== '') {
+        window.showreelConfig.videoUrl = card.getAttribute('data-video-url').trim();
+    }
+    if (card && card.getAttribute('data-thumbnail-url') && card.getAttribute('data-thumbnail-url').trim() !== '') {
+        window.showreelConfig.thumbnailUrl = card.getAttribute('data-thumbnail-url').trim();
+        if (thumbImg) thumbImg.src = window.showreelConfig.thumbnailUrl;
+    }
+
+    // 2. Jika user menentukan GID sheet untuk Showreel di window.showreelGid atau showreelConfig.sheetGid
+    const targetGid = window.showreelGid || window.showreelConfig.sheetGid;
+    if (targetGid) {
+        try {
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${targetGid}`;
+            const response = await fetch(url);
+            if (response.ok) {
+                const text = await response.text();
+                const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+                if (lines.length > 1) {
+                    const cols = lines[1].split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+                    const title = cols[0] || '';
+                    let thumb = cols[1] || '';
+                    let video = cols[2] || '';
+
+                    if (video) {
+                        if (video.includes('drive.google.com') && video.includes('/view')) {
+                            video = video.replace('/view', '/preview');
+                        }
+                        window.showreelConfig.videoUrl = video;
+                        if (card) card.setAttribute('data-video-url', video);
+                    }
+                    if (title && titleEl) {
+                        window.showreelConfig.title = title;
+                        titleEl.textContent = title;
+                    }
+                    if (thumb && thumb !== '-') {
+                        const thumbMatch = thumb.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                        if (thumbMatch && thumbMatch[1]) {
+                            thumb = `https://lh3.googleusercontent.com/d/${thumbMatch[1]}=w1920`;
+                        }
+                        window.showreelConfig.thumbnailUrl = thumb;
+                        if (thumbImg) thumbImg.src = thumb;
+                    } else if (video) {
+                        const gDriveMatch = video.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                        if (gDriveMatch && gDriveMatch[1]) {
+                            const autoThumb = `https://lh3.googleusercontent.com/d/${gDriveMatch[1]}=w1920`;
+                            window.showreelConfig.thumbnailUrl = autoThumb;
+                            if (thumbImg) thumbImg.src = autoThumb;
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.log('Showreel Google Sheet data fallback active:', e);
+        }
+    }
 }
 
 // Global Carousel Variables

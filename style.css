@@ -405,3 +405,28 @@ section, main, footer, header:not(#main-nav) {
     inset 0 1px 1px rgba(255, 255, 255, 0.05),
     0 8px 24px rgba(0, 0, 0, 0.3);
 }
+
+/* ==========================================================================
+   SHOWREEL SECTION STYLING & MICRO-INTERACTIONS
+   ========================================================================== */
+#showreel-card {
+  will-change: transform, box-shadow;
+}
+
+#showreel-card:hover {
+  transform: translateY(-6px) scale(1.008);
+}
+
+@keyframes showreel-play-glow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(var(--glow-rgb), 0.5);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(var(--glow-rgb), 0.85);
+  }
+}
+
+#showreel-card:hover .material-symbols-outlined {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
